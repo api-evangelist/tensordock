@@ -1,0 +1,257 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: TensorDock
+providerId: tensordock
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - GPU
+  - Cloud
+  - Compute
+  - Marketplace
+  - Hourly Pricing
+description: 'Reconciled pricing for TensorDock GPU and CPU virtual machines. TensorDock operates a
+  marketplace model where each independent host sets per-resource prices, so the figures below reflect
+  starting (entry) hourly rates. Sources: tensordock.com and marketplace.tensordock.com/deploy.'
+sources:
+  - https://www.tensordock.com
+  - https://marketplace.tensordock.com/deploy
+  - https://docs.tensordock.com/virtual-machines/spot-instances
+  - https://docs.tensordock.com/virtual-machines/introduction-to-core-compute-vms
+plans:
+  - id: tensordock-on-demand-gpu
+    name: GPU On-Demand
+    type: usage-based
+    description: Per-microsecond billing for dedicated GPU virtual machines. Prices vary by GPU model
+      and host; starting rates listed below.
+    entries:
+      - label: H100 SXM5 80GB hourly
+        name: gpu_h100_sxm5
+        type: metered
+        metric: gpu_hour
+        limit: -1
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: '2.25'
+        userMultiplied: false
+      - label: A100 SXM4 80GB hourly
+        name: gpu_a100_sxm4_80gb
+        type: metered
+        metric: gpu_hour
+        limit: -1
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: '0.87'
+        userMultiplied: false
+      - label: A100 PCIe 80GB hourly
+        name: gpu_a100_pcie_80gb
+        type: metered
+        metric: gpu_hour
+        limit: -1
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: '1.27'
+        userMultiplied: false
+      - label: RTX 6000 Ada 48GB hourly
+        name: gpu_rtx_6000_ada
+        type: metered
+        metric: gpu_hour
+        limit: -1
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: '0.72'
+        userMultiplied: false
+      - label: L40S 48GB hourly
+        name: gpu_l40s
+        type: metered
+        metric: gpu_hour
+        limit: -1
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: '0.49'
+        userMultiplied: false
+      - label: L4 24GB hourly
+        name: gpu_l4
+        type: metered
+        metric: gpu_hour
+        limit: -1
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: '0.24'
+        userMultiplied: false
+      - label: RTX A6000 48GB hourly
+        name: gpu_rtx_a6000
+        type: metered
+        metric: gpu_hour
+        limit: -1
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: '0.42'
+        userMultiplied: false
+      - label: RTX 5090 32GB hourly
+        name: gpu_rtx_5090
+        type: metered
+        metric: gpu_hour
+        limit: -1
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: '0.56'
+        userMultiplied: false
+      - label: RTX 4090 24GB hourly
+        name: gpu_rtx_4090
+        type: metered
+        metric: gpu_hour
+        limit: -1
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: '0.32'
+        userMultiplied: false
+      - label: RTX 3090 24GB hourly
+        name: gpu_rtx_3090
+        type: metered
+        metric: gpu_hour
+        limit: -1
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: '0.17'
+        userMultiplied: false
+      - label: V100 SXM3 32GB hourly
+        name: gpu_v100_sxm3
+        type: metered
+        metric: gpu_hour
+        limit: -1
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: '0.30'
+        userMultiplied: false
+      - label: V100 SXM2 16GB hourly
+        name: gpu_v100_sxm2
+        type: metered
+        metric: gpu_hour
+        limit: -1
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: '0.21'
+        userMultiplied: false
+
+  - id: tensordock-cpu-compute
+    name: CPU Compute
+    type: usage-based
+    description: CPU-only virtual machines on Intel Xeon or AMD EPYC for transcoding and batch processing.
+    entries:
+      - label: vCPU hourly
+        name: vcpu_hour
+        type: metered
+        metric: vcpu_hour
+        limit: -1
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: '0.012'
+        userMultiplied: false
+      - label: RAM per GB hourly
+        name: ram_gb_hour
+        type: metered
+        metric: gb_hour
+        limit: -1
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: 'varies'
+        userMultiplied: false
+        notes: Host-set; check /api/v0/client/deploy/hostnodes for live rates.
+      - label: Storage per GB hourly
+        name: storage_gb_hour
+        type: metered
+        metric: gb_hour
+        limit: -1
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: 'varies'
+        userMultiplied: false
+
+  - id: tensordock-spot
+    name: Spot Instances
+    type: bid-based
+    description: Interruptible spot instances where the customer sets a bid price; lowest-priced
+      eligible hostnode wins. Soft-validation endpoints let clients check whether a bid will clear
+      before deploying.
+    entries:
+      - label: Spot bid
+        name: spot_bid
+        type: metered
+        metric: gpu_hour
+        limit: -1
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: 'variable'
+        userMultiplied: false
+
+  - id: tensordock-reserved
+    name: Reserved
+    type: contract
+    description: Volume reservations with committed-use discounts available upon request from sales.
+    entries:
+      - label: Reserved capacity
+        name: reserved
+        type: contract
+        metric: gpu
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'call'
+        userMultiplied: false
+
+  - id: tensordock-instant-vms
+    name: Instant VMs (beta)
+    type: usage-based
+    description: Pre-configured Instant VM templates with sub-30-second deployment.
+    entries:
+      - label: Instant VM hourly
+        name: instant_vm_hour
+        type: metered
+        metric: vm_hour
+        limit: -1
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: 'varies'
+        userMultiplied: false
+
+  - id: tensordock-containers
+    name: Containers
+    type: usage-based
+    description: GPU container workloads deployable via the v0 container endpoints.
+    entries:
+      - label: Container GPU hourly
+        name: container_gpu_hour
+        type: metered
+        metric: gpu_hour
+        limit: -1
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: 'varies'
+        userMultiplied: false
+notes:
+  - Billing is pro-rated to the microsecond.
+  - When account balance hits $0, instances are automatically stopped and eventually deleted.
+  - All prices in USD; published rates exclude applicable taxes (VAT, GST).
+  - Marketplace dynamics mean the same GPU model can show different prices at different hosts.

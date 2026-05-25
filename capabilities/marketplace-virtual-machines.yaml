@@ -1,0 +1,185 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: TensorDock Marketplace API — Virtual Machines
+  description: 'TensorDock Marketplace API — Virtual Machines. 7 operations. Lead operation: Deploy Virtual Machine.
+    Self-contained Naftiko capability covering the v0 marketplace VM lifecycle.'
+  tags:
+  - TensorDock
+  - Virtual Machines
+  - GPU
+  - Lifecycle
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    TENSORDOCK_API_KEY: TENSORDOCK_API_KEY
+    TENSORDOCK_API_TOKEN: TENSORDOCK_API_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: marketplace-virtual-machines
+    baseUri: https://marketplace.tensordock.com
+    description: Deploy and manage GPU virtual machines on the TensorDock marketplace.
+    resources:
+    - name: deploy
+      path: /api/v0/client/deploy/single
+      operations:
+      - name: deployvirtualmachine
+        method: POST
+        description: Deploy a new GPU/CPU virtual machine.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: list
+      path: /api/v0/client/list
+      operations:
+      - name: listvirtualmachines
+        method: POST
+        description: List all virtual machines for the organization.
+        inputParameters:
+        - name: api_key
+          value: '{{env.TENSORDOCK_API_KEY}}'
+          in: form
+        - name: api_token
+          value: '{{env.TENSORDOCK_API_TOKEN}}'
+          in: form
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: get
+      path: /api/v0/client/get/single
+      operations:
+      - name: getvirtualmachine
+        method: POST
+        description: Get details for a single virtual machine.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: start
+      path: /api/v0/client/start/single
+      operations:
+      - name: startvirtualmachine
+        method: POST
+        description: Start a stopped virtual machine.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: stop
+      path: /api/v0/client/stop/single
+      operations:
+      - name: stopvirtualmachine
+        method: POST
+        description: Stop a running virtual machine.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: modify
+      path: /api/v0/client/modify/single
+      operations:
+      - name: modifyvirtualmachine
+        method: POST
+        description: Modify resources for a virtual machine.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: delete
+      path: /api/v0/client/delete/single
+      operations:
+      - name: deletevirtualmachine
+        method: POST
+        description: Delete a virtual machine.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: mcp
+    namespace: marketplace-virtual-machines-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for marketplace VM lifecycle.
+    tools:
+    - name: tensordock-deploy-vm
+      description: Deploy a TensorDock GPU/CPU virtual machine.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketplace-virtual-machines.deployvirtualmachine
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: tensordock-list-vms
+      description: List TensorDock virtual machines.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketplace-virtual-machines.listvirtualmachines
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: tensordock-get-vm
+      description: Get details for a TensorDock VM.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketplace-virtual-machines.getvirtualmachine
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: tensordock-start-vm
+      description: Start a stopped TensorDock VM.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: marketplace-virtual-machines.startvirtualmachine
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: tensordock-stop-vm
+      description: Stop a running TensorDock VM.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: marketplace-virtual-machines.stopvirtualmachine
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: tensordock-modify-vm
+      description: Modify resources for a TensorDock VM.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketplace-virtual-machines.modifyvirtualmachine
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: tensordock-delete-vm
+      description: Delete a TensorDock VM.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: marketplace-virtual-machines.deletevirtualmachine
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: TensorDock Marketplace API — Spot
+  description: 'TensorDock Marketplace API — Spot. 2 operations. Lead operation: Soft Validate Spot Instance Price.
+    Self-contained Naftiko capability for spot price validation.'
+  tags:
+  - TensorDock
+  - Spot
+  - Pricing
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    TENSORDOCK_API_KEY: TENSORDOCK_API_KEY
+    TENSORDOCK_API_TOKEN: TENSORDOCK_API_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: marketplace-spot
+    baseUri: https://marketplace.tensordock.com
+    description: Validate spot instance bid pricing without deploying.
+    resources:
+    - name: spot-validate-new
+      path: /api/v0/client/spot/validate/new
+      operations:
+      - name: validatespotnew
+        method: POST
+        description: Soft validate a spot bid price for a new instance.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: spot-validate-existing
+      path: /api/v0/client/spot/validate/existing
+      operations:
+      - name: validatespotexisting
+        method: POST
+        description: Soft validate a spot bid price for an existing instance.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: mcp
+    namespace: marketplace-spot-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for TensorDock spot price validation.
+    tools:
+    - name: tensordock-validate-spot-new
+      description: Validate spot bid price for a new TensorDock instance.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketplace-spot.validatespotnew
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: tensordock-validate-spot-existing
+      description: Validate spot bid price for an existing TensorDock instance.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketplace-spot.validatespotexisting
+      outputParameters:
+      - type: object
+        mapping: $.

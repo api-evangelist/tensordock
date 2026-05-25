@@ -1,0 +1,430 @@
+aid: tensordock
+url: https://raw.githubusercontent.com/api-evangelist/tensordock/refs/heads/main/apis.yml
+apis:
+- aid: tensordock:tensordock-marketplace-api
+  name: TensorDock Marketplace API
+  tags:
+  - GPU
+  - Cloud
+  - Compute
+  - Marketplace
+  - Virtual Machines
+  humanURL: https://documenter.getpostman.com/view/20973002/2s8YzMYRDc
+  properties:
+  - url: https://documenter.getpostman.com/view/20973002/2s8YzMYRDc
+    type: Documentation
+  - url: openapi/tensordock-marketplace-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/marketplace-auth.yaml
+  - type: NaftikoCapability
+    url: capabilities/marketplace-hostnodes.yaml
+  - type: NaftikoCapability
+    url: capabilities/marketplace-virtual-machines.yaml
+  - type: NaftikoCapability
+    url: capabilities/marketplace-spot.yaml
+  - type: NaftikoCapability
+    url: capabilities/marketplace-containers.yaml
+  - type: NaftikoCapability
+    url: capabilities/marketplace-billing.yaml
+  description: The original TensorDock Marketplace REST API (v0) for deploying, managing, starting, stopping, and
+    deleting GPU virtual machines across the global marketplace of independent hardware hosts. Endpoints accept
+    api_key + api_token authorization pairs as form parameters and cover hostnode discovery, on-demand and spot
+    instance deployment, instance lifecycle, container scaling, and billing balance lookups.
+- aid: tensordock:tensordock-instances-api
+  name: TensorDock Instances API
+  tags:
+  - GPU
+  - Cloud
+  - Compute
+  - Instances
+  - Virtual Machines
+  humanURL: https://dashboard.tensordock.com/api/docs/instance-management
+  properties:
+  - url: https://dashboard.tensordock.com/api/docs/instance-management
+    type: Documentation
+  - url: https://dashboard.tensordock.com/api/docs/instance-creation
+    type: Documentation
+  - url: openapi/tensordock-instances-api-openapi.yml
+    type: OpenAPI
+  - url: json-schema/tensordock-instance-schema.json
+    type: JSONSchema
+  - url: json-ld/tensordock-context.jsonld
+    type: JSONLD
+  - type: NaftikoCapability
+    url: capabilities/instances-instances.yaml
+  description: The current TensorDock Instances API (v2) at https://dashboard.tensordock.com/api/v2/instances for
+    creating, listing, inspecting, starting, stopping, modifying, and deleting GPU and CPU virtual machines.
+    Uses Bearer token authentication and a JSON:API-style envelope of `data.type`, `data.id`, and
+    `data.attributes`. Supports both location-based and hostnode-based deployment patterns.
+- aid: tensordock:tensordock-secrets-api
+  name: TensorDock Secrets API
+  tags:
+  - GPU
+  - Cloud
+  - Secrets
+  - SSH Keys
+  - Credentials
+  humanURL: https://dashboard.tensordock.com/api/docs/secrets
+  properties:
+  - url: https://dashboard.tensordock.com/api/docs/secrets
+    type: Documentation
+  - url: openapi/tensordock-secrets-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/secrets-secrets.yaml
+  description: The TensorDock Secrets API (v2) for managing SSH keys and generic secrets that are encrypted at
+    rest and in transit and can be attached to instances at deploy time. Two secret types are supported —
+    `SSHKEY` for SSH authentication and `SECRET`/`GENERIC` for application credentials whose values are not
+    returned after creation.
+name: TensorDock
+tags:
+- GPU
+- Cloud
+- Marketplace
+- Compute
+- Virtual Machines
+- AI
+- Machine Learning
+- Bare Metal
+- Spot Instances
+- Containers
+kind: contract
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+access: 3rd-Party
+common:
+- type: Portal
+  url: https://www.tensordock.com
+- type: Documentation
+  url: https://docs.tensordock.com
+- type: Documentation
+  url: https://dashboard.tensordock.com/api/docs
+  name: API Documentation
+- url: https://documenter.getpostman.com/view/20973002/2s8YzMYRDc
+  name: Postman API Documentation
+  type: Documentation
+- url: https://dashboard.tensordock.com/api/docs/getting-started
+  name: Getting Started
+  type: GettingStarted
+- url: https://dashboard.tensordock.com
+  name: TensorDock Dashboard
+  type: Console
+- url: https://dashboard.tensordock.com/deploy
+  name: Deploy GPU VM
+  type: Sandbox
+- url: https://dashboard.tensordock.com/deploy_cpu
+  name: Deploy CPU VM
+  type: Sandbox
+- url: https://dashboard.tensordock.com/api
+  name: API Keys
+  type: SignUp
+- url: https://blog.tensordock.com
+  name: TensorDock Blog
+  type: Blog
+- url: https://tensordock.com/security
+  name: Security and Reliability
+  type: TrustCenter
+- url: https://docs.tensordock.com/legal-information/legal-information
+  type: Documentation
+  name: Legal Information
+- url: https://docs.tensordock.com/legal-information/terms-of-service-tos
+  type: TermsOfService
+- url: https://docs.tensordock.com/legal-information/tensordock-privacy-policy
+  type: PrivacyPolicy
+- url: https://docs.tensordock.com/legal-information/acceptable-use-policy-aup
+  type: TermsOfService
+  name: Acceptable Use Policy
+- url: https://docs.tensordock.com/legal-information/downtime-compensation
+  type: Documentation
+  name: Downtime Compensation
+- url: https://docs.tensordock.com/legal-information/taxes-vat-gst
+  type: Documentation
+  name: Taxes, VAT, GST
+- url: https://marketplace.tensordock.com/support
+  name: Support
+  type: Support
+- url: https://marketplace.tensordock.com/faq
+  name: FAQ
+  type: Support
+- url: https://tensordock.userjot.com/
+  name: User Suggestions
+  type: Forum
+- type: Twitter
+  url: https://twitter.com/TensorDock
+- type: LinkedIn
+  url: https://www.linkedin.com/company/tensordock
+- type: Instagram
+  url: https://instagram.com/tensordock
+- type: YouTube
+  url: https://www.youtube.com/channel/UCsCAK6krPmRe3Y7Hp5QHXQg
+- type: Forum
+  url: https://discord.gg/Xyzjjuj6zf
+  name: TensorDock Discord
+- type: GitHubOrganization
+  url: https://github.com/tensordock
+- url: https://github.com/tensordock/tensordock-rs
+  name: Rust API Wrapper
+  type: SDK
+- url: https://pypi.org/project/tensordock/
+  name: Unofficial Python SDK
+  type: SDK
+- url: https://github.com/tensordock/dashboard-frontend-template
+  name: Whitelabel Storefront Template
+  type: Tool
+- url: https://github.com/tensordock/wireguard-manager
+  name: WireGuard Manager
+  type: Tool
+- url: https://github.com/tensordock/tensorblog
+  name: TensorBlog
+  type: Tool
+- url: https://github.com/tensordock/hosting-install
+  name: Hosting Install Scripts
+  type: Tool
+- url: https://docs.tensordock.com/virtual-machines/introduction-to-core-compute-vms
+  name: Introduction to Core Compute VMs
+  type: Documentation
+- url: https://docs.tensordock.com/virtual-machines/spot-instances
+  name: Spot Instances
+  type: Documentation
+- url: https://docs.tensordock.com/virtual-machines/cloud-init
+  name: cloud-init
+  type: Documentation
+- url: https://docs.tensordock.com/virtual-machines/how-to-ssh-into-your-instance
+  name: SSH Access Guide
+  type: Documentation
+- url: https://docs.tensordock.com/virtual-machines/how-to-rdp-into-your-instance
+  name: RDP Access Guide
+  type: Documentation
+- url: https://docs.tensordock.com/whitelabel/overview
+  name: Whitelabel Overview
+  type: Documentation
+- url: https://docs.tensordock.com/whitelabel/setting-up-a-storefront
+  name: Setting Up a Storefront
+  type: Documentation
+- url: https://www.tensordock.com/host.html
+  name: Become a Host
+  type: SignUp
+- url: plans/tensordock-plans-pricing.yml
+  type: Plans
+- url: rate-limits/tensordock-rate-limits.yml
+  type: RateLimits
+- url: finops/tensordock-finops.yml
+  type: FinOps
+- type: Pricing
+  url: https://marketplace.tensordock.com
+  data:
+  - id: gpu-h100-sxm5
+    name: NVIDIA H100 SXM5 80GB
+    type: GPU
+    entries:
+    - geo: Global
+      unit: 1
+      label: Hourly
+      price: 2.25
+      metric: gpu
+      timeFrame: hour
+      description: Per-GPU hourly rate from $2.25.
+    description: Flagship Hopper architecture GPU for large-scale AI training and inference.
+  - id: gpu-a100-sxm4-80gb
+    name: NVIDIA A100 SXM4 80GB
+    type: GPU
+    entries:
+    - geo: Global
+      unit: 1
+      label: Hourly
+      price: 0.87
+      metric: gpu
+      timeFrame: hour
+    description: 80GB Ampere SXM4 for AI training and HPC workloads.
+  - id: gpu-a100-pcie-80gb
+    name: NVIDIA A100 PCIe 80GB
+    type: GPU
+    entries:
+    - geo: Global
+      unit: 1
+      label: Hourly
+      price: 1.27
+      metric: gpu
+      timeFrame: hour
+    description: 80GB Ampere PCIe variant.
+  - id: gpu-rtx-5090
+    name: NVIDIA RTX 5090 32GB
+    type: GPU
+    entries:
+    - geo: Global
+      unit: 1
+      label: Hourly
+      price: 0.56
+      metric: gpu
+      timeFrame: hour
+    description: Blackwell-architecture consumer GPU with 32GB VRAM.
+  - id: gpu-rtx-4090
+    name: NVIDIA RTX 4090 24GB
+    type: GPU
+    entries:
+    - geo: Global
+      unit: 1
+      label: Hourly
+      price: 0.32
+      metric: gpu
+      timeFrame: hour
+    description: Ada Lovelace 24GB consumer GPU.
+  - id: gpu-rtx-3090
+    name: NVIDIA RTX 3090 24GB
+    type: GPU
+    entries:
+    - geo: Global
+      unit: 1
+      label: Hourly
+      price: 0.17
+      metric: gpu
+      timeFrame: hour
+    description: 24GB Ampere consumer GPU.
+  - id: gpu-rtx-6000-ada
+    name: NVIDIA RTX 6000 Ada 48GB
+    type: GPU
+    entries:
+    - geo: Global
+      unit: 1
+      label: Hourly
+      price: 0.72
+      metric: gpu
+      timeFrame: hour
+    description: 48GB Ada Lovelace workstation GPU for rendering and ML.
+  - id: gpu-l40s
+    name: NVIDIA L40S 48GB
+    type: GPU
+    entries:
+    - geo: Global
+      unit: 1
+      label: Hourly
+      price: 0.49
+      metric: gpu
+      timeFrame: hour
+    description: 48GB Ada datacenter GPU.
+  - id: gpu-l4
+    name: NVIDIA L4 24GB
+    type: GPU
+    entries:
+    - geo: Global
+      unit: 1
+      label: Hourly
+      price: 0.24
+      metric: gpu
+      timeFrame: hour
+    description: 24GB Ada efficiency GPU.
+  - id: gpu-a6000
+    name: NVIDIA RTX A6000 48GB
+    type: GPU
+    entries:
+    - geo: Global
+      unit: 1
+      label: Hourly
+      price: 0.42
+      metric: gpu
+      timeFrame: hour
+    description: 48GB Ampere workstation GPU.
+  - id: gpu-v100-sxm3
+    name: NVIDIA V100 SXM3 32GB
+    type: GPU
+    entries:
+    - geo: Global
+      unit: 1
+      label: Hourly
+      price: 0.30
+      metric: gpu
+      timeFrame: hour
+    description: 32GB Volta SXM3 GPU.
+  - id: gpu-v100-sxm2
+    name: NVIDIA V100 SXM2 16GB
+    type: GPU
+    entries:
+    - geo: Global
+      unit: 1
+      label: Hourly
+      price: 0.21
+      metric: gpu
+      timeFrame: hour
+    description: 16GB Volta SXM2 GPU.
+  - id: cpu-compute
+    name: CPU Compute
+    type: CPU
+    entries:
+    - geo: Global
+      unit: 1
+      label: Per vCPU
+      price: 0.012
+      metric: vcpu
+      timeFrame: hour
+    description: Intel Xeon and AMD EPYC virtual CPUs from $0.012/vCPU/hour. Ideal for transcoding and batch
+      processing.
+  - id: spot
+    name: Spot Instances
+    type: Pricing Model
+    entries:
+    - geo: Global
+      unit: 1
+      label: Bid Price
+      price: Variable
+      metric: gpu
+      timeFrame: hour
+    description: Interruptible instances with custom bid pricing for opportunistic workloads.
+  - id: reserved
+    name: Reserved Pricing
+    type: Pricing Model
+    entries:
+    - geo: Global
+      unit: 1
+      label: Contact
+      price: Call
+      metric: gpu
+      timeFrame: month
+    description: Volume reservations available upon request — contact sales for committed-use discounts.
+  name: Pricing
+- type: Features
+  data:
+  - GPU marketplace aggregating 30,000+ GPUs across 100+ locations in 20+ countries
+  - 42+ NVIDIA GPU models from consumer (RTX 3090/4090/5090) to data center (H100 SXM5, A100, V100, L40S, L4,
+    RTX 6000 Ada, A6000)
+  - Per-microsecond billing with pay-as-you-go and reserved pricing on request
+  - On-demand virtual machines with KVM virtualization, root access, and dedicated GPU passthrough
+  - Spot/interruptible instances with custom bid pricing and soft-validate APIs
+  - Instant VMs (beta) with sub-30-second deployment from pre-configured templates
+  - Container deployment, scaling, and termination endpoints
+  - CPU-only Compute VMs from $0.012/vCPU/hour for transcoding and batch jobs
+  - Windows 10 and Linux (Ubuntu, Debian, CentOS) images plus custom cloud-init support
+  - Whitelabel storefront product for resellers and managed cloud providers
+  - Two REST APIs — Marketplace v0 (api_key + api_token, form parameters) and Instances v2 (Bearer token,
+    JSON:API envelope)
+  - Secrets API (v2) with SSHKEY and GENERIC/SECRET types, encrypted at rest and in transit
+  - Hostnode discovery API listing all available GPU/CPU configurations per location
+  - 99.99% uptime SLA per host with agent-based monitoring and downtime compensation policy
+  - SSH access revoked from hosts and active monitoring for tenant isolation
+  - Postman collection covering Authorization, Hostnodes, Virtual Machines, Spot validation, Containers, and
+    Billing endpoint groups
+  - Rust client wrapper (tensordock-rs) and community Python SDK
+  - 100 requests per minute per organization on the v2 API
+  - Customer balance, revenue, and monthly summary endpoints for host operators
+  sources:
+  - https://www.tensordock.com
+  - https://docs.tensordock.com
+  - https://dashboard.tensordock.com/api/docs
+  - https://documenter.getpostman.com/view/20973002/2s8YzMYRDc
+  - https://blog.tensordock.com
+  updated: '2026-05-25'
+created: '2026-05-25'
+modified: '2026-05-25'
+position: Consuming
+description: TensorDock operates a global GPU cloud marketplace that connects independent hardware hosts with
+  customers needing affordable on-demand and spot GPU compute. The platform exposes two REST APIs — the original
+  Marketplace API (v0) at marketplace.tensordock.com and the newer Instances API (v2) at dashboard.tensordock.com
+  — to deploy, manage, and scale virtual machines across 100+ locations in 20+ countries with 42+ GPU models
+  ranging from consumer RTX cards to H100 SXM5. TensorDock targets AI startups, researchers, rendering shops,
+  and gaming services that need cost-effective compute (advertised at up to 80% less than hyperscalers) without
+  quotas or long-term commitments.
+maintainers:
+- FN: Kin Lane
+  email: info@apievangelist.com
+  X: apievangelist
+  url: https://apievangelist.com
+specificationVersion: '0.16'

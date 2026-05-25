@@ -1,0 +1,37 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://marketplace.tensordock.com/api/v0/client/deploy/hostnodes?api_key=YOUR_KEY&api_token=YOUR_TOKEN&minGPUCount=1"
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "hostnodes": {
+        "a3f9b4c1-2d1f-4e9b-9a7c-1b2cd3ef4567": {
+          "status": "online",
+          "location": {
+            "country": "US",
+            "region": "Virginia",
+            "city": "Ashburn"
+          },
+          "specs": {
+            "cpu": { "amount": 64, "price": 0.014 },
+            "gpu": {
+              "rtx4090-24gb": { "amount": 4, "price": 0.32 }
+            },
+            "ram": { "amount": 256, "price": 0.0025 },
+            "storage": { "amount": 4000, "price": 0.00015 },
+            "networking": {
+              "speed": "10Gbps",
+              "ports": {
+                "tcp": [22, 80, 443],
+                "udp": []
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,85 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: TensorDock Marketplace API — Authorization
+  description: 'TensorDock Marketplace API — Authorization. 2 operations. Lead operation: Test Authorization.
+    Self-contained Naftiko capability covering one TensorDock business surface.'
+  tags:
+  - TensorDock
+  - Authorization
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    TENSORDOCK_API_KEY: TENSORDOCK_API_KEY
+    TENSORDOCK_API_TOKEN: TENSORDOCK_API_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: marketplace-auth
+    baseUri: https://marketplace.tensordock.com
+    description: TensorDock Marketplace authorization endpoints.
+    resources:
+    - name: auth-test
+      path: /api/v0/auth/test
+      operations:
+      - name: testauthorization
+        method: POST
+        description: Test that the api_key + api_token pair is valid.
+        inputParameters:
+        - name: api_key
+          value: '{{env.TENSORDOCK_API_KEY}}'
+          in: form
+        - name: api_token
+          value: '{{env.TENSORDOCK_API_TOKEN}}'
+          in: form
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: auth-list
+      path: /api/v0/auth/list
+      operations:
+      - name: listauthorizations
+        method: POST
+        description: List authorization pairs for the calling organization.
+        inputParameters:
+        - name: api_key
+          value: '{{env.TENSORDOCK_API_KEY}}'
+          in: form
+        - name: api_token
+          value: '{{env.TENSORDOCK_API_TOKEN}}'
+          in: form
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: mcp
+    namespace: marketplace-auth-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for TensorDock Marketplace authorization.
+    tools:
+    - name: tensordock-test-authorization
+      description: Test TensorDock api_key + api_token pair.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketplace-auth.testauthorization
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: tensordock-list-authorizations
+      description: List TensorDock authorization pairs.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketplace-auth.listauthorizations
+      outputParameters:
+      - type: object
+        mapping: $.

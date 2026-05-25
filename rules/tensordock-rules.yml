@@ -1,0 +1,70 @@
+extends:
+  - spectral:oas
+rules:
+  tensordock-operation-summary-title-case:
+    description: TensorDock operation summaries should use Title Case.
+    message: '{{property}} summary should be Title Case.'
+    given: '$.paths[*][get,post,put,delete,patch].summary'
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[A-Z][A-Za-z0-9]*( [A-Z0-9][A-Za-z0-9()/-]*)*$'
+  tensordock-operation-id-camel-case:
+    description: TensorDock operationIds must use lowerCamelCase.
+    message: '{{property}} must be camelCase (e.g., listInstances, createInstance).'
+    given: '$.paths[*][get,post,put,delete,patch].operationId'
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-zA-Z0-9]*$'
+  tensordock-tags-present:
+    description: Every operation should have at least one tag.
+    given: '$.paths[*][get,post,put,delete,patch]'
+    severity: error
+    then:
+      field: tags
+      function: truthy
+  tensordock-paths-lower-kebab:
+    description: TensorDock paths use lowercase segments and kebab-case for compound names.
+    message: 'Path segment {{value}} should be lowercase or {curly-braced} parameter.'
+    given: '$.paths.~'
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: '^(/[a-z0-9_-]+|/\{[a-zA-Z_]+\})+$'
+  tensordock-api-key-pair-security:
+    description: Marketplace v0 endpoints must reference the ApiKeyPair security scheme.
+    given: '$.paths[/api/v0/*].*'
+    severity: warn
+    then:
+      field: security
+      function: truthy
+  tensordock-bearer-security-v2:
+    description: v2 endpoints must reference the BearerAuth security scheme.
+    given: '$.paths[/api/v2/*].*'
+    severity: warn
+    then:
+      field: security
+      function: truthy
+  tensordock-success-response:
+    description: Every operation must define a 2xx response.
+    given: '$.paths[*][get,post,put,delete,patch].responses'
+    severity: error
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          patternProperties:
+            '^2\d\d$':
+              type: object
+  tensordock-info-contact:
+    description: TensorDock specs should set a contact email.
+    given: '$.info.contact'
+    severity: warn
+    then:
+      field: email
+      function: truthy

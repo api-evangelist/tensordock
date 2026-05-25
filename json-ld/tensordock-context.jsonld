@@ -1,0 +1,93 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://schema.org/",
+    "tensordock": "https://dashboard.tensordock.com/api/v2/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Instance": {
+      "@id": "tensordock:Instance",
+      "@context": {
+        "id": { "@id": "tensordock:Instance/id", "@type": "xsd:string" },
+        "type": { "@id": "tensordock:Instance/type", "@type": "xsd:string" },
+        "attributes": { "@id": "tensordock:Instance/attributes" }
+      }
+    },
+
+    "InstanceAttributes": {
+      "@id": "tensordock:InstanceAttributes",
+      "@context": {
+        "name": { "@id": "schema:name", "@type": "xsd:string" },
+        "status": { "@id": "tensordock:InstanceAttributes/status", "@type": "xsd:string" },
+        "ipAddress": { "@id": "tensordock:InstanceAttributes/ipAddress", "@type": "xsd:string" },
+        "image": { "@id": "tensordock:InstanceAttributes/image", "@type": "xsd:string" },
+        "location_id": { "@id": "tensordock:InstanceAttributes/locationId", "@type": "xsd:string" },
+        "rateHourly": { "@id": "tensordock:InstanceAttributes/rateHourly", "@type": "xsd:decimal" }
+      }
+    },
+
+    "Resources": {
+      "@id": "tensordock:Resources",
+      "@context": {
+        "vcpu_count": { "@id": "tensordock:Resources/vcpuCount", "@type": "xsd:integer" },
+        "ram_gb": { "@id": "tensordock:Resources/ramGb", "@type": "xsd:decimal" },
+        "storage_gb": { "@id": "tensordock:Resources/storageGb", "@type": "xsd:decimal" },
+        "gpus": { "@id": "tensordock:Resources/gpus", "@container": "@list" }
+      }
+    },
+
+    "GpuAllocation": {
+      "@id": "tensordock:GpuAllocation",
+      "@context": {
+        "gpuV0Name": { "@id": "tensordock:GpuAllocation/gpuV0Name", "@type": "xsd:string" },
+        "count": { "@id": "tensordock:GpuAllocation/count", "@type": "xsd:integer" }
+      }
+    },
+
+    "Hostnode": {
+      "@id": "tensordock:Hostnode",
+      "@context": {
+        "uuid": { "@id": "tensordock:Hostnode/uuid", "@type": "xsd:string" },
+        "status": { "@id": "tensordock:Hostnode/status", "@type": "xsd:string" },
+        "location": { "@id": "tensordock:Hostnode/location" },
+        "specs": { "@id": "tensordock:Hostnode/specs" }
+      }
+    },
+
+    "Location": {
+      "@id": "schema:Place",
+      "@context": {
+        "country": { "@id": "schema:addressCountry", "@type": "xsd:string" },
+        "region": { "@id": "schema:addressRegion", "@type": "xsd:string" },
+        "city": { "@id": "schema:addressLocality", "@type": "xsd:string" }
+      }
+    },
+
+    "Secret": {
+      "@id": "tensordock:Secret",
+      "@context": {
+        "id": { "@id": "tensordock:Secret/id", "@type": "xsd:string" },
+        "name": { "@id": "schema:name", "@type": "xsd:string" },
+        "secret_type": { "@id": "tensordock:Secret/secretType", "@type": "xsd:string" }
+      }
+    },
+
+    "Balance": {
+      "@id": "tensordock:Balance",
+      "@context": {
+        "balance": { "@id": "tensordock:Balance/balance", "@type": "xsd:decimal" },
+        "currency": { "@id": "schema:priceCurrency", "@type": "xsd:string" }
+      }
+    },
+
+    "SpotValidation": {
+      "@id": "tensordock:SpotValidation",
+      "@context": {
+        "will_succeed": { "@id": "tensordock:SpotValidation/willSucceed", "@type": "xsd:boolean" },
+        "suggested_price": { "@id": "tensordock:SpotValidation/suggestedPrice", "@type": "xsd:decimal" }
+      }
+    }
+  }
+}

@@ -1,0 +1,114 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: TensorDock Marketplace API — Containers
+  description: 'TensorDock Marketplace API — Containers. 4 operations. Lead operation: Deploy Container.
+    Self-contained Naftiko capability for container workload deployment and scaling.'
+  tags:
+  - TensorDock
+  - Containers
+  - GPU
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    TENSORDOCK_API_KEY: TENSORDOCK_API_KEY
+    TENSORDOCK_API_TOKEN: TENSORDOCK_API_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: marketplace-containers
+    baseUri: https://marketplace.tensordock.com
+    description: Deploy and manage GPU container workloads.
+    resources:
+    - name: container-deploy
+      path: /api/v0/client/container/deploy
+      operations:
+      - name: deploycontainer
+        method: POST
+        description: Deploy a new container workload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-scale
+      path: /api/v0/client/container/scale
+      operations:
+      - name: scalecontainer
+        method: POST
+        description: Scale container replicas.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-stop
+      path: /api/v0/client/container/stop
+      operations:
+      - name: terminatecontainer
+        method: POST
+        description: Terminate a container workload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-replicas
+      path: /api/v0/client/container/{container_id}/replicas
+      operations:
+      - name: listcontainerreplicas
+        method: GET
+        description: List container replicas.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: mcp
+    namespace: marketplace-containers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for container workloads.
+    tools:
+    - name: tensordock-deploy-container
+      description: Deploy a TensorDock container workload.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketplace-containers.deploycontainer
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: tensordock-scale-container
+      description: Scale TensorDock container replicas.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketplace-containers.scalecontainer
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: tensordock-terminate-container
+      description: Terminate a TensorDock container workload.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: marketplace-containers.terminatecontainer
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: tensordock-list-container-replicas
+      description: List replicas for a TensorDock container.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketplace-containers.listcontainerreplicas
+      outputParameters:
+      - type: object
+        mapping: $.

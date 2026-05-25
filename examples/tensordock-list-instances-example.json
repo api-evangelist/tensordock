@@ -1,0 +1,59 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://dashboard.tensordock.com/api/v2/instances",
+    "headers": {
+      "Authorization": "Bearer YOUR_TOKEN",
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "data": {
+        "instances": [
+          {
+            "type": "virtualmachine",
+            "id": "8c2f0e88-3b4a-4c2c-9d27-f5a1c2c2b7ab",
+            "attributes": {
+              "name": "training-node-01",
+              "status": "running",
+              "ipAddress": "203.0.113.42",
+              "image": "ubuntu2404",
+              "location_id": "loc-us-east-1",
+              "rateHourly": 2.41,
+              "resources": {
+                "vcpu_count": 16,
+                "ram_gb": 96,
+                "storage_gb": 500,
+                "gpus": [
+                  {
+                    "gpuV0Name": "h100-sxm5-80gb",
+                    "count": 1
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "type": "virtualmachine",
+            "id": "1ab9d44d-9a1d-4b4c-bd72-1a78cc1f4e02",
+            "attributes": {
+              "name": "transcoder-batch",
+              "status": "stopped",
+              "image": "ubuntu2204",
+              "location_id": "loc-eu-west-2",
+              "rateHourly": 0.05,
+              "resources": {
+                "vcpu_count": 8,
+                "ram_gb": 16,
+                "storage_gb": 200,
+                "gpus": []
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,96 @@
+vocabulary: TensorDock Vocabulary
+provider: TensorDock
+providerId: tensordock
+created: '2026-05-25'
+modified: '2026-05-25'
+description: Domain vocabulary for the TensorDock GPU cloud marketplace, covering instance lifecycle,
+  hostnode discovery, GPU/CPU specifications, spot bidding, secrets, containers, and billing.
+terms:
+  - term: Marketplace
+    definition: TensorDock's global network of independent hardware hosts that publish capacity and
+      compete on per-resource pricing. Customers deploy VMs onto hostnodes via the v0 Marketplace API.
+  - term: Hostnode
+    definition: An individual physical host in the TensorDock marketplace, identified by UUID and
+      exposing GPU, CPU, RAM, storage, and networking specifications.
+  - term: Hostnode UUID
+    definition: Globally unique identifier for a hostnode used as a path parameter in
+      /api/v0/client/deploy/hostnodes/{hostnode_uuid}.
+  - term: Instance
+    definition: A virtual machine deployed on the TensorDock marketplace. The v0 API refers to these
+      as "virtualmachines" / "servers"; the v2 API uses "instance" with the JSON:API type
+      "virtualmachine".
+  - term: Core Compute VM
+    definition: TensorDock's primary VM product — a KVM-virtualized VM with dedicated GPU passthrough,
+      root access, and configurable vCPU/RAM/storage.
+  - term: Instant VM
+    definition: A pre-configured Instant VM template (beta) that deploys in under 30 seconds via
+      /api/v0/client/deployinstant/single.
+  - term: Spot instance
+    definition: An interruptible instance whose pricing is determined by a customer-set bid that must
+      clear the lowest eligible hostnode's reserve price.
+  - term: Soft validate
+    definition: Pre-deployment validation of a spot bid using /api/v0/client/spot/validate/new or
+      /existing without provisioning resources.
+  - term: gpuV0Name
+    definition: TensorDock canonical GPU model identifier used in the v2 API (e.g., `h100-sxm5-80gb`,
+      `rtx4090-24gb`, `a100-sxm4-80gb`).
+  - term: Cloud-init
+    definition: First-boot configuration script attached at VM deployment time for customizing the OS.
+  - term: Whitelabel storefront
+    definition: TensorDock's resold-cloud product allowing partners to brand and embed the deployment
+      experience under their own domain.
+  - term: SSHKEY secret
+    definition: A secret of type SSHKEY whose value can be retrieved post-creation and attached to
+      instances for SSH authentication.
+  - term: GENERIC secret
+    definition: A secret of type GENERIC (also SECRET) whose value is encrypted at rest and never
+      returned after creation.
+  - term: Container
+    definition: A GPU container workload deployed via /api/v0/client/container/deploy that can be
+      scaled or terminated independently of VM lifecycle.
+  - term: Replicas
+    definition: The number of running copies of a container deployment, retrievable via
+      /api/v0/client/container/{container_id}/replicas.
+  - term: Disassociate resources
+    definition: Optional flag on stop operations that controls whether the GPU is released back to the
+      marketplace (true) or held for the next start (false).
+  - term: Balance
+    definition: The prepaid account credit denominated in USD that funds usage; instances stop
+      automatically when balance reaches $0.
+  - term: Hosting provider
+    definition: A hardware operator contributing capacity to the TensorDock marketplace; uses the
+      /api/v0/billing/revenue endpoint to track earnings.
+  - term: API key + API token pair
+    definition: The legacy v0 authorization credential — two UUIDs sent as `api_key` and `api_token`
+      form parameters. Pairs are organization-scoped and can be created without limit.
+  - term: Bearer token
+    definition: The v2 API authentication credential, sent as `Authorization: Bearer <token>`,
+      generated from Developer Settings at https://dashboard.tensordock.com/api.
+gpuModels:
+  dataCenter:
+    - H100 SXM5 80GB
+    - A100 SXM4 80GB
+    - A100 PCIe 80GB
+    - V100 SXM3 32GB
+    - V100 SXM2 16GB
+  professional:
+    - RTX 6000 Ada 48GB
+    - L40S 48GB
+    - L4 24GB
+    - RTX A6000 48GB
+  consumer:
+    - RTX 5090 32GB
+    - RTX 4090 24GB
+    - RTX 3090 24GB
+instanceStates:
+  - starting
+  - running
+  - stopping
+  - stopped
+  - deleting
+  - deleted
+  - error
+secretTypes:
+  - SSHKEY
+  - GENERIC
+  - SECRET

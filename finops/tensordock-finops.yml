@@ -1,0 +1,118 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: TensorDock
+providerId: tensordock
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - FinOps
+  - Cost Management
+  - FOCUS
+  - GPU
+  - Cloud Compute
+description: FOCUS-aligned FinOps definition for TensorDock GPU and CPU cloud. Per-microsecond
+  metering with separate billing for GPU-hours, vCPU-hours, RAM, and storage. Spot bidding and
+  reserved discounts are first-class billing levers.
+sources:
+  - https://www.tensordock.com
+  - https://marketplace.tensordock.com/deploy
+  - https://documenter.getpostman.com/view/20973002/2s8YzMYRDc
+  - https://docs.tensordock.com/legal-information/taxes-vat-gst
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: TensorDock
+serviceCategory: Compute
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Continuous (pro-rated to the microsecond)
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Purchase
+    - Tax
+    - Credit
+    - Adjustment
+  primaryUnit: gpu_hour
+  secondaryUnits:
+    - vcpu_hour
+    - ram_gb_hour
+    - storage_gb_hour
+    - container_hour
+    - instant_vm_hour
+focusColumns:
+  ServiceName: TensorDock Marketplace
+  ServiceCategory: Compute
+  ProviderName: TensorDock
+  PublisherName: TensorDock
+  InvoiceIssuerName: TensorDock
+  PricingCategory: Usage-Based
+  PricingUnit: gpu-hour
+  BillingCurrency: USD
+meters:
+  - name: gpu_hours
+    unit: gpu_hour
+    aggregation: sum
+    dimensions:
+      - gpu_model
+      - hostnode
+      - location
+      - instance
+  - name: vcpu_hours
+    unit: vcpu_hour
+    aggregation: sum
+    dimensions:
+      - hostnode
+      - instance
+  - name: ram_gb_hours
+    unit: gb_hour
+    aggregation: sum
+    dimensions:
+      - hostnode
+      - instance
+  - name: storage_gb_hours
+    unit: gb_hour
+    aggregation: sum
+    dimensions:
+      - hostnode
+      - instance
+  - name: dedicated_ip_hours
+    unit: ip_hour
+    aggregation: sum
+    dimensions:
+      - instance
+discountLanes:
+  - name: Spot bidding
+    type: bid-based
+    description: Customer-set bid prices on interruptible instances. Soft-validation API
+      (/api/v0/client/spot/validate/*) returns the suggested clearing price before deploying.
+  - name: Reserved
+    type: commitment
+    description: Volume reservations with committed-use discounts available on request from sales.
+  - name: Marketplace competition
+    type: dynamic
+    description: Marketplace dynamics drive per-resource rates lower as hosts compete on price.
+billingApi:
+  endpoints:
+    - method: POST
+      path: /api/v0/billing/balance
+      description: Retrieve current account balance.
+    - method: POST
+      path: /api/v0/billing/revenue
+      description: Retrieve revenue history (host operators).
+    - method: POST
+      path: /api/v0/billing/summary
+      description: Retrieve monthly billing summary.
+  formatNotes: 'v0 billing endpoints accept api_key + api_token in form-encoded body and return JSON.'
+taxNotes:
+  - VAT and GST applied per applicable jurisdiction as documented at
+    https://docs.tensordock.com/legal-information/taxes-vat-gst.
+downtimeCompensation:
+  policyUrl: https://docs.tensordock.com/legal-information/downtime-compensation
+  description: TensorDock requires 99.99% uptime from hosts; compensation policy applies for
+    qualifying downtime events.

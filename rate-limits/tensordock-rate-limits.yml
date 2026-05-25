@@ -1,0 +1,52 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: TensorDock
+providerId: tensordock
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - GPU
+  - Rate Limiting
+  - Quotas
+description: Reconciled rate-limit policies for the TensorDock REST APIs. The legacy Marketplace v0
+  API is uncapped but requests a reasonable pace (about 1 request/second); the v2 Instances API
+  enforces a hard cap of 100 requests per minute per organization.
+sources:
+  - https://documenter.getpostman.com/view/20973002/2s8YzMYRDc
+  - https://dashboard.tensordock.com/api/docs/getting-started
+headers:
+  limit: ''
+  remaining: ''
+  reset: ''
+  retryAfter: Retry-After
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+algorithm: fixed-window
+limits:
+  - surface: Marketplace v0 (marketplace.tensordock.com / dashboard.tensordock.com /api/v0/*)
+    policy: best-effort
+    note: 'TensorDock does not formally rate-limit the v0 API but asks customers to "keep API requests
+      reasonable (e.g. 1 request per second)". Bulk-action endpoints can be added on request via
+      support@tensordock.com.'
+    rpm: 60
+    rps: 1
+  - surface: Instances API v2 (dashboard.tensordock.com /api/v2/*)
+    policy: enforced
+    rpm: 100
+    scope: per organization
+    note: '100 requests per minute per organization. Excess requests are rejected with HTTP 429.'
+quotas:
+  - name: Account balance
+    description: TensorDock VMs require a minimum account balance of $1 to deploy; instances stop
+      automatically when the balance reaches $0 and are eventually deleted.
+    threshold: $1 minimum balance
+  - name: Storage minimum
+    description: Minimum 100 GB storage per instance.
+    threshold: 100 GB
+notes:
+  - The v0 endpoints accept api_key + api_token as form parameters; the v2 endpoints use Bearer tokens.
+  - Spot instance soft-validation endpoints (/api/v0/client/spot/validate/*) are intended as a
+    pre-flight check and should not be polled aggressively.

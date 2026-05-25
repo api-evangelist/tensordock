@@ -1,0 +1,47 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://dashboard.tensordock.com/api/v2/instances",
+    "headers": {
+      "Authorization": "Bearer YOUR_TOKEN",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "data": {
+        "type": "virtualmachine",
+        "attributes": {
+          "name": "llm-finetune-rtx4090",
+          "type": "virtualmachine",
+          "image": "ubuntu2404",
+          "location_id": "loc-us-east-1",
+          "useDedicatedIp": true,
+          "ssh_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI...",
+          "resources": {
+            "vcpu_count": 8,
+            "ram_gb": 32,
+            "storage_gb": 250,
+            "gpus": {
+              "model": {
+                "gpuV0Name": "rtx4090-24gb",
+                "count": 2
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "data": {
+        "type": "virtualmachine",
+        "id": "d2a7c8e2-50b5-4e64-9b21-1ed8e0d5b9af",
+        "attributes": {
+          "name": "llm-finetune-rtx4090",
+          "status": "starting"
+        }
+      }
+    }
+  }
+}

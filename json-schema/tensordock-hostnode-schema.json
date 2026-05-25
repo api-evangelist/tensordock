@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/tensordock/main/json-schema/tensordock-hostnode-schema.json",
+  "title": "TensorDock Hostnode",
+  "description": "Schema for a TensorDock Marketplace hostnode as returned by /api/v0/client/deploy/hostnodes.",
+  "type": "object",
+  "properties": {
+    "uuid": {
+      "type": "string",
+      "description": "Hostnode UUID."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["online", "maintenance", "offline"]
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "country": { "type": "string" },
+        "region": { "type": "string" },
+        "city": { "type": "string" }
+      }
+    },
+    "specs": {
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "type": "object",
+          "properties": {
+            "amount": { "type": "integer" },
+            "price": { "type": "number" }
+          }
+        },
+        "gpu": {
+          "type": "object",
+          "description": "Map of GPU model name -> { amount, price }.",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "amount": { "type": "integer" },
+              "price": { "type": "number" }
+            }
+          }
+        },
+        "ram": {
+          "type": "object",
+          "properties": {
+            "amount": { "type": "integer" },
+            "price": { "type": "number" }
+          }
+        },
+        "storage": {
+          "type": "object",
+          "properties": {
+            "amount": { "type": "integer" },
+            "price": { "type": "number" }
+          }
+        },
+        "networking": {
+          "type": "object",
+          "properties": {
+            "ports": {
+              "type": "object"
+            },
+            "speed": { "type": "string" },
+            "receive": { "type": "string" },
+            "send": { "type": "string" }
+          }
+        }
+      }
+    },
+    "networking": {
+      "type": "object"
+    }
+  },
+  "required": ["uuid", "specs"]
+}

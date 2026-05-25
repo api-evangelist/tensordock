@@ -1,0 +1,19 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://marketplace.tensordock.com/api/v0/client/spot/validate/new",
+    "headers": {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    "body": "api_key=YOUR_KEY&api_token=YOUR_TOKEN&hostnode=a3f9b4c1-2d1f-4e9b-9a7c-1b2cd3ef4567&gpu_model=rtx4090-24gb&gpu_count=1&price=0.20"
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "will_succeed": false,
+      "message": "Bid below current clearing price; raise bid to $0.27/hr or higher.",
+      "suggested_price": 0.27
+    }
+  }
+}

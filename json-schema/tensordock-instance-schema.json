@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/tensordock/main/json-schema/tensordock-instance-schema.json",
+  "title": "TensorDock Instance",
+  "description": "Schema for a TensorDock v2 virtual machine instance as returned by /api/v2/instances/{id}.",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "object",
+      "required": ["type", "id", "attributes"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "virtualmachine"
+        },
+        "id": {
+          "type": "string",
+          "description": "Instance UUID."
+        },
+        "attributes": {
+          "type": "object",
+          "required": ["name", "status"],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string",
+              "enum": ["starting", "running", "stopping", "stopped", "deleting", "deleted", "error"]
+            },
+            "ipAddress": {
+              "type": "string",
+              "format": "ipv4"
+            },
+            "portForwards": {
+              "type": "object",
+              "description": "Map of internal port -> external port forwards.",
+              "additionalProperties": {
+                "type": "integer"
+              }
+            },
+            "resources": {
+              "type": "object",
+              "properties": {
+                "vcpu_count": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "ram_gb": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "storage_gb": {
+                  "type": "number",
+                  "minimum": 100,
+                  "description": "Minimum storage allocation is 100 GB."
+                },
+                "gpus": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "gpuV0Name": {
+                        "type": "string",
+                        "description": "TensorDock canonical GPU model identifier."
+                      },
+                      "count": {
+                        "type": "integer",
+                        "minimum": 1
+                      }
+                    },
+                    "required": ["gpuV0Name", "count"]
+                  }
+                }
+              }
+            },
+            "rateHourly": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Current per-hour billing rate in USD."
+            },
+            "location_id": {
+              "type": "string"
+            },
+            "image": {
+              "type": "string",
+              "description": "Operating system image (e.g., ubuntu2404, windows10)."
+            },
+            "useDedicatedIp": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": ["data"]
+}

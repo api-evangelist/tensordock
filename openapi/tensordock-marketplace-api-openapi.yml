@@ -1,0 +1,851 @@
+openapi: 3.1.0
+info:
+  title: TensorDock Marketplace API
+  description: |
+    The original TensorDock Marketplace API for deploying and managing GPU virtual
+    machines across a global network of independent hardware hosts. Endpoints are
+    authenticated via `api_key` + `api_token` form parameters that are tied to an
+    organization and can be generated at https://dashboard.tensordock.com/api.
+
+    The API covers authorization checks, hostnode discovery, on-demand and spot
+    virtual machine deployment, instance lifecycle (start, stop, modify, delete),
+    instant VM deployment, container scaling, and billing balance/revenue lookups.
+  version: '0'
+  contact:
+    name: TensorDock Support
+    email: support@tensordock.com
+    url: https://marketplace.tensordock.com/support
+  x-logo:
+    url: https://www.tensordock.com/favicon.ico
+
+servers:
+  - url: https://marketplace.tensordock.com
+    description: TensorDock Marketplace (production)
+  - url: https://dashboard.tensordock.com
+    description: TensorDock Dashboard (alias / production)
+
+security:
+  - ApiKeyPair: []
+
+tags:
+  - name: Authorization
+    description: Verify and list API authorization pairs
+  - name: Hostnodes
+    description: Discover available hostnodes and GPU/CPU configurations
+  - name: Virtual Machines
+    description: Deploy, list, start, stop, modify, and delete virtual machines
+  - name: Spot
+    description: Validate spot instance pricing for new and existing instances
+  - name: Instant VMs
+    description: Deploy and inspect pre-configured Instant VMs
+  - name: Containers
+    description: Deploy, scale, terminate, and inspect containers
+  - name: Billing
+    description: Retrieve balance, revenue, and monthly summaries
+
+paths:
+  /api/v0/auth/test:
+    post:
+      summary: Test Authorization
+      description: Verify that an `api_key` + `api_token` pair is registered and valid.
+      operationId: testAuthorization
+      tags:
+        - Authorization
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthCredentials'
+      responses:
+        '200':
+          description: Returns `success: true` when the pair is valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /api/v0/auth/list:
+    post:
+      summary: List Authorizations
+      description: List all authorization pairs registered for the calling organization.
+      operationId: listAuthorizations
+      tags:
+        - Authorization
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthCredentials'
+      responses:
+        '200':
+          description: List of authorization pair metadata.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  authorizations:
+                    type: array
+                    items:
+                      type: object
+
+  /api/v0/client/deploy/hostnodes:
+    get:
+      summary: List Available Hostnodes
+      description: Retrieve a JSON list of all hostnodes and their available GPU, CPU, RAM, storage,
+        and per-resource pricing.
+      operationId: listHostnodes
+      tags:
+        - Hostnodes
+      parameters:
+        - in: query
+          name: requiresRTX
+          schema:
+            type: boolean
+        - in: query
+          name: minGPUCount
+          schema:
+            type: integer
+        - in: query
+          name: maxGPUCount
+          schema:
+            type: integer
+        - in: query
+          name: minRAM
+          schema:
+            type: integer
+        - in: query
+          name: maxRAM
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Map of hostnode UUIDs to specifications.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HostnodeMap'
+
+  /api/v0/client/deploy/hostnodes/{hostnode_uuid}:
+    get:
+      summary: Get Hostnode Details
+      description: Retrieve detailed specifications for a single hostnode by UUID.
+      operationId: getHostnode
+      tags:
+        - Hostnodes
+      parameters:
+        - in: path
+          name: hostnode_uuid
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Hostnode specification.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hostnode'
+
+  /api/v0/client/deploy/single:
+    post:
+      summary: Deploy Virtual Machine
+      description: Deploy a new GPU or CPU virtual machine on a chosen hostnode with the requested
+        resource configuration.
+      operationId: deployVirtualMachine
+      tags:
+        - Virtual Machines
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DeployRequest'
+      responses:
+        '200':
+          description: Deployment accepted; server is provisioning.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeployResponse'
+
+  /api/v0/client/spot/validate/new:
+    post:
+      summary: Soft Validate Spot Instance Price (New Instance)
+      description: Validate whether a proposed bid price for a new spot instance will succeed without
+        actually deploying.
+      operationId: validateSpotNew
+      tags:
+        - Spot
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              allOf:
+                - $ref: '#/components/schemas/AuthCredentials'
+                - type: object
+                  properties:
+                    price:
+                      type: number
+                    hostnode:
+                      type: string
+                    gpu_model:
+                      type: string
+                    gpu_count:
+                      type: integer
+      responses:
+        '200':
+          description: Validation result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpotValidationResponse'
+
+  /api/v0/client/spot/validate/existing:
+    post:
+      summary: Soft Validate Spot Instance Price (Existing Instance)
+      description: Validate whether a new bid for an existing spot instance will succeed.
+      operationId: validateSpotExisting
+      tags:
+        - Spot
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              allOf:
+                - $ref: '#/components/schemas/AuthCredentials'
+                - type: object
+                  properties:
+                    server:
+                      type: string
+                    price:
+                      type: number
+      responses:
+        '200':
+          description: Validation result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpotValidationResponse'
+
+  /api/v0/client/list:
+    post:
+      summary: List Virtual Machines
+      description: List all virtual machines belonging to the calling organization.
+      operationId: listVirtualMachines
+      tags:
+        - Virtual Machines
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthCredentials'
+      responses:
+        '200':
+          description: Array of VM objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  virtualmachines:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VirtualMachine'
+
+  /api/v0/client/get/single:
+    post:
+      summary: Get Virtual Machine
+      description: Retrieve details for a single virtual machine by server UUID.
+      operationId: getVirtualMachine
+      tags:
+        - Virtual Machines
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              allOf:
+                - $ref: '#/components/schemas/AuthCredentials'
+                - type: object
+                  required:
+                    - server
+                  properties:
+                    server:
+                      type: string
+      responses:
+        '200':
+          description: Virtual machine details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualMachine'
+
+  /api/v0/client/start/single:
+    post:
+      summary: Start Virtual Machine
+      description: Start a previously stopped virtual machine.
+      operationId: startVirtualMachine
+      tags:
+        - Virtual Machines
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              allOf:
+                - $ref: '#/components/schemas/AuthCredentials'
+                - type: object
+                  required:
+                    - server
+                  properties:
+                    server:
+                      type: string
+      responses:
+        '200':
+          description: Start command accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /api/v0/client/stop/single:
+    post:
+      summary: Stop Virtual Machine
+      description: |
+        Stop a running virtual machine. The optional `disassociate_resources` parameter
+        controls whether the GPU is released back to the marketplace.
+      operationId: stopVirtualMachine
+      tags:
+        - Virtual Machines
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              allOf:
+                - $ref: '#/components/schemas/AuthCredentials'
+                - type: object
+                  required:
+                    - server
+                  properties:
+                    server:
+                      type: string
+                    disassociate_resources:
+                      type: boolean
+                      description: When true, release the GPU; when false, retain the GPU reservation.
+      responses:
+        '200':
+          description: Stop command accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /api/v0/client/modify/single:
+    post:
+      summary: Modify Virtual Machine
+      description: Adjust the resource allocation (vCPU, RAM, storage, GPU count) for an existing VM.
+      operationId: modifyVirtualMachine
+      tags:
+        - Virtual Machines
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ModifyRequest'
+      responses:
+        '200':
+          description: Modification accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /api/v0/client/delete/single:
+    post:
+      summary: Delete Virtual Machine
+      description: Permanently delete a virtual machine and release its resources.
+      operationId: deleteVirtualMachine
+      tags:
+        - Virtual Machines
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              allOf:
+                - $ref: '#/components/schemas/AuthCredentials'
+                - type: object
+                  required:
+                    - server
+                  properties:
+                    server:
+                      type: string
+      responses:
+        '200':
+          description: Deletion succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /api/v0/client/deployinstant/single:
+    post:
+      summary: Deploy Instant Virtual Machine
+      description: Deploy a pre-configured Instant VM in under 30 seconds.
+      operationId: deployInstantVm
+      tags:
+        - Instant VMs
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/InstantDeployRequest'
+      responses:
+        '200':
+          description: Instant VM deployed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeployResponse'
+
+  /api/v0/client/deploy/instantvms:
+    get:
+      summary: List Instant VM Templates
+      description: List all available Instant VM templates and their per-hour pricing.
+      operationId: listInstantVms
+      tags:
+        - Instant VMs
+      responses:
+        '200':
+          description: Available Instant VM templates.
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/v0/client/container/deploy:
+    post:
+      summary: Deploy Container
+      description: Deploy a container workload on the TensorDock GPU marketplace.
+      operationId: deployContainer
+      tags:
+        - Containers
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContainerDeployRequest'
+      responses:
+        '200':
+          description: Container deployment accepted.
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/v0/client/container/scale:
+    post:
+      summary: Scale Container
+      description: Scale the number of replicas for an existing container.
+      operationId: scaleContainer
+      tags:
+        - Containers
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              allOf:
+                - $ref: '#/components/schemas/AuthCredentials'
+                - type: object
+                  required:
+                    - container_id
+                    - replicas
+                  properties:
+                    container_id:
+                      type: string
+                    replicas:
+                      type: integer
+      responses:
+        '200':
+          description: Scale accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /api/v0/client/container/stop:
+    post:
+      summary: Terminate Container
+      description: Terminate a running container deployment.
+      operationId: terminateContainer
+      tags:
+        - Containers
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              allOf:
+                - $ref: '#/components/schemas/AuthCredentials'
+                - type: object
+                  required:
+                    - container_id
+                  properties:
+                    container_id:
+                      type: string
+      responses:
+        '200':
+          description: Termination accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /api/v0/client/container/{container_id}/replicas:
+    get:
+      summary: List Container Replicas
+      description: List the replica details for a running container.
+      operationId: listContainerReplicas
+      tags:
+        - Containers
+      parameters:
+        - in: path
+          name: container_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Container replica details.
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/v0/billing/balance:
+    post:
+      summary: Retrieve Balance
+      description: Retrieve the current account balance for the calling organization.
+      operationId: retrieveBalance
+      tags:
+        - Billing
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthCredentials'
+      responses:
+        '200':
+          description: Account balance.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  balance:
+                    type: number
+                  currency:
+                    type: string
+
+  /api/v0/billing/revenue:
+    post:
+      summary: Retrieve Revenue
+      description: Retrieve revenue history for a hosting provider account.
+      operationId: retrieveRevenue
+      tags:
+        - Billing
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthCredentials'
+      responses:
+        '200':
+          description: Revenue history.
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/v0/billing/summary:
+    post:
+      summary: Retrieve Monthly Summary
+      description: Retrieve a monthly billing summary for the calling organization.
+      operationId: retrieveMonthlySummary
+      tags:
+        - Billing
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthCredentials'
+      responses:
+        '200':
+          description: Monthly billing summary.
+          content:
+            application/json:
+              schema:
+                type: object
+
+components:
+  securitySchemes:
+    ApiKeyPair:
+      type: apiKey
+      in: query
+      name: api_key
+      description: |
+        TensorDock Marketplace endpoints accept an `api_key` + `api_token` pair
+        passed as form parameters in the request body (or query string for GET
+        endpoints). Generate pairs at https://dashboard.tensordock.com/api.
+
+  schemas:
+    AuthCredentials:
+      type: object
+      required:
+        - api_key
+        - api_token
+      properties:
+        api_key:
+          type: string
+          description: TensorDock authorization key UUID.
+        api_token:
+          type: string
+          description: TensorDock authorization token UUID.
+
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+
+    Hostnode:
+      type: object
+      properties:
+        uuid:
+          type: string
+        status:
+          type: string
+        location:
+          type: object
+          properties:
+            country:
+              type: string
+            region:
+              type: string
+            city:
+              type: string
+        specs:
+          type: object
+          properties:
+            cpu:
+              type: object
+            gpu:
+              type: object
+            ram:
+              type: object
+            storage:
+              type: object
+            networking:
+              type: object
+        pricing:
+          type: object
+
+    HostnodeMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/Hostnode'
+
+    DeployRequest:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/AuthCredentials'
+        - type: object
+          required:
+            - name
+            - hostnode
+            - operating_system
+            - gpu_count
+            - gpu_model
+            - vcpus
+            - ram
+            - storage
+            - password
+          properties:
+            name:
+              type: string
+            hostnode:
+              type: string
+            operating_system:
+              type: string
+            gpu_count:
+              type: integer
+            gpu_model:
+              type: string
+            vcpus:
+              type: integer
+            ram:
+              type: integer
+            storage:
+              type: integer
+            password:
+              type: string
+            cloudinit_script:
+              type: string
+            external_port_22:
+              type: integer
+            external_port_80:
+              type: integer
+            external_port_443:
+              type: integer
+            internal_port_22:
+              type: integer
+            internal_port_80:
+              type: integer
+            internal_port_443:
+              type: integer
+            ipv4:
+              type: boolean
+
+    DeployResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        server:
+          type: string
+        cost:
+          type: object
+
+    ModifyRequest:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/AuthCredentials'
+        - type: object
+          required:
+            - server
+          properties:
+            server:
+              type: string
+            vcpus:
+              type: integer
+            ram:
+              type: integer
+            storage:
+              type: integer
+            gpu_count:
+              type: integer
+
+    InstantDeployRequest:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/AuthCredentials'
+        - type: object
+          required:
+            - name
+            - instant_vm
+          properties:
+            name:
+              type: string
+            instant_vm:
+              type: string
+            password:
+              type: string
+
+    ContainerDeployRequest:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/AuthCredentials'
+        - type: object
+          required:
+            - name
+            - image
+          properties:
+            name:
+              type: string
+            image:
+              type: string
+            replicas:
+              type: integer
+            gpu_model:
+              type: string
+            gpu_count:
+              type: integer
+            ports:
+              type: array
+              items:
+                type: integer
+            env:
+              type: object
+
+    VirtualMachine:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        hostnode:
+          type: string
+        ip:
+          type: string
+        port_forwards:
+          type: object
+        resources:
+          type: object
+          properties:
+            vcpu_count:
+              type: integer
+            ram_gb:
+              type: number
+            storage_gb:
+              type: number
+            gpus:
+              type: array
+              items:
+                type: object
+        rate_hourly:
+          type: number
+
+    SpotValidationResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        will_succeed:
+          type: boolean
+        message:
+          type: string
+        suggested_price:
+          type: number
