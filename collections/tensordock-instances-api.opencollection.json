@@ -1,0 +1,149 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TensorDock Instances API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Instances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dashboard.tensordock.com/api/v2/instances"
+          },
+          "docs": "List all instances belonging to the calling organization."
+        },
+        {
+          "info": {
+            "name": "Create Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dashboard.tensordock.com/api/v2/instances",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new virtual machine instance. Supports both location-based\ndeployment (specify `location_id`) and hostnode-based deployment.\nRequires a minimum storage of 100 GB, an account balance of at least\n$1, and at least one GPU for location-based deployment.\n"
+        },
+        {
+          "info": {
+            "name": "Get Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dashboard.tensordock.com/api/v2/instances/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Instance UUID."
+              }
+            ]
+          },
+          "docs": "Retrieve details for a single instance by ID."
+        },
+        {
+          "info": {
+            "name": "Delete Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://dashboard.tensordock.com/api/v2/instances/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Instance UUID."
+              }
+            ]
+          },
+          "docs": "Permanently delete an instance and release its resources."
+        },
+        {
+          "info": {
+            "name": "Start Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dashboard.tensordock.com/api/v2/instances/:id/start",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Instance UUID."
+              }
+            ]
+          },
+          "docs": "Start a stopped instance."
+        },
+        {
+          "info": {
+            "name": "Stop Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dashboard.tensordock.com/api/v2/instances/:id/stop",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Instance UUID."
+              }
+            ]
+          },
+          "docs": "Stop a running instance."
+        },
+        {
+          "info": {
+            "name": "Modify Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://dashboard.tensordock.com/api/v2/instances/:id/modify",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Instance UUID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adjust the resource allocation (vCPU, RAM, storage, GPU model and count) for an existing instance."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
