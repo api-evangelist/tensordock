@@ -103,7 +103,7 @@ common:
     type: Sandbox
   - url: https://dashboard.tensordock.com/api
     name: API Keys
-    type: SignUp
+    type: Signup
   - url: https://blog.tensordock.com
     name: TensorDock Blog
     type: Blog
@@ -134,7 +134,7 @@ common:
     type: Support
   - url: https://tensordock.userjot.com/
     name: User Suggestions
-    type: Forum
+    type: Forums
   - type: Twitter
     url: https://twitter.com/TensorDock
   - type: LinkedIn
@@ -143,29 +143,29 @@ common:
     url: https://instagram.com/tensordock
   - type: YouTube
     url: https://www.youtube.com/channel/UCsCAK6krPmRe3Y7Hp5QHXQg
-  - type: Forum
+  - type: Forums
     url: https://discord.gg/Xyzjjuj6zf
     name: TensorDock Discord
   - type: GitHubOrganization
     url: https://github.com/tensordock
   - url: https://github.com/tensordock/tensordock-rs
     name: Rust API Wrapper
-    type: SDK
+    type: SDKs
   - url: https://pypi.org/project/tensordock/
     name: Unofficial Python SDK
-    type: SDK
+    type: SDKs
   - url: https://github.com/tensordock/dashboard-frontend-template
     name: Whitelabel Storefront Template
-    type: Tool
+    type: Tools
   - url: https://github.com/tensordock/wireguard-manager
     name: WireGuard Manager
-    type: Tool
+    type: Tools
   - url: https://github.com/tensordock/tensorblog
     name: TensorBlog
-    type: Tool
+    type: Tools
   - url: https://github.com/tensordock/hosting-install
     name: Hosting Install Scripts
-    type: Tool
+    type: Tools
   - url: https://docs.tensordock.com/virtual-machines/introduction-to-core-compute-vms
     name: Introduction to Core Compute VMs
     type: Documentation
@@ -189,7 +189,7 @@ common:
     type: Documentation
   - url: https://www.tensordock.com/host.html
     name: Become a Host
-    type: SignUp
+    type: Signup
   - url: plans/tensordock-plans-pricing.yml
     type: Plans
   - url: rate-limits/tensordock-rate-limits.yml
