@@ -1,0 +1,18 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/tensordock-instances-api-openapi.yml, openapi/tensordock-secrets-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: API Key
+  description: |-
+    Bearer token authentication. Generate API tokens at
+    https://dashboard.tensordock.com/api. Send the token in the
+    `Authorization: Bearer <token>` header.
+  sources:
+  - openapi/tensordock-instances-api-openapi.yml
+  - openapi/tensordock-secrets-api-openapi.yml
