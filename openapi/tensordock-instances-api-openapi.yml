@@ -1,15 +1,22 @@
 openapi: 3.1.0
 info:
   title: TensorDock Instances API
-  description: |
-    The current TensorDock Instances API (v2) for creating, listing, inspecting,
+  description: 'The current TensorDock Instances API (v2) for creating, listing, inspecting,
+
     starting, stopping, modifying, and deleting GPU and CPU virtual machines on
+
     the TensorDock marketplace. Authentication uses a Bearer token generated
+
     from the Developer Settings page at https://dashboard.tensordock.com/api.
 
+
     Requests and responses follow a JSON:API-style envelope with `data.type`,
+
     `data.id`, and `data.attributes` fields. Rate limited at 100 requests per
+
     minute per organization.
+
+    '
   version: '2.0'
   contact:
     name: TensorDock Support
@@ -17,20 +24,14 @@ info:
     url: https://marketplace.tensordock.com/support
   x-logo:
     url: https://www.tensordock.com/favicon.ico
-
 servers:
-  - url: https://dashboard.tensordock.com
-    description: TensorDock Dashboard (production)
-
+- url: https://dashboard.tensordock.com
+  description: TensorDock Dashboard (production)
 security:
-  - BearerAuth: []
-
+- BearerAuth: []
 tags:
-  - name: Instances
-    description: Create, list, inspect, and manage virtual machine instances
-  - name: Locations
-    description: Discover deployment locations and available GPU/CPU resources
-
+- name: Instances
+  description: Create, list, inspect, and manage virtual machine instances
 paths:
   /api/v2/instances:
     get:
@@ -38,7 +39,7 @@ paths:
       description: List all instances belonging to the calling organization.
       operationId: listInstances
       tags:
-        - Instances
+      - Instances
       responses:
         '200':
           description: Array of instance objects under `data.instances`.
@@ -50,17 +51,20 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '429':
           $ref: '#/components/responses/RateLimited'
-
     post:
       summary: Create Instance
-      description: |
-        Create a new virtual machine instance. Supports both location-based
+      description: 'Create a new virtual machine instance. Supports both location-based
+
         deployment (specify `location_id`) and hostnode-based deployment.
+
         Requires a minimum storage of 100 GB, an account balance of at least
+
         $1, and at least one GPU for location-based deployment.
+
+        '
       operationId: createInstance
       tags:
-        - Instances
+      - Instances
       requestBody:
         required: true
         content:
@@ -80,16 +84,15 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '429':
           $ref: '#/components/responses/RateLimited'
-
   /api/v2/instances/{id}:
     get:
       summary: Get Instance
       description: Retrieve details for a single instance by ID.
       operationId: getInstance
       tags:
-        - Instances
+      - Instances
       parameters:
-        - $ref: '#/components/parameters/InstanceId'
+      - $ref: '#/components/parameters/InstanceId'
       responses:
         '200':
           description: Instance details.
@@ -101,15 +104,14 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
-
     delete:
       summary: Delete Instance
       description: Permanently delete an instance and release its resources.
       operationId: deleteInstance
       tags:
-        - Instances
+      - Instances
       parameters:
-        - $ref: '#/components/parameters/InstanceId'
+      - $ref: '#/components/parameters/InstanceId'
       responses:
         '200':
           description: Deletion succeeded.
@@ -117,16 +119,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SuccessEnvelope'
-
   /api/v2/instances/{id}/start:
     post:
       summary: Start Instance
       description: Start a stopped instance.
       operationId: startInstance
       tags:
-        - Instances
+      - Instances
       parameters:
-        - $ref: '#/components/parameters/InstanceId'
+      - $ref: '#/components/parameters/InstanceId'
       responses:
         '200':
           description: Start command accepted; status returns to `starting` then `running`.
@@ -134,16 +135,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InstanceStatusEnvelope'
-
   /api/v2/instances/{id}/stop:
     post:
       summary: Stop Instance
       description: Stop a running instance.
       operationId: stopInstance
       tags:
-        - Instances
+      - Instances
       parameters:
-        - $ref: '#/components/parameters/InstanceId'
+      - $ref: '#/components/parameters/InstanceId'
       responses:
         '200':
           description: Stop command accepted; status returns to `stopping` then `stopped`.
@@ -151,17 +151,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InstanceStatusEnvelope'
-
   /api/v2/instances/{id}/modify:
     put:
       summary: Modify Instance
-      description: Adjust the resource allocation (vCPU, RAM, storage, GPU model and count) for an
-        existing instance.
+      description: Adjust the resource allocation (vCPU, RAM, storage, GPU model and count) for an existing instance.
       operationId: modifyInstance
       tags:
-        - Instances
+      - Instances
       parameters:
-        - $ref: '#/components/parameters/InstanceId'
+      - $ref: '#/components/parameters/InstanceId'
       requestBody:
         required: true
         content:
@@ -175,55 +173,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SuccessEnvelope'
-
 components:
-  securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: API Key
-      description: |
-        Bearer token authentication. Generate API tokens at
-        https://dashboard.tensordock.com/api. Send the token in the
-        `Authorization: Bearer <token>` header.
-
-  parameters:
-    InstanceId:
-      in: path
-      name: id
-      required: true
-      schema:
-        type: string
-      description: Instance UUID.
-
-  responses:
-    Unauthorized:
-      description: Authentication failed or missing.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request body.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Instance not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    RateLimited:
-      description: Too many requests; rate limited at 100 requests per minute per organization.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-
   schemas:
-    SuccessEnvelope:
+    InstanceStatusEnvelope:
       type: object
       properties:
         data:
@@ -231,10 +183,17 @@ components:
           properties:
             type:
               type: string
-              const: success
-            message:
+              const: virtualmachine
+            id:
               type: string
-
+            attributes:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                  - starting
+                  - stopping
     ErrorResponse:
       type: object
       properties:
@@ -249,7 +208,14 @@ components:
                 type: string
               detail:
                 type: string
-
+    GpuAllocation:
+      type: object
+      properties:
+        gpuV0Name:
+          type: string
+          description: TensorDock canonical GPU model identifier (e.g., `h100-sxm5-80gb`, `rtx4090-24gb`).
+        count:
+          type: integer
     InstanceListResponse:
       type: object
       properties:
@@ -260,24 +226,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/InstanceEnvelope'
-
-    InstanceResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/InstanceEnvelope'
-
-    InstanceEnvelope:
-      type: object
-      properties:
-        type:
-          type: string
-          const: virtualmachine
-        id:
-          type: string
-        attributes:
-          $ref: '#/components/schemas/InstanceAttributes'
-
     InstanceAttributes:
       type: object
       properties:
@@ -285,7 +233,14 @@ components:
           type: string
         status:
           type: string
-          enum: [starting, running, stopping, stopped, deleting, deleted, error]
+          enum:
+          - starting
+          - running
+          - stopping
+          - stopped
+          - deleting
+          - deleted
+          - error
         ipAddress:
           type: string
         portForwards:
@@ -298,40 +253,27 @@ components:
           type: string
         image:
           type: string
-
-    Resources:
+    SuccessEnvelope:
       type: object
       properties:
-        vcpu_count:
-          type: integer
-        ram_gb:
-          type: number
-        storage_gb:
-          type: number
-        gpus:
-          type: array
-          items:
-            $ref: '#/components/schemas/GpuAllocation'
-
-    GpuAllocation:
-      type: object
-      properties:
-        gpuV0Name:
-          type: string
-          description: TensorDock canonical GPU model identifier (e.g., `h100-sxm5-80gb`, `rtx4090-24gb`).
-        count:
-          type: integer
-
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              const: success
+            message:
+              type: string
     CreateInstanceRequest:
       type: object
       required:
-        - data
+      - data
       properties:
         data:
           type: object
           required:
-            - type
-            - attributes
+          - type
+          - attributes
           properties:
             type:
               type: string
@@ -339,9 +281,9 @@ components:
             attributes:
               type: object
               required:
-                - name
-                - image
-                - resources
+              - name
+              - image
+              - resources
               properties:
                 name:
                   type: string
@@ -363,7 +305,6 @@ components:
                   type: string
                 cloud_init:
                   type: string
-
     ModifyInstanceRequest:
       type: object
       properties:
@@ -380,21 +321,76 @@ components:
               type: string
             count:
               type: integer
-
-    InstanceStatusEnvelope:
+    InstanceEnvelope:
+      type: object
+      properties:
+        type:
+          type: string
+          const: virtualmachine
+        id:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/InstanceAttributes'
+    Resources:
+      type: object
+      properties:
+        vcpu_count:
+          type: integer
+        ram_gb:
+          type: number
+        storage_gb:
+          type: number
+        gpus:
+          type: array
+          items:
+            $ref: '#/components/schemas/GpuAllocation'
+    InstanceResponse:
       type: object
       properties:
         data:
-          type: object
-          properties:
-            type:
-              type: string
-              const: virtualmachine
-            id:
-              type: string
-            attributes:
-              type: object
-              properties:
-                status:
-                  type: string
-                  enum: [starting, stopping]
+          $ref: '#/components/schemas/InstanceEnvelope'
+  responses:
+    NotFound:
+      description: Instance not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request body.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    RateLimited:
+      description: Too many requests; rate limited at 100 requests per minute per organization.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed or missing.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    InstanceId:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+      description: Instance UUID.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: 'Bearer token authentication. Generate API tokens at
+
+        https://dashboard.tensordock.com/api. Send the token in the
+
+        `Authorization: Bearer <token>` header.
+
+        '
