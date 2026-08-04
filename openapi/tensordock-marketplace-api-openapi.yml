@@ -59,7 +59,7 @@ paths:
               $ref: '#/components/schemas/AuthCredentials'
       responses:
         '200':
-          description: Returns `success: true` when the pair is valid.
+          description: "Returns `success: true` when the pair is valid."
           content:
             application/json:
               schema:

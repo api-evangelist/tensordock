@@ -1,0 +1,1131 @@
+{
+  "info": {
+    "_postman_id": "e554e252-a749-4941-8e7f-4977c5b76fc5",
+    "name": "TensorDock Instances API",
+    "description": "The current TensorDock Instances API (v2) for creating, listing, inspecting,\nstarting, stopping, modifying, and deleting GPU and CPU virtual machines on\nthe TensorDock marketplace. Authentication uses a Bearer token generated\nfrom the Developer Settings page at https://dashboard.tensordock.com/api.\n\nRequests and responses follow a JSON:API-style envelope with `data.type`,\n`data.id`, and `data.attributes` fields. Rate limited at 100 requests per\nminute per organization.\n\n\nContact Support:\n Name: TensorDock Support\n Email: support@tensordock.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T11:03:48.000Z",
+    "updatedAt": "2026-07-28T11:03:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e554e252-a749-4941-8e7f-4977c5b76fc5"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v2",
+          "item": [
+            {
+              "name": "instances",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "start",
+                      "item": [
+                        {
+                          "name": "Start Instance",
+                          "id": "c06dff1f-78a0-4761-ab22-feda9e440f01",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/instances/:id/start",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "instances",
+                                ":id",
+                                "start"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "8d39819b-40f1-499c-9f67-dc2e2dada82f",
+                                  "key": "id",
+                                  "value": "<string>",
+                                  "description": "(Required) Instance UUID."
+                                }
+                              ]
+                            },
+                            "description": "Start a stopped instance."
+                          },
+                          "response": [
+                            {
+                              "id": "f8a7c768-2650-4e9b-9f27-45a4625d1140",
+                              "name": "Start command accepted; status returns to `starting` then `running`.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v2/instances/:id/start",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v2",
+                                    "instances",
+                                    ":id",
+                                    "start"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"status\": \"stopping\"\n    }\n  }\n}",
+                              "createdAt": "2026-07-28T11:03:49.000Z",
+                              "updatedAt": "2026-07-28T11:03:49.000Z",
+                              "uid": "35240-f8a7c768-2650-4e9b-9f27-45a4625d1140"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T11:03:49.000Z",
+                          "updatedAt": "2026-07-28T11:03:49.000Z",
+                          "uid": "35240-c06dff1f-78a0-4761-ab22-feda9e440f01"
+                        }
+                      ],
+                      "id": "9ef282b0-4f23-45c7-849b-92bc68f62516",
+                      "createdAt": "2026-07-28T11:03:49.000Z",
+                      "updatedAt": "2026-07-28T11:03:49.000Z",
+                      "uid": "35240-9ef282b0-4f23-45c7-849b-92bc68f62516"
+                    },
+                    {
+                      "name": "stop",
+                      "item": [
+                        {
+                          "name": "Stop Instance",
+                          "id": "9487a464-64ea-4d22-a19c-99dc7a68b9a0",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/instances/:id/stop",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "instances",
+                                ":id",
+                                "stop"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "dbe2757d-c3a9-48f1-a0e3-3bc36108a904",
+                                  "key": "id",
+                                  "value": "<string>",
+                                  "description": "(Required) Instance UUID."
+                                }
+                              ]
+                            },
+                            "description": "Stop a running instance."
+                          },
+                          "response": [
+                            {
+                              "id": "af3afbd4-26a2-4fad-92d9-546c219170c0",
+                              "name": "Stop command accepted; status returns to `stopping` then `stopped`.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v2/instances/:id/stop",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v2",
+                                    "instances",
+                                    ":id",
+                                    "stop"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"status\": \"stopping\"\n    }\n  }\n}",
+                              "createdAt": "2026-07-28T11:03:49.000Z",
+                              "updatedAt": "2026-07-28T11:03:49.000Z",
+                              "uid": "35240-af3afbd4-26a2-4fad-92d9-546c219170c0"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T11:03:49.000Z",
+                          "updatedAt": "2026-07-28T11:03:49.000Z",
+                          "uid": "35240-9487a464-64ea-4d22-a19c-99dc7a68b9a0"
+                        }
+                      ],
+                      "id": "db226684-e566-47dc-b969-bbb73211ab89",
+                      "createdAt": "2026-07-28T11:03:49.000Z",
+                      "updatedAt": "2026-07-28T11:03:49.000Z",
+                      "uid": "35240-db226684-e566-47dc-b969-bbb73211ab89"
+                    },
+                    {
+                      "name": "modify",
+                      "item": [
+                        {
+                          "name": "Modify Instance",
+                          "id": "ee74220a-d643-4d5f-aad3-7c591af7a9ff",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"cpuCores\": \"<integer>\",\n  \"ramGb\": \"<number>\",\n  \"diskGb\": \"<number>\",\n  \"gpus\": {\n    \"gpuV0Name\": \"<string>\",\n    \"count\": \"<integer>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/instances/:id/modify",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "instances",
+                                ":id",
+                                "modify"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "614e140b-2aef-4bde-900a-0e205e6e5bce",
+                                  "key": "id",
+                                  "value": "<string>",
+                                  "description": "(Required) Instance UUID."
+                                }
+                              ]
+                            },
+                            "description": "Adjust the resource allocation (vCPU, RAM, storage, GPU model and count) for an existing instance."
+                          },
+                          "response": [
+                            {
+                              "id": "038e6a80-e077-457f-a95d-1a0418d72613",
+                              "name": "Modification accepted.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"cpuCores\": \"<integer>\",\n  \"ramGb\": \"<number>\",\n  \"diskGb\": \"<number>\",\n  \"gpus\": {\n    \"gpuV0Name\": \"<string>\",\n    \"count\": \"<integer>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v2/instances/:id/modify",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v2",
+                                    "instances",
+                                    ":id",
+                                    "modify"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T11:03:49.000Z",
+                              "updatedAt": "2026-07-28T11:03:49.000Z",
+                              "uid": "35240-038e6a80-e077-457f-a95d-1a0418d72613"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T11:03:49.000Z",
+                          "updatedAt": "2026-07-28T11:03:49.000Z",
+                          "uid": "35240-ee74220a-d643-4d5f-aad3-7c591af7a9ff"
+                        }
+                      ],
+                      "id": "081de6eb-74c6-4f03-afd9-a96f3a1de8d6",
+                      "createdAt": "2026-07-28T11:03:49.000Z",
+                      "updatedAt": "2026-07-28T11:03:49.000Z",
+                      "uid": "35240-081de6eb-74c6-4f03-afd9-a96f3a1de8d6"
+                    },
+                    {
+                      "name": "Get Instance",
+                      "id": "ee135cc5-8165-4e52-a8dc-f2a4860311e3",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/instances/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "instances",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "ce9e39a6-fbc5-4216-9336-20f692e3c500",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) Instance UUID."
+                            }
+                          ]
+                        },
+                        "description": "Retrieve details for a single instance by ID."
+                      },
+                      "response": [
+                        {
+                          "id": "fae3933d-32b4-485b-863f-ab23a44d035d",
+                          "name": "Instance details.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/instances/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "instances",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"status\": \"stopping\",\n      \"ipAddress\": \"<string>\",\n      \"portForwards\": {},\n      \"resources\": {\n        \"vcpu_count\": \"<integer>\",\n        \"ram_gb\": \"<number>\",\n        \"storage_gb\": \"<number>\",\n        \"gpus\": [\n          {\n            \"gpuV0Name\": \"<string>\",\n            \"count\": \"<integer>\"\n          },\n          {\n            \"gpuV0Name\": \"<string>\",\n            \"count\": \"<integer>\"\n          }\n        ]\n      },\n      \"rateHourly\": \"<number>\",\n      \"location_id\": \"<string>\",\n      \"image\": \"<string>\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T11:03:49.000Z",
+                          "updatedAt": "2026-07-28T11:03:49.000Z",
+                          "uid": "35240-fae3933d-32b4-485b-863f-ab23a44d035d"
+                        },
+                        {
+                          "id": "344c018c-5362-44c6-bf13-e7e89304d135",
+                          "name": "Authentication failed or missing.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/instances/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "instances",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T11:03:49.000Z",
+                          "updatedAt": "2026-07-28T11:03:49.000Z",
+                          "uid": "35240-344c018c-5362-44c6-bf13-e7e89304d135"
+                        },
+                        {
+                          "id": "356a0d3a-fffe-4936-870b-a20832088547",
+                          "name": "Instance not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/instances/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "instances",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T11:03:49.000Z",
+                          "updatedAt": "2026-07-28T11:03:49.000Z",
+                          "uid": "35240-356a0d3a-fffe-4936-870b-a20832088547"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T11:03:49.000Z",
+                      "updatedAt": "2026-07-28T11:03:49.000Z",
+                      "uid": "35240-ee135cc5-8165-4e52-a8dc-f2a4860311e3"
+                    },
+                    {
+                      "name": "Delete Instance",
+                      "id": "cf743127-f6f0-4db6-8911-fe29a90275f8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/instances/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "instances",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "1aaa2152-1466-44f6-ab26-3cc56585d2f6",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) Instance UUID."
+                            }
+                          ]
+                        },
+                        "description": "Permanently delete an instance and release its resources."
+                      },
+                      "response": [
+                        {
+                          "id": "35b4e564-27d1-49b5-8bb7-cf3835bb10e6",
+                          "name": "Deletion succeeded.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/instances/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "instances",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T11:03:49.000Z",
+                          "updatedAt": "2026-07-28T11:03:49.000Z",
+                          "uid": "35240-35b4e564-27d1-49b5-8bb7-cf3835bb10e6"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T11:03:49.000Z",
+                      "updatedAt": "2026-07-28T11:03:49.000Z",
+                      "uid": "35240-cf743127-f6f0-4db6-8911-fe29a90275f8"
+                    }
+                  ],
+                  "id": "febdf6c1-6ef8-4aa7-81ce-98cc5f052474",
+                  "createdAt": "2026-07-28T11:03:49.000Z",
+                  "updatedAt": "2026-07-28T11:03:49.000Z",
+                  "uid": "35240-febdf6c1-6ef8-4aa7-81ce-98cc5f052474"
+                },
+                {
+                  "name": "List Instances",
+                  "id": "fb120767-441c-4cbe-a128-8752362fb5ca",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v2/instances",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v2",
+                        "instances"
+                      ]
+                    },
+                    "description": "List all instances belonging to the calling organization."
+                  },
+                  "response": [
+                    {
+                      "id": "b421f98e-30d5-4933-bde4-19dffa022d8a",
+                      "name": "Array of instance objects under `data.instances`.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/instances",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "instances"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"instances\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"name\": \"<string>\",\n          \"status\": \"stopping\",\n          \"ipAddress\": \"<string>\",\n          \"portForwards\": {},\n          \"resources\": {\n            \"vcpu_count\": \"<integer>\",\n            \"ram_gb\": \"<number>\",\n            \"storage_gb\": \"<number>\",\n            \"gpus\": [\n              {\n                \"gpuV0Name\": \"<string>\",\n                \"count\": \"<integer>\"\n              },\n              {\n                \"gpuV0Name\": \"<string>\",\n                \"count\": \"<integer>\"\n              }\n            ]\n          },\n          \"rateHourly\": \"<number>\",\n          \"location_id\": \"<string>\",\n          \"image\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"name\": \"<string>\",\n          \"status\": \"stopping\",\n          \"ipAddress\": \"<string>\",\n          \"portForwards\": {},\n          \"resources\": {\n            \"vcpu_count\": \"<integer>\",\n            \"ram_gb\": \"<number>\",\n            \"storage_gb\": \"<number>\",\n            \"gpus\": [\n              {\n                \"gpuV0Name\": \"<string>\",\n                \"count\": \"<integer>\"\n              },\n              {\n                \"gpuV0Name\": \"<string>\",\n                \"count\": \"<integer>\"\n              }\n            ]\n          },\n          \"rateHourly\": \"<number>\",\n          \"location_id\": \"<string>\",\n          \"image\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T11:03:49.000Z",
+                      "updatedAt": "2026-07-28T11:03:49.000Z",
+                      "uid": "35240-b421f98e-30d5-4933-bde4-19dffa022d8a"
+                    },
+                    {
+                      "id": "fb855819-03c6-4377-9c08-7afca98cc092",
+                      "name": "Authentication failed or missing.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/instances",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "instances"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T11:03:49.000Z",
+                      "updatedAt": "2026-07-28T11:03:49.000Z",
+                      "uid": "35240-fb855819-03c6-4377-9c08-7afca98cc092"
+                    },
+                    {
+                      "id": "f3573a4a-9f52-4d62-8999-2dd68c54f1b4",
+                      "name": "Too many requests; rate limited at 100 requests per minute per organization.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/instances",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "instances"
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T11:03:49.000Z",
+                      "updatedAt": "2026-07-28T11:03:49.000Z",
+                      "uid": "35240-f3573a4a-9f52-4d62-8999-2dd68c54f1b4"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T11:03:49.000Z",
+                  "updatedAt": "2026-07-28T11:03:49.000Z",
+                  "uid": "35240-fb120767-441c-4cbe-a128-8752362fb5ca"
+                },
+                {
+                  "name": "Create Instance",
+                  "id": "78d151e2-8dfc-450a-8269-9814dcc97a61",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"image\": \"<string>\",\n      \"resources\": {\n        \"vcpu_count\": \"<integer>\",\n        \"ram_gb\": \"<number>\",\n        \"storage_gb\": \"<number>\",\n        \"gpus\": [\n          {\n            \"gpuV0Name\": \"<string>\",\n            \"count\": \"<integer>\"\n          },\n          {\n            \"gpuV0Name\": \"<string>\",\n            \"count\": \"<integer>\"\n          }\n        ]\n      },\n      \"type\": \"<string>\",\n      \"location_id\": \"<string>\",\n      \"hostnode_id\": \"<string>\",\n      \"useDedicatedIp\": \"<boolean>\",\n      \"ssh_key\": \"<string>\",\n      \"cloud_init\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v2/instances",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v2",
+                        "instances"
+                      ]
+                    },
+                    "description": "Create a new virtual machine instance. Supports both location-based\ndeployment (specify `location_id`) and hostnode-based deployment.\nRequires a minimum storage of 100 GB, an account balance of at least\n$1, and at least one GPU for location-based deployment.\n"
+                  },
+                  "response": [
+                    {
+                      "id": "847bb4db-4e3e-46a3-bc11-33122451cd7b",
+                      "name": "Instance created and provisioning.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"image\": \"<string>\",\n      \"resources\": {\n        \"vcpu_count\": \"<integer>\",\n        \"ram_gb\": \"<number>\",\n        \"storage_gb\": \"<number>\",\n        \"gpus\": [\n          {\n            \"gpuV0Name\": \"<string>\",\n            \"count\": \"<integer>\"\n          },\n          {\n            \"gpuV0Name\": \"<string>\",\n            \"count\": \"<integer>\"\n          }\n        ]\n      },\n      \"type\": \"<string>\",\n      \"location_id\": \"<string>\",\n      \"hostnode_id\": \"<string>\",\n      \"useDedicatedIp\": \"<boolean>\",\n      \"ssh_key\": \"<string>\",\n      \"cloud_init\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/instances",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "instances"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"status\": \"stopping\",\n      \"ipAddress\": \"<string>\",\n      \"portForwards\": {},\n      \"resources\": {\n        \"vcpu_count\": \"<integer>\",\n        \"ram_gb\": \"<number>\",\n        \"storage_gb\": \"<number>\",\n        \"gpus\": [\n          {\n            \"gpuV0Name\": \"<string>\",\n            \"count\": \"<integer>\"\n          },\n          {\n            \"gpuV0Name\": \"<string>\",\n            \"count\": \"<integer>\"\n          }\n        ]\n      },\n      \"rateHourly\": \"<number>\",\n      \"location_id\": \"<string>\",\n      \"image\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T11:03:49.000Z",
+                      "updatedAt": "2026-07-28T11:03:49.000Z",
+                      "uid": "35240-847bb4db-4e3e-46a3-bc11-33122451cd7b"
+                    },
+                    {
+                      "id": "e80a002c-02f5-4178-8584-f6f1f4e46dd0",
+                      "name": "Invalid request body.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"image\": \"<string>\",\n      \"resources\": {\n        \"vcpu_count\": \"<integer>\",\n        \"ram_gb\": \"<number>\",\n        \"storage_gb\": \"<number>\",\n        \"gpus\": [\n          {\n            \"gpuV0Name\": \"<string>\",\n            \"count\": \"<integer>\"\n          },\n          {\n            \"gpuV0Name\": \"<string>\",\n            \"count\": \"<integer>\"\n          }\n        ]\n      },\n      \"type\": \"<string>\",\n      \"location_id\": \"<string>\",\n      \"hostnode_id\": \"<string>\",\n      \"useDedicatedIp\": \"<boolean>\",\n      \"ssh_key\": \"<string>\",\n      \"cloud_init\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/instances",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "instances"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T11:03:49.000Z",
+                      "updatedAt": "2026-07-28T11:03:49.000Z",
+                      "uid": "35240-e80a002c-02f5-4178-8584-f6f1f4e46dd0"
+                    },
+                    {
+                      "id": "eeb8d095-7206-45a3-8f47-a35c9755865e",
+                      "name": "Authentication failed or missing.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"image\": \"<string>\",\n      \"resources\": {\n        \"vcpu_count\": \"<integer>\",\n        \"ram_gb\": \"<number>\",\n        \"storage_gb\": \"<number>\",\n        \"gpus\": [\n          {\n            \"gpuV0Name\": \"<string>\",\n            \"count\": \"<integer>\"\n          },\n          {\n            \"gpuV0Name\": \"<string>\",\n            \"count\": \"<integer>\"\n          }\n        ]\n      },\n      \"type\": \"<string>\",\n      \"location_id\": \"<string>\",\n      \"hostnode_id\": \"<string>\",\n      \"useDedicatedIp\": \"<boolean>\",\n      \"ssh_key\": \"<string>\",\n      \"cloud_init\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/instances",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "instances"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T11:03:49.000Z",
+                      "updatedAt": "2026-07-28T11:03:49.000Z",
+                      "uid": "35240-eeb8d095-7206-45a3-8f47-a35c9755865e"
+                    },
+                    {
+                      "id": "6adf33bd-14f2-45b0-a0cc-8ab7f6982805",
+                      "name": "Too many requests; rate limited at 100 requests per minute per organization.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"image\": \"<string>\",\n      \"resources\": {\n        \"vcpu_count\": \"<integer>\",\n        \"ram_gb\": \"<number>\",\n        \"storage_gb\": \"<number>\",\n        \"gpus\": [\n          {\n            \"gpuV0Name\": \"<string>\",\n            \"count\": \"<integer>\"\n          },\n          {\n            \"gpuV0Name\": \"<string>\",\n            \"count\": \"<integer>\"\n          }\n        ]\n      },\n      \"type\": \"<string>\",\n      \"location_id\": \"<string>\",\n      \"hostnode_id\": \"<string>\",\n      \"useDedicatedIp\": \"<boolean>\",\n      \"ssh_key\": \"<string>\",\n      \"cloud_init\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/instances",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "instances"
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T11:03:49.000Z",
+                      "updatedAt": "2026-07-28T11:03:49.000Z",
+                      "uid": "35240-6adf33bd-14f2-45b0-a0cc-8ab7f6982805"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T11:03:49.000Z",
+                  "updatedAt": "2026-07-28T11:03:49.000Z",
+                  "uid": "35240-78d151e2-8dfc-450a-8269-9814dcc97a61"
+                }
+              ],
+              "id": "581c4f33-10aa-4f2e-9837-3b6378abf75a",
+              "createdAt": "2026-07-28T11:03:49.000Z",
+              "updatedAt": "2026-07-28T11:03:49.000Z",
+              "uid": "35240-581c4f33-10aa-4f2e-9837-3b6378abf75a"
+            }
+          ],
+          "id": "41fdfa1f-bd83-4a22-9933-41be231f7e99",
+          "createdAt": "2026-07-28T11:03:49.000Z",
+          "updatedAt": "2026-07-28T11:03:49.000Z",
+          "uid": "35240-41fdfa1f-bd83-4a22-9933-41be231f7e99"
+        }
+      ],
+      "id": "4aebc098-6ca3-4f30-9da7-266481cfd64d",
+      "createdAt": "2026-07-28T11:03:49.000Z",
+      "updatedAt": "2026-07-28T11:03:49.000Z",
+      "uid": "35240-4aebc098-6ca3-4f30-9da7-266481cfd64d"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://dashboard.tensordock.com"
+    }
+  ]
+}

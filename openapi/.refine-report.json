@@ -1,0 +1,18 @@
+{
+  "provider": "tensordock",
+  "sources": [
+    "tensordock-instances-api-openapi.yml",
+    "tensordock-secrets-api-openapi.yml"
+  ],
+  "outputs": [
+    "tensordock-instances-api-openapi.yml",
+    "tensordock-secrets-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": [
+    "tensordock-marketplace-api-openapi.yml: parse error ScannerError: mapping values are not allowed here"
+  ]
+}
