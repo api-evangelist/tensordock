@@ -64,8 +64,7 @@ terms:
     definition: The legacy v0 authorization credential — two UUIDs sent as `api_key` and `api_token`
       form parameters. Pairs are organization-scoped and can be created without limit.
   - term: Bearer token
-    definition: The v2 API authentication credential, sent as `Authorization: Bearer <token>`,
-      generated from Developer Settings at https://dashboard.tensordock.com/api.
+    definition: "The v2 API authentication credential, sent as `Authorization: Bearer <token>`, generated from Developer Settings at https://dashboard.tensordock.com/api."
 gpuModels:
   dataCenter:
     - H100 SXM5 80GB
