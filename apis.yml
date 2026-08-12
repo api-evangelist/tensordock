@@ -1,68 +1,127 @@
 aid: tensordock
 url: https://raw.githubusercontent.com/api-evangelist/tensordock/refs/heads/main/apis.yml
 apis:
-  - aid: tensordock:tensordock-marketplace-api
-    name: TensorDock Marketplace API
-    tags:
-      - GPU
-      - Cloud
-      - Compute
-      - Marketplace
-      - Virtual Machines
-    humanURL: https://documenter.getpostman.com/view/20973002/2s8YzMYRDc
-    properties:
-      - url: https://documenter.getpostman.com/view/20973002/2s8YzMYRDc
-        type: Documentation
-      - url: openapi/tensordock-marketplace-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      The original TensorDock Marketplace REST API (v0) for deploying, managing, starting, stopping, and deleting GPU
-      virtual machines across the global marketplace of independent hardware hosts. Endpoints accept api_key + api_token
-      authorization pairs as form parameters and cover hostnode discovery, on-demand and spot instance deployment,
-      instance lifecycle, container scaling, and billing balance lookups.
-  - aid: tensordock:tensordock-instances-api
-    name: TensorDock Instances API
-    tags:
-      - GPU
-      - Cloud
-      - Compute
-      - Instances
-      - Virtual Machines
-    humanURL: https://dashboard.tensordock.com/api/docs/instance-management
-    properties:
-      - url: https://dashboard.tensordock.com/api/docs/instance-management
-        type: Documentation
-      - url: https://dashboard.tensordock.com/api/docs/instance-creation
-        type: Documentation
-      - url: openapi/tensordock-instances-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/tensordock-instance-schema.json
-        type: JSONSchema
-      - url: json-ld/tensordock-context.jsonld
-        type: JSONLD
-    description: >-
-      The current TensorDock Instances API (v2) at https://dashboard.tensordock.com/api/v2/instances for creating,
-      listing, inspecting, starting, stopping, modifying, and deleting GPU and CPU virtual machines. Uses Bearer token
-      authentication and a JSON:API-style envelope of `data.type`, `data.id`, and `data.attributes`. Supports both
-      location-based and hostnode-based deployment patterns.
-  - aid: tensordock:tensordock-secrets-api
-    name: TensorDock Secrets API
-    tags:
-      - GPU
-      - Cloud
-      - Secrets
-      - SSH Keys
-      - Credentials
-    humanURL: https://dashboard.tensordock.com/api/docs/secrets
-    properties:
-      - url: https://dashboard.tensordock.com/api/docs/secrets
-        type: Documentation
-      - url: openapi/tensordock-secrets-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      The TensorDock Secrets API (v2) for managing SSH keys and generic secrets that are encrypted at rest and in
-      transit and can be attached to instances at deploy time. Two secret types are supported — `SSHKEY` for SSH
-      authentication and `SECRET`/`GENERIC` for application credentials whose values are not returned after creation.
+- aid: tensordock:tensordock-instances-api
+  name: TensorDock Instances API
+  tags:
+  - GPU
+  - Cloud
+  - Compute
+  - Instances
+  - Virtual Machines
+  humanURL: https://dashboard.tensordock.com/api/docs/instance-management
+  properties:
+  - url: https://dashboard.tensordock.com/api/docs/instance-management
+    type: Documentation
+  - url: https://dashboard.tensordock.com/api/docs/instance-creation
+    type: Documentation
+  - url: openapi/tensordock-instances-api-openapi.yml
+    type: OpenAPI
+  - url: json-schema/tensordock-instance-schema.json
+    type: JSONSchema
+  - url: json-ld/tensordock-context.jsonld
+    type: JSONLD
+  description: >-
+    The current TensorDock Instances API (v2) at https://dashboard.tensordock.com/api/v2/instances for
+    creating, listing, inspecting, starting, stopping, modifying, and deleting GPU and CPU virtual machines.
+    Uses Bearer token authentication and a JSON:API-style envelope of `data.type`, `data.id`, and `data.attributes`.
+    Supports both location-based and hostnode-based deployment patterns.
+- aid: tensordock:tensordock-secrets-api
+  name: TensorDock Secrets API
+  tags:
+  - GPU
+  - Cloud
+  - Secrets
+  - SSH Keys
+  - Credentials
+  humanURL: https://dashboard.tensordock.com/api/docs/secrets
+  properties:
+  - url: https://dashboard.tensordock.com/api/docs/secrets
+    type: Documentation
+  - url: openapi/tensordock-secrets-api-openapi.yml
+    type: OpenAPI
+  description: >-
+    The TensorDock Secrets API (v2) for managing SSH keys and generic secrets that are encrypted at rest
+    and in transit and can be attached to instances at deploy time. Two secret types are supported — `SSHKEY`
+    for SSH authentication and `SECRET`/`GENERIC` for application credentials whose values are not returned
+    after creation.
+- aid: tensordock:tensordock-authorization-api
+  name: TensorDock Authorization API
+  description: Verify and list API authorization pairs
+  humanURL: https://documenter.getpostman.com/view/20973002/2s8YzMYRDc
+  tags:
+  - Authorization
+  properties:
+  - type: OpenAPI
+    url: openapi/tensordock-authorization-api-openapi.yml
+  - type: Documentation
+    url: https://documenter.getpostman.com/view/20973002/2s8YzMYRDc
+- aid: tensordock:tensordock-billing-api
+  name: TensorDock Billing API
+  description: Retrieve balance, revenue, and monthly summaries
+  humanURL: https://documenter.getpostman.com/view/20973002/2s8YzMYRDc
+  tags:
+  - Billing
+  properties:
+  - type: OpenAPI
+    url: openapi/tensordock-billing-api-openapi.yml
+  - type: Documentation
+    url: https://documenter.getpostman.com/view/20973002/2s8YzMYRDc
+- aid: tensordock:tensordock-containers-api
+  name: TensorDock Containers API
+  description: Deploy, scale, terminate, and inspect containers
+  humanURL: https://documenter.getpostman.com/view/20973002/2s8YzMYRDc
+  tags:
+  - Containers
+  properties:
+  - type: OpenAPI
+    url: openapi/tensordock-containers-api-openapi.yml
+  - type: Documentation
+    url: https://documenter.getpostman.com/view/20973002/2s8YzMYRDc
+- aid: tensordock:tensordock-hostnodes-api
+  name: TensorDock Hostnodes API
+  description: Discover available hostnodes and GPU/CPU configurations
+  humanURL: https://documenter.getpostman.com/view/20973002/2s8YzMYRDc
+  tags:
+  - Hostnodes
+  properties:
+  - type: OpenAPI
+    url: openapi/tensordock-hostnodes-api-openapi.yml
+  - type: Documentation
+    url: https://documenter.getpostman.com/view/20973002/2s8YzMYRDc
+- aid: tensordock:tensordock-instant-vms-api
+  name: TensorDock Instant VMs API
+  description: Deploy and inspect pre-configured Instant VMs
+  humanURL: https://documenter.getpostman.com/view/20973002/2s8YzMYRDc
+  tags:
+  - Instant VMs
+  properties:
+  - type: OpenAPI
+    url: openapi/tensordock-instant-vms-api-openapi.yml
+  - type: Documentation
+    url: https://documenter.getpostman.com/view/20973002/2s8YzMYRDc
+- aid: tensordock:tensordock-spot-api
+  name: TensorDock Spot API
+  description: Validate spot instance pricing for new and existing instances
+  humanURL: https://documenter.getpostman.com/view/20973002/2s8YzMYRDc
+  tags:
+  - Spot
+  properties:
+  - type: OpenAPI
+    url: openapi/tensordock-spot-api-openapi.yml
+  - type: Documentation
+    url: https://documenter.getpostman.com/view/20973002/2s8YzMYRDc
+- aid: tensordock:tensordock-virtual-machines-api
+  name: TensorDock Virtual Machines API
+  description: Deploy, list, start, stop, modify, and delete virtual machines
+  humanURL: https://documenter.getpostman.com/view/20973002/2s8YzMYRDc
+  tags:
+  - Virtual Machines
+  properties:
+  - type: OpenAPI
+    url: openapi/tensordock-virtual-machines-api-openapi.yml
+  - type: Documentation
+    url: https://documenter.getpostman.com/view/20973002/2s8YzMYRDc
 name: TensorDock
 tags:
   - GPU
