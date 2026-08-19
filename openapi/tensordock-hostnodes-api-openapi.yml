@@ -1,0 +1,141 @@
+openapi: 3.2.0
+info:
+  title: TensorDock Marketplace Hostnodes API
+  description: 'The original TensorDock Marketplace API for deploying and managing GPU virtual
+
+    machines across a global network of independent hardware hosts. Endpoints are
+
+    authenticated via `api_key` + `api_token` form parameters that are tied to an
+
+    organization and can be generated at https://dashboard.tensordock.com/api.
+
+
+    The API covers authorization checks, hostnode discovery, on-demand and spot
+
+    virtual machine deployment, instance lifecycle (start, stop, modify, delete),
+
+    instant VM deployment, container scaling, and billing balance/revenue lookups.
+
+    '
+  version: '0'
+  contact:
+    name: TensorDock Support
+    email: support@tensordock.com
+    url: https://marketplace.tensordock.com/support
+  x-logo:
+    url: https://www.tensordock.com/favicon.ico
+servers:
+- url: https://marketplace.tensordock.com
+  description: TensorDock Marketplace (production)
+- url: https://dashboard.tensordock.com
+  description: TensorDock Dashboard (alias / production)
+security:
+- ApiKeyPair: []
+tags:
+- name: Hostnodes
+  description: Discover available hostnodes and GPU/CPU configurations
+paths:
+  /api/v0/client/deploy/hostnodes:
+    get:
+      summary: List Available Hostnodes
+      description: Retrieve a JSON list of all hostnodes and their available GPU, CPU, RAM, storage, and per-resource pricing.
+      operationId: listHostnodes
+      tags:
+      - Hostnodes
+      parameters:
+      - in: query
+        name: requiresRTX
+        schema:
+          type: boolean
+      - in: query
+        name: minGPUCount
+        schema:
+          type: integer
+      - in: query
+        name: maxGPUCount
+        schema:
+          type: integer
+      - in: query
+        name: minRAM
+        schema:
+          type: integer
+      - in: query
+        name: maxRAM
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Map of hostnode UUIDs to specifications.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HostnodeMap'
+  /api/v0/client/deploy/hostnodes/{hostnode_uuid}:
+    get:
+      summary: Get Hostnode Details
+      description: Retrieve detailed specifications for a single hostnode by UUID.
+      operationId: getHostnode
+      tags:
+      - Hostnodes
+      parameters:
+      - in: path
+        name: hostnode_uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Hostnode specification.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hostnode'
+components:
+  schemas:
+    HostnodeMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/Hostnode'
+    Hostnode:
+      type: object
+      properties:
+        uuid:
+          type: string
+        status:
+          type: string
+        location:
+          type: object
+          properties:
+            country:
+              type: string
+            region:
+              type: string
+            city:
+              type: string
+        specs:
+          type: object
+          properties:
+            cpu:
+              type: object
+            gpu:
+              type: object
+            ram:
+              type: object
+            storage:
+              type: object
+            networking:
+              type: object
+        pricing:
+          type: object
+  securitySchemes:
+    ApiKeyPair:
+      type: apiKey
+      in: query
+      name: api_key
+      description: 'TensorDock Marketplace endpoints accept an `api_key` + `api_token` pair
+
+        passed as form parameters in the request body (or query string for GET
+
+        endpoints). Generate pairs at https://dashboard.tensordock.com/api.
+
+        '

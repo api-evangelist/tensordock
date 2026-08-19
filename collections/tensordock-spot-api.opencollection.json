@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TensorDock Marketplace Spot API",
+    "version": "0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Spot",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Soft Validate Spot Instance Price (New Instance)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://marketplace.tensordock.com/api/v0/client/spot/validate/new",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Validate whether a proposed bid price for a new spot instance will succeed without actually deploying."
+        },
+        {
+          "info": {
+            "name": "Soft Validate Spot Instance Price (Existing Instance)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://marketplace.tensordock.com/api/v0/client/spot/validate/existing",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Validate whether a new bid for an existing spot instance will succeed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,130 @@
+openapi: 3.2.0
+info:
+  title: TensorDock Marketplace Billing API
+  description: 'The original TensorDock Marketplace API for deploying and managing GPU virtual
+
+    machines across a global network of independent hardware hosts. Endpoints are
+
+    authenticated via `api_key` + `api_token` form parameters that are tied to an
+
+    organization and can be generated at https://dashboard.tensordock.com/api.
+
+
+    The API covers authorization checks, hostnode discovery, on-demand and spot
+
+    virtual machine deployment, instance lifecycle (start, stop, modify, delete),
+
+    instant VM deployment, container scaling, and billing balance/revenue lookups.
+
+    '
+  version: '0'
+  contact:
+    name: TensorDock Support
+    email: support@tensordock.com
+    url: https://marketplace.tensordock.com/support
+  x-logo:
+    url: https://www.tensordock.com/favicon.ico
+servers:
+- url: https://marketplace.tensordock.com
+  description: TensorDock Marketplace (production)
+- url: https://dashboard.tensordock.com
+  description: TensorDock Dashboard (alias / production)
+security:
+- ApiKeyPair: []
+tags:
+- name: Billing
+  description: Retrieve balance, revenue, and monthly summaries
+paths:
+  /api/v0/billing/balance:
+    post:
+      summary: Retrieve Balance
+      description: Retrieve the current account balance for the calling organization.
+      operationId: retrieveBalance
+      tags:
+      - Billing
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthCredentials'
+      responses:
+        '200':
+          description: Account balance.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  balance:
+                    type: number
+                  currency:
+                    type: string
+  /api/v0/billing/revenue:
+    post:
+      summary: Retrieve Revenue
+      description: Retrieve revenue history for a hosting provider account.
+      operationId: retrieveRevenue
+      tags:
+      - Billing
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthCredentials'
+      responses:
+        '200':
+          description: Revenue history.
+          content:
+            application/json:
+              schema:
+                type: object
+  /api/v0/billing/summary:
+    post:
+      summary: Retrieve Monthly Summary
+      description: Retrieve a monthly billing summary for the calling organization.
+      operationId: retrieveMonthlySummary
+      tags:
+      - Billing
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthCredentials'
+      responses:
+        '200':
+          description: Monthly billing summary.
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    AuthCredentials:
+      type: object
+      required:
+      - api_key
+      - api_token
+      properties:
+        api_key:
+          type: string
+          description: TensorDock authorization key UUID.
+        api_token:
+          type: string
+          description: TensorDock authorization token UUID.
+  securitySchemes:
+    ApiKeyPair:
+      type: apiKey
+      in: query
+      name: api_key
+      description: 'TensorDock Marketplace endpoints accept an `api_key` + `api_token` pair
+
+        passed as form parameters in the request body (or query string for GET
+
+        endpoints). Generate pairs at https://dashboard.tensordock.com/api.
+
+        '

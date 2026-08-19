@@ -1,0 +1,121 @@
+openapi: 3.2.0
+info:
+  title: TensorDock Marketplace Instant VMs API
+  description: 'The original TensorDock Marketplace API for deploying and managing GPU virtual
+
+    machines across a global network of independent hardware hosts. Endpoints are
+
+    authenticated via `api_key` + `api_token` form parameters that are tied to an
+
+    organization and can be generated at https://dashboard.tensordock.com/api.
+
+
+    The API covers authorization checks, hostnode discovery, on-demand and spot
+
+    virtual machine deployment, instance lifecycle (start, stop, modify, delete),
+
+    instant VM deployment, container scaling, and billing balance/revenue lookups.
+
+    '
+  version: '0'
+  contact:
+    name: TensorDock Support
+    email: support@tensordock.com
+    url: https://marketplace.tensordock.com/support
+  x-logo:
+    url: https://www.tensordock.com/favicon.ico
+servers:
+- url: https://marketplace.tensordock.com
+  description: TensorDock Marketplace (production)
+- url: https://dashboard.tensordock.com
+  description: TensorDock Dashboard (alias / production)
+security:
+- ApiKeyPair: []
+tags:
+- name: Instant VMs
+  description: Deploy and inspect pre-configured Instant VMs
+paths:
+  /api/v0/client/deployinstant/single:
+    post:
+      summary: Deploy Instant Virtual Machine
+      description: Deploy a pre-configured Instant VM in under 30 seconds.
+      operationId: deployInstantVm
+      tags:
+      - Instant VMs
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/InstantDeployRequest'
+      responses:
+        '200':
+          description: Instant VM deployed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeployResponse'
+  /api/v0/client/deploy/instantvms:
+    get:
+      summary: List Instant VM Templates
+      description: List all available Instant VM templates and their per-hour pricing.
+      operationId: listInstantVms
+      tags:
+      - Instant VMs
+      responses:
+        '200':
+          description: Available Instant VM templates.
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    DeployResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        server:
+          type: string
+        cost:
+          type: object
+    AuthCredentials:
+      type: object
+      required:
+      - api_key
+      - api_token
+      properties:
+        api_key:
+          type: string
+          description: TensorDock authorization key UUID.
+        api_token:
+          type: string
+          description: TensorDock authorization token UUID.
+    InstantDeployRequest:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/AuthCredentials'
+      - type: object
+        required:
+        - name
+        - instant_vm
+        properties:
+          name:
+            type: string
+          instant_vm:
+            type: string
+          password:
+            type: string
+  securitySchemes:
+    ApiKeyPair:
+      type: apiKey
+      in: query
+      name: api_key
+      description: 'TensorDock Marketplace endpoints accept an `api_key` + `api_token` pair
+
+        passed as form parameters in the request body (or query string for GET
+
+        endpoints). Generate pairs at https://dashboard.tensordock.com/api.
+
+        '

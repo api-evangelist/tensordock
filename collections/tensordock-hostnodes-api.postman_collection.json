@@ -1,0 +1,279 @@
+{
+  "item": [
+    {
+      "id": "5aba19a8-d138-4d03-961b-1fdb923a48e7",
+      "name": "Hostnodes",
+      "description": {
+        "content": "Discover available hostnodes and GPU/CPU configurations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cc17e7fe-279a-4c0b-874a-d4d43a8d928a",
+          "name": "List Available Hostnodes",
+          "request": {
+            "name": "List Available Hostnodes",
+            "description": {
+              "content": "Retrieve a JSON list of all hostnodes and their available GPU, CPU, RAM, storage, and per-resource pricing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v0",
+                "client",
+                "deploy",
+                "hostnodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "requiresRTX",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "minGPUCount",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "maxGPUCount",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "minRAM",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "maxRAM",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d56b88f2-4106-4152-9754-2d3f5d84c5c6",
+              "name": "Map of hostnode UUIDs to specifications.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v0",
+                    "client",
+                    "deploy",
+                    "hostnodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "requiresRTX",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "minGPUCount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "maxGPUCount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "minRAM",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "maxRAM",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": {\n    \"uuid\": \"string\",\n    \"status\": \"string\",\n    \"location\": {\n      \"country\": \"string\",\n      \"region\": \"string\",\n      \"city\": \"string\"\n    },\n    \"specs\": {\n      \"cpu\": {},\n      \"gpu\": {},\n      \"ram\": {},\n      \"storage\": {},\n      \"networking\": {}\n    },\n    \"pricing\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca2f4e8f-3f7c-4d6e-96fd-2f498a712086",
+          "name": "Get Hostnode Details",
+          "request": {
+            "name": "Get Hostnode Details",
+            "description": {
+              "content": "Retrieve detailed specifications for a single hostnode by UUID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v0",
+                "client",
+                "deploy",
+                "hostnodes",
+                ":hostnode_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hostnode_uuid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "011166f8-51c7-4f58-841e-f1d808899c93",
+              "name": "Hostnode specification.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v0",
+                    "client",
+                    "deploy",
+                    "hostnodes",
+                    ":hostnode_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hostnode_uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"string\",\n  \"status\": \"string\",\n  \"location\": {\n    \"country\": \"string\",\n    \"region\": \"string\",\n    \"city\": \"string\"\n  },\n  \"specs\": {\n    \"cpu\": {},\n    \"gpu\": {},\n    \"ram\": {},\n    \"storage\": {},\n    \"networking\": {}\n  },\n  \"pricing\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://marketplace.tensordock.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7ac02456-c82f-48b0-a0ff-e5fd82d3775c",
+    "name": "TensorDock Marketplace Hostnodes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The original TensorDock Marketplace API for deploying and managing GPU virtual\nmachines across a global network of independent hardware hosts. Endpoints are\nauthenticated via `api_key` + `api_token` form parameters that are tied to an\norganization and can be generated at https://dashboard.tensordock.com/api.\n\nThe API covers authorization checks, hostnode discovery, on-demand and spot\nvirtual machine deployment, instance lifecycle (start, stop, modify, delete),\ninstant VM deployment, container scaling, and billing balance/revenue lookups.\n\n\nContact Support:\n Name: TensorDock Support\n Email: support@tensordock.com",
+      "type": "text/plain"
+    }
+  }
+}

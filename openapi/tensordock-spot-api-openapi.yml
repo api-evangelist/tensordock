@@ -1,0 +1,134 @@
+openapi: 3.2.0
+info:
+  title: TensorDock Marketplace Spot API
+  description: 'The original TensorDock Marketplace API for deploying and managing GPU virtual
+
+    machines across a global network of independent hardware hosts. Endpoints are
+
+    authenticated via `api_key` + `api_token` form parameters that are tied to an
+
+    organization and can be generated at https://dashboard.tensordock.com/api.
+
+
+    The API covers authorization checks, hostnode discovery, on-demand and spot
+
+    virtual machine deployment, instance lifecycle (start, stop, modify, delete),
+
+    instant VM deployment, container scaling, and billing balance/revenue lookups.
+
+    '
+  version: '0'
+  contact:
+    name: TensorDock Support
+    email: support@tensordock.com
+    url: https://marketplace.tensordock.com/support
+  x-logo:
+    url: https://www.tensordock.com/favicon.ico
+servers:
+- url: https://marketplace.tensordock.com
+  description: TensorDock Marketplace (production)
+- url: https://dashboard.tensordock.com
+  description: TensorDock Dashboard (alias / production)
+security:
+- ApiKeyPair: []
+tags:
+- name: Spot
+  description: Validate spot instance pricing for new and existing instances
+paths:
+  /api/v0/client/spot/validate/new:
+    post:
+      summary: Soft Validate Spot Instance Price (New Instance)
+      description: Validate whether a proposed bid price for a new spot instance will succeed without actually deploying.
+      operationId: validateSpotNew
+      tags:
+      - Spot
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              allOf:
+              - $ref: '#/components/schemas/AuthCredentials'
+              - type: object
+                properties:
+                  price:
+                    type: number
+                  hostnode:
+                    type: string
+                  gpu_model:
+                    type: string
+                  gpu_count:
+                    type: integer
+      responses:
+        '200':
+          description: Validation result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpotValidationResponse'
+  /api/v0/client/spot/validate/existing:
+    post:
+      summary: Soft Validate Spot Instance Price (Existing Instance)
+      description: Validate whether a new bid for an existing spot instance will succeed.
+      operationId: validateSpotExisting
+      tags:
+      - Spot
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              allOf:
+              - $ref: '#/components/schemas/AuthCredentials'
+              - type: object
+                properties:
+                  server:
+                    type: string
+                  price:
+                    type: number
+      responses:
+        '200':
+          description: Validation result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpotValidationResponse'
+components:
+  schemas:
+    AuthCredentials:
+      type: object
+      required:
+      - api_key
+      - api_token
+      properties:
+        api_key:
+          type: string
+          description: TensorDock authorization key UUID.
+        api_token:
+          type: string
+          description: TensorDock authorization token UUID.
+    SpotValidationResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        will_succeed:
+          type: boolean
+        message:
+          type: string
+        suggested_price:
+          type: number
+  securitySchemes:
+    ApiKeyPair:
+      type: apiKey
+      in: query
+      name: api_key
+      description: 'TensorDock Marketplace endpoints accept an `api_key` + `api_token` pair
+
+        passed as form parameters in the request body (or query string for GET
+
+        endpoints). Generate pairs at https://dashboard.tensordock.com/api.
+
+        '

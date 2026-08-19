@@ -1,0 +1,363 @@
+openapi: 3.2.0
+info:
+  title: TensorDock Marketplace Virtual Machines API
+  description: 'The original TensorDock Marketplace API for deploying and managing GPU virtual
+
+    machines across a global network of independent hardware hosts. Endpoints are
+
+    authenticated via `api_key` + `api_token` form parameters that are tied to an
+
+    organization and can be generated at https://dashboard.tensordock.com/api.
+
+
+    The API covers authorization checks, hostnode discovery, on-demand and spot
+
+    virtual machine deployment, instance lifecycle (start, stop, modify, delete),
+
+    instant VM deployment, container scaling, and billing balance/revenue lookups.
+
+    '
+  version: '0'
+  contact:
+    name: TensorDock Support
+    email: support@tensordock.com
+    url: https://marketplace.tensordock.com/support
+  x-logo:
+    url: https://www.tensordock.com/favicon.ico
+servers:
+- url: https://marketplace.tensordock.com
+  description: TensorDock Marketplace (production)
+- url: https://dashboard.tensordock.com
+  description: TensorDock Dashboard (alias / production)
+security:
+- ApiKeyPair: []
+tags:
+- name: Virtual Machines
+  description: Deploy, list, start, stop, modify, and delete virtual machines
+paths:
+  /api/v0/client/deploy/single:
+    post:
+      summary: Deploy Virtual Machine
+      description: Deploy a new GPU or CPU virtual machine on a chosen hostnode with the requested resource configuration.
+      operationId: deployVirtualMachine
+      tags:
+      - Virtual Machines
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DeployRequest'
+      responses:
+        '200':
+          description: Deployment accepted; server is provisioning.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeployResponse'
+  /api/v0/client/list:
+    post:
+      summary: List Virtual Machines
+      description: List all virtual machines belonging to the calling organization.
+      operationId: listVirtualMachines
+      tags:
+      - Virtual Machines
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthCredentials'
+      responses:
+        '200':
+          description: Array of VM objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  virtualmachines:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VirtualMachine'
+  /api/v0/client/get/single:
+    post:
+      summary: Get Virtual Machine
+      description: Retrieve details for a single virtual machine by server UUID.
+      operationId: getVirtualMachine
+      tags:
+      - Virtual Machines
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              allOf:
+              - $ref: '#/components/schemas/AuthCredentials'
+              - type: object
+                required:
+                - server
+                properties:
+                  server:
+                    type: string
+      responses:
+        '200':
+          description: Virtual machine details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualMachine'
+  /api/v0/client/start/single:
+    post:
+      summary: Start Virtual Machine
+      description: Start a previously stopped virtual machine.
+      operationId: startVirtualMachine
+      tags:
+      - Virtual Machines
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              allOf:
+              - $ref: '#/components/schemas/AuthCredentials'
+              - type: object
+                required:
+                - server
+                properties:
+                  server:
+                    type: string
+      responses:
+        '200':
+          description: Start command accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/v0/client/stop/single:
+    post:
+      summary: Stop Virtual Machine
+      description: 'Stop a running virtual machine. The optional `disassociate_resources` parameter
+
+        controls whether the GPU is released back to the marketplace.
+
+        '
+      operationId: stopVirtualMachine
+      tags:
+      - Virtual Machines
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              allOf:
+              - $ref: '#/components/schemas/AuthCredentials'
+              - type: object
+                required:
+                - server
+                properties:
+                  server:
+                    type: string
+                  disassociate_resources:
+                    type: boolean
+                    description: When true, release the GPU; when false, retain the GPU reservation.
+      responses:
+        '200':
+          description: Stop command accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/v0/client/modify/single:
+    post:
+      summary: Modify Virtual Machine
+      description: Adjust the resource allocation (vCPU, RAM, storage, GPU count) for an existing VM.
+      operationId: modifyVirtualMachine
+      tags:
+      - Virtual Machines
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ModifyRequest'
+      responses:
+        '200':
+          description: Modification accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/v0/client/delete/single:
+    post:
+      summary: Delete Virtual Machine
+      description: Permanently delete a virtual machine and release its resources.
+      operationId: deleteVirtualMachine
+      tags:
+      - Virtual Machines
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              allOf:
+              - $ref: '#/components/schemas/AuthCredentials'
+              - type: object
+                required:
+                - server
+                properties:
+                  server:
+                    type: string
+      responses:
+        '200':
+          description: Deletion succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+components:
+  schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+    DeployRequest:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/AuthCredentials'
+      - type: object
+        required:
+        - name
+        - hostnode
+        - operating_system
+        - gpu_count
+        - gpu_model
+        - vcpus
+        - ram
+        - storage
+        - password
+        properties:
+          name:
+            type: string
+          hostnode:
+            type: string
+          operating_system:
+            type: string
+          gpu_count:
+            type: integer
+          gpu_model:
+            type: string
+          vcpus:
+            type: integer
+          ram:
+            type: integer
+          storage:
+            type: integer
+          password:
+            type: string
+          cloudinit_script:
+            type: string
+          external_port_22:
+            type: integer
+          external_port_80:
+            type: integer
+          external_port_443:
+            type: integer
+          internal_port_22:
+            type: integer
+          internal_port_80:
+            type: integer
+          internal_port_443:
+            type: integer
+          ipv4:
+            type: boolean
+    DeployResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        server:
+          type: string
+        cost:
+          type: object
+    ModifyRequest:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/AuthCredentials'
+      - type: object
+        required:
+        - server
+        properties:
+          server:
+            type: string
+          vcpus:
+            type: integer
+          ram:
+            type: integer
+          storage:
+            type: integer
+          gpu_count:
+            type: integer
+    AuthCredentials:
+      type: object
+      required:
+      - api_key
+      - api_token
+      properties:
+        api_key:
+          type: string
+          description: TensorDock authorization key UUID.
+        api_token:
+          type: string
+          description: TensorDock authorization token UUID.
+    VirtualMachine:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        hostnode:
+          type: string
+        ip:
+          type: string
+        port_forwards:
+          type: object
+        resources:
+          type: object
+          properties:
+            vcpu_count:
+              type: integer
+            ram_gb:
+              type: number
+            storage_gb:
+              type: number
+            gpus:
+              type: array
+              items:
+                type: object
+        rate_hourly:
+          type: number
+  securitySchemes:
+    ApiKeyPair:
+      type: apiKey
+      in: query
+      name: api_key
+      description: 'TensorDock Marketplace endpoints accept an `api_key` + `api_token` pair
+
+        passed as form parameters in the request body (or query string for GET
+
+        endpoints). Generate pairs at https://dashboard.tensordock.com/api.
+
+        '

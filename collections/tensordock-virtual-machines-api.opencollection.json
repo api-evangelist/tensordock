@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TensorDock Marketplace Virtual Machines API",
+    "version": "0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Virtual Machines",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Deploy Virtual Machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://marketplace.tensordock.com/api/v0/client/deploy/single",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Deploy a new GPU or CPU virtual machine on a chosen hostnode with the requested resource configuration."
+        },
+        {
+          "info": {
+            "name": "List Virtual Machines",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://marketplace.tensordock.com/api/v0/client/list",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "List all virtual machines belonging to the calling organization."
+        },
+        {
+          "info": {
+            "name": "Get Virtual Machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://marketplace.tensordock.com/api/v0/client/get/single",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Retrieve details for a single virtual machine by server UUID."
+        },
+        {
+          "info": {
+            "name": "Start Virtual Machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://marketplace.tensordock.com/api/v0/client/start/single",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Start a previously stopped virtual machine."
+        },
+        {
+          "info": {
+            "name": "Stop Virtual Machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://marketplace.tensordock.com/api/v0/client/stop/single",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Stop a running virtual machine. The optional `disassociate_resources` parameter\ncontrols whether the GPU is released back to the marketplace.\n"
+        },
+        {
+          "info": {
+            "name": "Modify Virtual Machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://marketplace.tensordock.com/api/v0/client/modify/single",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Adjust the resource allocation (vCPU, RAM, storage, GPU count) for an existing VM."
+        },
+        {
+          "info": {
+            "name": "Delete Virtual Machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://marketplace.tensordock.com/api/v0/client/delete/single",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Permanently delete a virtual machine and release its resources."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

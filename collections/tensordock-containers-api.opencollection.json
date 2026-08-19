@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TensorDock Marketplace Containers API",
+    "version": "0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Containers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Deploy Container",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://marketplace.tensordock.com/api/v0/client/container/deploy",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Deploy a container workload on the TensorDock GPU marketplace."
+        },
+        {
+          "info": {
+            "name": "Scale Container",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://marketplace.tensordock.com/api/v0/client/container/scale",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Scale the number of replicas for an existing container."
+        },
+        {
+          "info": {
+            "name": "Terminate Container",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://marketplace.tensordock.com/api/v0/client/container/stop",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Terminate a running container deployment."
+        },
+        {
+          "info": {
+            "name": "List Container Replicas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://marketplace.tensordock.com/api/v0/client/container/:container_id/replicas",
+            "params": [
+              {
+                "name": "container_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List the replica details for a running container."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

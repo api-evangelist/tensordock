@@ -1,0 +1,297 @@
+{
+  "item": [
+    {
+      "id": "ec668f97-a49f-4e26-88a1-418cdcdc31ce",
+      "name": "Authorization",
+      "description": {
+        "content": "Verify and list API authorization pairs",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "84ad4bbd-a017-450d-b348-7425c988116b",
+          "name": "Test Authorization",
+          "request": {
+            "name": "Test Authorization",
+            "description": {
+              "content": "Verify that an `api_key` + `api_token` pair is registered and valid.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v0",
+                "auth",
+                "test"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) TensorDock authorization key UUID."
+                },
+                {
+                  "disabled": false,
+                  "key": "api_token",
+                  "value": "<string>",
+                  "description": "(Required) TensorDock authorization token UUID."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2c58bf21-35ab-4962-b5fb-ca05144406ca",
+              "name": "Returns `success: true` when the pair is valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v0",
+                    "auth",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) TensorDock authorization key UUID.",
+                        "type": "text/plain"
+                      },
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) TensorDock authorization token UUID.",
+                        "type": "text/plain"
+                      },
+                      "key": "api_token",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c370f0db-3c79-4833-8770-5abc03c518fa",
+          "name": "List Authorizations",
+          "request": {
+            "name": "List Authorizations",
+            "description": {
+              "content": "List all authorization pairs registered for the calling organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v0",
+                "auth",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) TensorDock authorization key UUID."
+                },
+                {
+                  "disabled": false,
+                  "key": "api_token",
+                  "value": "<string>",
+                  "description": "(Required) TensorDock authorization token UUID."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fa3eaa3e-639d-4508-835b-59bbfccd0da2",
+              "name": "List of authorization pair metadata.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v0",
+                    "auth",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) TensorDock authorization key UUID.",
+                        "type": "text/plain"
+                      },
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) TensorDock authorization token UUID.",
+                        "type": "text/plain"
+                      },
+                      "key": "api_token",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://marketplace.tensordock.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b6dd1e90-6519-4e2e-9b19-5680373cca03",
+    "name": "TensorDock Marketplace Authorization API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The original TensorDock Marketplace API for deploying and managing GPU virtual\nmachines across a global network of independent hardware hosts. Endpoints are\nauthenticated via `api_key` + `api_token` form parameters that are tied to an\norganization and can be generated at https://dashboard.tensordock.com/api.\n\nThe API covers authorization checks, hostnode discovery, on-demand and spot\nvirtual machine deployment, instance lifecycle (start, stop, modify, delete),\ninstant VM deployment, container scaling, and billing balance/revenue lookups.\n\n\nContact Support:\n Name: TensorDock Support\n Email: support@tensordock.com",
+      "type": "text/plain"
+    }
+  }
+}

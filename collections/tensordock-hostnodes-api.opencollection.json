@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TensorDock Marketplace Hostnodes API",
+    "version": "0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Hostnodes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Available Hostnodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://marketplace.tensordock.com/api/v0/client/deploy/hostnodes",
+            "params": [
+              {
+                "name": "requiresRTX",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "minGPUCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "maxGPUCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "minRAM",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "maxRAM",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve a JSON list of all hostnodes and their available GPU, CPU, RAM, storage, and per-resource pricing."
+        },
+        {
+          "info": {
+            "name": "Get Hostnode Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://marketplace.tensordock.com/api/v0/client/deploy/hostnodes/:hostnode_uuid",
+            "params": [
+              {
+                "name": "hostnode_uuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed specifications for a single hostnode by UUID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

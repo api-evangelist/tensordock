@@ -1,7 +1,7 @@
 {
   "item": [
     {
-      "id": "fd303958-e945-4131-9c50-ece4b3ee5630",
+      "id": "41eeee7f-5ee2-46fd-9e6a-a6a0d50f1ba9",
       "name": "Instances",
       "description": {
         "content": "Create, list, inspect, and manage virtual machine instances",
@@ -9,7 +9,7 @@
       },
       "item": [
         {
-          "id": "6918cf08-3df0-4e04-81df-1474d22d6762",
+          "id": "e4e2e865-397a-4ae6-8de5-b297a3748452",
           "name": "List Instances",
           "request": {
             "name": "List Instances",
@@ -40,7 +40,7 @@
           },
           "response": [
             {
-              "id": "f92f90cc-42ca-4c8a-9c7b-0941ab8ad3ef",
+              "id": "88fecde6-63e8-48df-9310-f6a013d165eb",
               "name": "Array of instance objects under `data.instances`.",
               "originalRequest": {
                 "url": {
@@ -80,12 +80,12 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"data\": {\n    \"instances\": [\n      {\n        \"type\": \"string\",\n        \"id\": \"string\",\n        \"attributes\": {\n          \"name\": \"string\",\n          \"status\": \"stopped\",\n          \"ipAddress\": \"string\",\n          \"portForwards\": {},\n          \"resources\": {\n            \"vcpu_count\": 5922,\n            \"ram_gb\": 8354.016302643364,\n            \"storage_gb\": 4891.377180360719,\n            \"gpus\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"rateHourly\": 1648.7656005218555,\n          \"location_id\": \"string\",\n          \"image\": \"string\"\n        }\n      },\n      {\n        \"type\": \"string\",\n        \"id\": \"string\",\n        \"attributes\": {\n          \"name\": \"string\",\n          \"status\": \"deleted\",\n          \"ipAddress\": \"string\",\n          \"portForwards\": {},\n          \"resources\": {\n            \"vcpu_count\": 8717,\n            \"ram_gb\": 2376.1846269124785,\n            \"storage_gb\": 3536.4744227845536,\n            \"gpus\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"rateHourly\": 8462.36114733147,\n          \"location_id\": \"string\",\n          \"image\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "body": "{\n  \"data\": {\n    \"instances\": [\n      {\n        \"type\": \"string\",\n        \"id\": \"string\",\n        \"attributes\": {\n          \"name\": \"string\",\n          \"status\": \"running\",\n          \"ipAddress\": \"string\",\n          \"portForwards\": {},\n          \"resources\": {\n            \"vcpu_count\": 5865,\n            \"ram_gb\": 9058.951422644244,\n            \"storage_gb\": 3845.349473878257,\n            \"gpus\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"rateHourly\": 7164.441528727553,\n          \"location_id\": \"string\",\n          \"image\": \"string\"\n        }\n      },\n      {\n        \"type\": \"string\",\n        \"id\": \"string\",\n        \"attributes\": {\n          \"name\": \"string\",\n          \"status\": \"error\",\n          \"ipAddress\": \"string\",\n          \"portForwards\": {},\n          \"resources\": {\n            \"vcpu_count\": 2698,\n            \"ram_gb\": 1863.7003930644157,\n            \"storage_gb\": 6607.095175356879,\n            \"gpus\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"rateHourly\": 5039.289387588348,\n          \"location_id\": \"string\",\n          \"image\": \"string\"\n        }\n      }\n    ]\n  }\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "d5ff388c-0cea-41f5-b2ae-0002adab056f",
+              "id": "20e428c1-4dab-4aac-b5be-3f24cf617f10",
               "name": "Authentication failed or missing.",
               "originalRequest": {
                 "url": {
@@ -130,7 +130,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "04f9721b-7b9c-4e6a-b863-0bd0e98fbcac",
+              "id": "3966d54a-a323-456c-af61-9da6c63b7e59",
               "name": "Too many requests; rate limited at 100 requests per minute per organization.",
               "originalRequest": {
                 "url": {
@@ -181,7 +181,7 @@
           }
         },
         {
-          "id": "c87f332e-6b28-40e9-afd0-f5fb0ca8aba5",
+          "id": "85b03d4d-1f2b-4d2a-98f0-b3963221c0a9",
           "name": "Create Instance",
           "request": {
             "name": "Create Instance",
@@ -225,7 +225,7 @@
           },
           "response": [
             {
-              "id": "25d0a0c0-aa65-4207-9980-43ee882b74f0",
+              "id": "d703b6a0-b075-4be5-8f95-0728269bf5b9",
               "name": "Instance created and provisioning.",
               "originalRequest": {
                 "url": {
@@ -257,7 +257,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"image\": \"<string>\",\n      \"resources\": {\n        \"vcpu_count\": 4088,\n        \"ram_gb\": 9139.126246890373,\n        \"storage_gb\": 7155.8038932679965,\n        \"gpus\": [\n          {\n            \"gpuV0Name\": \"string\",\n            \"count\": 1473\n          },\n          {\n            \"gpuV0Name\": \"string\",\n            \"count\": 6666\n          }\n        ]\n      },\n      \"type\": \"<string>\",\n      \"location_id\": \"<string>\",\n      \"hostnode_id\": \"<string>\",\n      \"useDedicatedIp\": \"<boolean>\",\n      \"ssh_key\": \"<string>\",\n      \"cloud_init\": \"<string>\"\n    }\n  }\n}",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"image\": \"<string>\",\n      \"resources\": {\n        \"vcpu_count\": \"<integer>\",\n        \"ram_gb\": \"<number>\",\n        \"storage_gb\": \"<number>\",\n        \"gpus\": [\n          {\n            \"gpuV0Name\": \"<string>\",\n            \"count\": \"<integer>\"\n          },\n          {\n            \"gpuV0Name\": \"<string>\",\n            \"count\": \"<integer>\"\n          }\n        ]\n      },\n      \"type\": \"<string>\",\n      \"location_id\": \"<string>\",\n      \"hostnode_id\": \"<string>\",\n      \"useDedicatedIp\": \"<boolean>\",\n      \"ssh_key\": \"<string>\",\n      \"cloud_init\": \"<string>\"\n    }\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -273,12 +273,12 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"data\": {\n    \"type\": \"string\",\n    \"id\": \"string\",\n    \"attributes\": {\n      \"name\": \"string\",\n      \"status\": \"error\",\n      \"ipAddress\": \"string\",\n      \"portForwards\": {},\n      \"resources\": {\n        \"vcpu_count\": 9373,\n        \"ram_gb\": 1222.6449618419133,\n        \"storage_gb\": 925.122326355653,\n        \"gpus\": [\n          {\n            \"gpuV0Name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"count\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"gpuV0Name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"count\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"rateHourly\": 8305.905818994717,\n      \"location_id\": \"string\",\n      \"image\": \"string\"\n    }\n  }\n}",
+              "body": "{\n  \"data\": {\n    \"type\": \"string\",\n    \"id\": \"string\",\n    \"attributes\": {\n      \"name\": \"string\",\n      \"status\": \"deleted\",\n      \"ipAddress\": \"string\",\n      \"portForwards\": {},\n      \"resources\": {\n        \"vcpu_count\": \"<integer>\",\n        \"ram_gb\": \"<number>\",\n        \"storage_gb\": \"<number>\",\n        \"gpus\": [\n          {\n            \"gpuV0Name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"count\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"gpuV0Name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"count\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"rateHourly\": 7578.105136778887,\n      \"location_id\": \"string\",\n      \"image\": \"string\"\n    }\n  }\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "da98d19c-2640-422c-a3b5-7e93804ef3d9",
+              "id": "b96da8fe-a1b6-432e-8d1b-90f0bb2753f0",
               "name": "Invalid request body.",
               "originalRequest": {
                 "url": {
@@ -310,7 +310,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"image\": \"<string>\",\n      \"resources\": {\n        \"vcpu_count\": 4088,\n        \"ram_gb\": 9139.126246890373,\n        \"storage_gb\": 7155.8038932679965,\n        \"gpus\": [\n          {\n            \"gpuV0Name\": \"string\",\n            \"count\": 1473\n          },\n          {\n            \"gpuV0Name\": \"string\",\n            \"count\": 6666\n          }\n        ]\n      },\n      \"type\": \"<string>\",\n      \"location_id\": \"<string>\",\n      \"hostnode_id\": \"<string>\",\n      \"useDedicatedIp\": \"<boolean>\",\n      \"ssh_key\": \"<string>\",\n      \"cloud_init\": \"<string>\"\n    }\n  }\n}",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"image\": \"<string>\",\n      \"resources\": {\n        \"vcpu_count\": \"<integer>\",\n        \"ram_gb\": \"<number>\",\n        \"storage_gb\": \"<number>\",\n        \"gpus\": [\n          {\n            \"gpuV0Name\": \"<string>\",\n            \"count\": \"<integer>\"\n          },\n          {\n            \"gpuV0Name\": \"<string>\",\n            \"count\": \"<integer>\"\n          }\n        ]\n      },\n      \"type\": \"<string>\",\n      \"location_id\": \"<string>\",\n      \"hostnode_id\": \"<string>\",\n      \"useDedicatedIp\": \"<boolean>\",\n      \"ssh_key\": \"<string>\",\n      \"cloud_init\": \"<string>\"\n    }\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -331,7 +331,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "d53a7b92-41e8-4003-8c80-f0bf1be2bd21",
+              "id": "da5b2066-57d8-4dea-a6da-95224eaa5846",
               "name": "Authentication failed or missing.",
               "originalRequest": {
                 "url": {
@@ -363,7 +363,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"image\": \"<string>\",\n      \"resources\": {\n        \"vcpu_count\": 4088,\n        \"ram_gb\": 9139.126246890373,\n        \"storage_gb\": 7155.8038932679965,\n        \"gpus\": [\n          {\n            \"gpuV0Name\": \"string\",\n            \"count\": 1473\n          },\n          {\n            \"gpuV0Name\": \"string\",\n            \"count\": 6666\n          }\n        ]\n      },\n      \"type\": \"<string>\",\n      \"location_id\": \"<string>\",\n      \"hostnode_id\": \"<string>\",\n      \"useDedicatedIp\": \"<boolean>\",\n      \"ssh_key\": \"<string>\",\n      \"cloud_init\": \"<string>\"\n    }\n  }\n}",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"image\": \"<string>\",\n      \"resources\": {\n        \"vcpu_count\": \"<integer>\",\n        \"ram_gb\": \"<number>\",\n        \"storage_gb\": \"<number>\",\n        \"gpus\": [\n          {\n            \"gpuV0Name\": \"<string>\",\n            \"count\": \"<integer>\"\n          },\n          {\n            \"gpuV0Name\": \"<string>\",\n            \"count\": \"<integer>\"\n          }\n        ]\n      },\n      \"type\": \"<string>\",\n      \"location_id\": \"<string>\",\n      \"hostnode_id\": \"<string>\",\n      \"useDedicatedIp\": \"<boolean>\",\n      \"ssh_key\": \"<string>\",\n      \"cloud_init\": \"<string>\"\n    }\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -384,7 +384,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "008a03d9-666d-40d9-9607-faa46155e235",
+              "id": "5ec1a895-4059-4e1c-9b1a-809bd0f0d9b2",
               "name": "Too many requests; rate limited at 100 requests per minute per organization.",
               "originalRequest": {
                 "url": {
@@ -416,7 +416,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"image\": \"<string>\",\n      \"resources\": {\n        \"vcpu_count\": 4088,\n        \"ram_gb\": 9139.126246890373,\n        \"storage_gb\": 7155.8038932679965,\n        \"gpus\": [\n          {\n            \"gpuV0Name\": \"string\",\n            \"count\": 1473\n          },\n          {\n            \"gpuV0Name\": \"string\",\n            \"count\": 6666\n          }\n        ]\n      },\n      \"type\": \"<string>\",\n      \"location_id\": \"<string>\",\n      \"hostnode_id\": \"<string>\",\n      \"useDedicatedIp\": \"<boolean>\",\n      \"ssh_key\": \"<string>\",\n      \"cloud_init\": \"<string>\"\n    }\n  }\n}",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"image\": \"<string>\",\n      \"resources\": {\n        \"vcpu_count\": \"<integer>\",\n        \"ram_gb\": \"<number>\",\n        \"storage_gb\": \"<number>\",\n        \"gpus\": [\n          {\n            \"gpuV0Name\": \"<string>\",\n            \"count\": \"<integer>\"\n          },\n          {\n            \"gpuV0Name\": \"<string>\",\n            \"count\": \"<integer>\"\n          }\n        ]\n      },\n      \"type\": \"<string>\",\n      \"location_id\": \"<string>\",\n      \"hostnode_id\": \"<string>\",\n      \"useDedicatedIp\": \"<boolean>\",\n      \"ssh_key\": \"<string>\",\n      \"cloud_init\": \"<string>\"\n    }\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -443,7 +443,7 @@
           }
         },
         {
-          "id": "8d07107c-74a7-4e04-9d18-d8ac41caa761",
+          "id": "b8a6682d-4863-4867-b6d3-a957fd31560b",
           "name": "Get Instance",
           "request": {
             "name": "Get Instance",
@@ -483,7 +483,7 @@
           },
           "response": [
             {
-              "id": "bba8bda9-c2eb-46d9-9127-816b411aa412",
+              "id": "49adefba-e367-4880-b47f-090f83306232",
               "name": "Instance details.",
               "originalRequest": {
                 "url": {
@@ -532,12 +532,12 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"data\": {\n    \"type\": \"string\",\n    \"id\": \"string\",\n    \"attributes\": {\n      \"name\": \"string\",\n      \"status\": \"error\",\n      \"ipAddress\": \"string\",\n      \"portForwards\": {},\n      \"resources\": {\n        \"vcpu_count\": 9373,\n        \"ram_gb\": 1222.6449618419133,\n        \"storage_gb\": 925.122326355653,\n        \"gpus\": [\n          {\n            \"gpuV0Name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"count\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"gpuV0Name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"count\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"rateHourly\": 8305.905818994717,\n      \"location_id\": \"string\",\n      \"image\": \"string\"\n    }\n  }\n}",
+              "body": "{\n  \"data\": {\n    \"type\": \"string\",\n    \"id\": \"string\",\n    \"attributes\": {\n      \"name\": \"string\",\n      \"status\": \"deleted\",\n      \"ipAddress\": \"string\",\n      \"portForwards\": {},\n      \"resources\": {\n        \"vcpu_count\": \"<integer>\",\n        \"ram_gb\": \"<number>\",\n        \"storage_gb\": \"<number>\",\n        \"gpus\": [\n          {\n            \"gpuV0Name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"count\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"gpuV0Name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"count\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"rateHourly\": 7578.105136778887,\n      \"location_id\": \"string\",\n      \"image\": \"string\"\n    }\n  }\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "f32be5a5-6f25-4700-9555-5f162abafbb7",
+              "id": "c56a064c-57f5-4c81-8efd-a20e68385546",
               "name": "Authentication failed or missing.",
               "originalRequest": {
                 "url": {
@@ -591,7 +591,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "28da9135-985c-4ca3-a16c-b5464d9a5852",
+              "id": "92a405f0-4709-4ac8-a246-965e21efece1",
               "name": "Instance not found.",
               "originalRequest": {
                 "url": {
@@ -651,7 +651,7 @@
           }
         },
         {
-          "id": "7f2b9cf7-23db-4759-8050-4ce5b5d798c7",
+          "id": "4fcb6767-a927-401f-bf33-044b4b97bf46",
           "name": "Delete Instance",
           "request": {
             "name": "Delete Instance",
@@ -691,7 +691,7 @@
           },
           "response": [
             {
-              "id": "73870491-1824-455d-90cc-0a9cfb0acb1a",
+              "id": "1126ca33-8ffa-4013-a986-7494134e9475",
               "name": "Deletion succeeded.",
               "originalRequest": {
                 "url": {
@@ -751,7 +751,7 @@
           }
         },
         {
-          "id": "bb4b0f81-e1f2-4570-aee3-a50c2d13828a",
+          "id": "fdfbf882-870a-4bb8-a48f-367ce02c565d",
           "name": "Start Instance",
           "request": {
             "name": "Start Instance",
@@ -792,7 +792,7 @@
           },
           "response": [
             {
-              "id": "ea72d7a7-d221-4a67-b2c1-476155eb1484",
+              "id": "4b0f1e86-eecb-46fd-a895-66d6747d00d3",
               "name": "Start command accepted; status returns to `starting` then `running`.",
               "originalRequest": {
                 "url": {
@@ -842,7 +842,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"data\": {\n    \"type\": \"string\",\n    \"id\": \"string\",\n    \"attributes\": {\n      \"status\": \"starting\"\n    }\n  }\n}",
+              "body": "{\n  \"data\": {\n    \"type\": \"string\",\n    \"id\": \"string\",\n    \"attributes\": {\n      \"status\": \"stopping\"\n    }\n  }\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -853,7 +853,7 @@
           }
         },
         {
-          "id": "947fcaf7-ee6c-4667-980d-c132f7194cd8",
+          "id": "7dbac769-04b0-4d3b-8a86-b6b029bff2f6",
           "name": "Stop Instance",
           "request": {
             "name": "Stop Instance",
@@ -894,7 +894,7 @@
           },
           "response": [
             {
-              "id": "871185cd-666b-4505-90ac-271b9119439f",
+              "id": "33743727-806c-4306-8e0c-5e17cef04149",
               "name": "Stop command accepted; status returns to `stopping` then `stopped`.",
               "originalRequest": {
                 "url": {
@@ -944,7 +944,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"data\": {\n    \"type\": \"string\",\n    \"id\": \"string\",\n    \"attributes\": {\n      \"status\": \"starting\"\n    }\n  }\n}",
+              "body": "{\n  \"data\": {\n    \"type\": \"string\",\n    \"id\": \"string\",\n    \"attributes\": {\n      \"status\": \"stopping\"\n    }\n  }\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -955,7 +955,7 @@
           }
         },
         {
-          "id": "dc9e82be-fd8d-4b52-87ae-4fb5cd1b1c6e",
+          "id": "f1858e75-04b9-4e50-aa4c-cb65f7f119a3",
           "name": "Modify Instance",
           "request": {
             "name": "Modify Instance",
@@ -1009,7 +1009,7 @@
           },
           "response": [
             {
-              "id": "1c8875f7-bc1f-47af-9dd7-8ab7a26787e4",
+              "id": "b392d244-82ef-47c7-96df-51fc41cc2223",
               "name": "Modification accepted.",
               "originalRequest": {
                 "url": {
@@ -1079,16 +1079,6 @@
         }
       ],
       "event": []
-    },
-    {
-      "id": "94fcfd2f-ada7-46a2-a0d4-bab746e603a2",
-      "name": "Locations",
-      "description": {
-        "content": "Discover deployment locations and available GPU/CPU resources",
-        "type": "text/plain"
-      },
-      "item": [],
-      "event": []
     }
   ],
   "event": [],
@@ -1109,7 +1099,7 @@
     ]
   },
   "info": {
-    "_postman_id": "d9dfa856-884a-4e79-8a18-f888e9e8cccb",
+    "_postman_id": "593ef99f-daa3-4098-82ef-5d5cd04c3b36",
     "name": "TensorDock Instances API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {

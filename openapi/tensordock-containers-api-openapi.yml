@@ -1,0 +1,194 @@
+openapi: 3.2.0
+info:
+  title: TensorDock Marketplace Containers API
+  description: 'The original TensorDock Marketplace API for deploying and managing GPU virtual
+
+    machines across a global network of independent hardware hosts. Endpoints are
+
+    authenticated via `api_key` + `api_token` form parameters that are tied to an
+
+    organization and can be generated at https://dashboard.tensordock.com/api.
+
+
+    The API covers authorization checks, hostnode discovery, on-demand and spot
+
+    virtual machine deployment, instance lifecycle (start, stop, modify, delete),
+
+    instant VM deployment, container scaling, and billing balance/revenue lookups.
+
+    '
+  version: '0'
+  contact:
+    name: TensorDock Support
+    email: support@tensordock.com
+    url: https://marketplace.tensordock.com/support
+  x-logo:
+    url: https://www.tensordock.com/favicon.ico
+servers:
+- url: https://marketplace.tensordock.com
+  description: TensorDock Marketplace (production)
+- url: https://dashboard.tensordock.com
+  description: TensorDock Dashboard (alias / production)
+security:
+- ApiKeyPair: []
+tags:
+- name: Containers
+  description: Deploy, scale, terminate, and inspect containers
+paths:
+  /api/v0/client/container/deploy:
+    post:
+      summary: Deploy Container
+      description: Deploy a container workload on the TensorDock GPU marketplace.
+      operationId: deployContainer
+      tags:
+      - Containers
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContainerDeployRequest'
+      responses:
+        '200':
+          description: Container deployment accepted.
+          content:
+            application/json:
+              schema:
+                type: object
+  /api/v0/client/container/scale:
+    post:
+      summary: Scale Container
+      description: Scale the number of replicas for an existing container.
+      operationId: scaleContainer
+      tags:
+      - Containers
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              allOf:
+              - $ref: '#/components/schemas/AuthCredentials'
+              - type: object
+                required:
+                - container_id
+                - replicas
+                properties:
+                  container_id:
+                    type: string
+                  replicas:
+                    type: integer
+      responses:
+        '200':
+          description: Scale accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/v0/client/container/stop:
+    post:
+      summary: Terminate Container
+      description: Terminate a running container deployment.
+      operationId: terminateContainer
+      tags:
+      - Containers
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              allOf:
+              - $ref: '#/components/schemas/AuthCredentials'
+              - type: object
+                required:
+                - container_id
+                properties:
+                  container_id:
+                    type: string
+      responses:
+        '200':
+          description: Termination accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/v0/client/container/{container_id}/replicas:
+    get:
+      summary: List Container Replicas
+      description: List the replica details for a running container.
+      operationId: listContainerReplicas
+      tags:
+      - Containers
+      parameters:
+      - in: path
+        name: container_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Container replica details.
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    AuthCredentials:
+      type: object
+      required:
+      - api_key
+      - api_token
+      properties:
+        api_key:
+          type: string
+          description: TensorDock authorization key UUID.
+        api_token:
+          type: string
+          description: TensorDock authorization token UUID.
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+    ContainerDeployRequest:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/AuthCredentials'
+      - type: object
+        required:
+        - name
+        - image
+        properties:
+          name:
+            type: string
+          image:
+            type: string
+          replicas:
+            type: integer
+          gpu_model:
+            type: string
+          gpu_count:
+            type: integer
+          ports:
+            type: array
+            items:
+              type: integer
+          env:
+            type: object
+  securitySchemes:
+    ApiKeyPair:
+      type: apiKey
+      in: query
+      name: api_key
+      description: 'TensorDock Marketplace endpoints accept an `api_key` + `api_token` pair
+
+        passed as form parameters in the request body (or query string for GET
+
+        endpoints). Generate pairs at https://dashboard.tensordock.com/api.
+
+        '

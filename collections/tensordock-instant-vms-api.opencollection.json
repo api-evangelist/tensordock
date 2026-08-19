@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TensorDock Marketplace Instant VMs API",
+    "version": "0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Instant VMs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Deploy Instant Virtual Machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://marketplace.tensordock.com/api/v0/client/deployinstant/single",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Deploy a pre-configured Instant VM in under 30 seconds."
+        },
+        {
+          "info": {
+            "name": "List Instant VM Templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://marketplace.tensordock.com/api/v0/client/deploy/instantvms"
+          },
+          "docs": "List all available Instant VM templates and their per-hour pricing."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

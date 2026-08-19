@@ -1,18 +1,41 @@
 {
   "provider": "tensordock",
   "sources": [
+    "tensordock-authorization-api-openapi.yml",
+    "tensordock-billing-api-openapi.yml",
+    "tensordock-containers-api-openapi.yml",
+    "tensordock-hostnodes-api-openapi.yml",
     "tensordock-instances-api-openapi.yml",
-    "tensordock-secrets-api-openapi.yml"
+    "tensordock-instant-vms-api-openapi.yml",
+    "tensordock-secrets-api-openapi.yml",
+    "tensordock-spot-api-openapi.yml",
+    "tensordock-virtual-machines-api-openapi.yml"
   ],
   "outputs": [
+    "tensordock-authorization-api-openapi.yml",
+    "tensordock-billing-api-openapi.yml",
+    "tensordock-containers-api-openapi.yml",
+    "tensordock-hostnodes-api-openapi.yml",
     "tensordock-instances-api-openapi.yml",
-    "tensordock-secrets-api-openapi.yml"
+    "tensordock-instant-vms-api-openapi.yml",
+    "tensordock-secrets-api-openapi.yml",
+    "tensordock-spot-api-openapi.yml",
+    "tensordock-virtual-machines-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": [
-    "tensordock-marketplace-api-openapi.yml: parse error ScannerError: mapping values are not allowed here"
-  ]
+  "notes": [
+    "tensordock-authorization-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "tensordock-billing-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "tensordock-containers-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "tensordock-hostnodes-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "tensordock-instances-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "tensordock-instant-vms-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "tensordock-secrets-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "tensordock-spot-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "tensordock-virtual-machines-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": []
 }
