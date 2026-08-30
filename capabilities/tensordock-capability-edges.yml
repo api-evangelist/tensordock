@@ -1,0 +1,56 @@
+slug: tensordock
+provider: TensorDock
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Electrical Components & Equipment
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Instances
+  spec_file: tensordock-instances-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: POST /api/v2/instances Create Instance; POST /api/v2/instances/{id}/start Start Instance;
+    DELETE /api/v2/instances/{id} Delete Instance; schemas InstanceAttributes, GpuAllocation, Resources
+  reason: Full lifecycle management of GPU/CPU virtual machines — provisioning and operating cloud compute
+    — maps squarely to IT Infrastructure Management (compute, storage, network, cloud).
+- tag: Virtual Machines
+  spec_file: tensordock-virtual-machines-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: POST /api/v0/client/deploy/single Deploy Virtual Machine; POST /api/v0/client/stop/single
+    Stop Virtual Machine; schema VirtualMachine
+  reason: Deploy, list, start, stop, modify and delete of GPU virtual machines is cloud compute provisioning
+    and operation — IT Infrastructure Management.
+- tag: Instant VMs
+  spec_file: tensordock-instant-vms-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.72
+  evidence: POST /api/v0/client/deployinstant/single Deploy Instant Virtual Machine; GET /api/v0/client/deploy/instantvms
+    List Instant VM Templates
+  reason: Template-based rapid provisioning of virtual machines is cloud compute infrastructure provisioning,
+    i.e. IT Infrastructure Management.
+- tag: Containers
+  spec_file: tensordock-containers-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: POST /api/v0/client/container/deploy Deploy Container; POST /api/v0/client/container/scale
+    Scale Container; GET .../replicas List Container Replicas
+  reason: Deploying, scaling and terminating GPU container workloads across a cloud fleet is provisioning
+    of compute infrastructure — IT Infrastructure Management. Not an industry capability; the vendor is
+    a cloud compute marketplace.
