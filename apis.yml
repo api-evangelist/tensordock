@@ -175,6 +175,8 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/tensordock.png
 access: 3rd-Party
 common:
+  - type: Website
+    url: https://www.tensordock.com/
   - type: CapabilityMap
     url: capabilities/tensordock-capability-edges.yml
     name: TensorDock Business Capability Map
