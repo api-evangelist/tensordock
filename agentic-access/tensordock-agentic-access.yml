@@ -1,20 +1,184 @@
-generated: '2026-07-15'
+generated: '2026-09-16'
 method: generated
-source: openapi/tensordock-instances-api-openapi.yml, openapi/tensordock-secrets-api-openapi.yml
+source: openapi/tensordock-authorization-api-openapi.yml, openapi/tensordock-billing-api-openapi.yml,
+  openapi/tensordock-containers-api-openapi.yml, openapi/tensordock-hostnodes-api-openapi.yml,
+  openapi/tensordock-instances-api-openapi.yml, openapi/tensordock-instant-vms-api-openapi.yml,
+  openapi/tensordock-secrets-api-openapi.yml, openapi/tensordock-spot-api-openapi.yml, openapi/tensordock-virtual-machines-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 11
+  operations: 33
   by_action_class:
-    connected: 4
-    acting: 7
+    acting: 25
+    connected: 8
   by_consequence:
-    read: 4
-    write: 6
-    safety-critical: 1
-  human_in_the_loop_required: 1
+    write: 19
+    physical: 3
+    safety-critical: 3
+    read: 8
+  human_in_the_loop_required: 3
 operations:
+- path: /api/v0/auth/test
+  method: post
+  operationId: testAuthorization
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v0/auth/list
+  method: post
+  operationId: listAuthorizations
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v0/billing/balance
+  method: post
+  operationId: retrieveBalance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v0/billing/revenue
+  method: post
+  operationId: retrieveRevenue
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v0/billing/summary
+  method: post
+  operationId: retrieveMonthlySummary
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v0/client/container/deploy
+  method: post
+  operationId: deployContainer
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v0/client/container/scale
+  method: post
+  operationId: scaleContainer
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v0/client/container/stop
+  method: post
+  operationId: terminateContainer
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /api/v0/client/container/{container_id}/replicas
+  method: get
+  operationId: listContainerReplicas
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v0/client/deploy/hostnodes
+  method: get
+  operationId: listHostnodes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v0/client/deploy/hostnodes/{hostnode_uuid}
+  method: get
+  operationId: getHostnode
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /api/v2/instances
   method: get
   operationId: listInstances
@@ -115,6 +279,34 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /api/v0/client/deployinstant/single
+  method: post
+  operationId: deployInstantVm
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v0/client/deploy/instantvms
+  method: get
+  operationId: listInstantVms
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /api/v2/secrets
   method: get
   operationId: listSecrets
@@ -154,6 +346,152 @@ operations:
 - path: /api/v2/secrets/{id}
   method: delete
   operationId: deleteSecret
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v0/client/spot/validate/new
+  method: post
+  operationId: validateSpotNew
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v0/client/spot/validate/existing
+  method: post
+  operationId: validateSpotExisting
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v0/client/deploy/single
+  method: post
+  operationId: deployVirtualMachine
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v0/client/list
+  method: post
+  operationId: listVirtualMachines
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v0/client/get/single
+  method: post
+  operationId: getVirtualMachine
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v0/client/start/single
+  method: post
+  operationId: startVirtualMachine
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v0/client/stop/single
+  method: post
+  operationId: stopVirtualMachine
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /api/v0/client/modify/single
+  method: post
+  operationId: modifyVirtualMachine
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v0/client/delete/single
+  method: post
+  operationId: deleteVirtualMachine
   x-agentic-access:
     action-class: acting
     consequence: write
