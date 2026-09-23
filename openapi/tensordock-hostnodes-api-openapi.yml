@@ -3,20 +3,7 @@ info:
   title: TensorDock Marketplace Hostnodes API
   description: 'The original TensorDock Marketplace API for deploying and managing GPU virtual
 
-    machines across a global network of independent hardware hosts. Endpoints are
-
-    authenticated via `api_key` + `api_token` form parameters that are tied to an
-
-    organization and can be generated at https://dashboard.tensordock.com/api.
-
-
-    The API covers authorization checks, hostnode discovery, on-demand and spot
-
-    virtual machine deployment, instance lifecycle (start, stop, modify, delete),
-
-    instant VM deployment, container scaling, and billing balance/revenue lookups.
-
-    '
+    machines across a global network of independent hardware hosts.'
   version: '0'
   contact:
     name: TensorDock Support
@@ -92,10 +79,6 @@ paths:
                 $ref: '#/components/schemas/Hostnode'
 components:
   schemas:
-    HostnodeMap:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/Hostnode'
     Hostnode:
       type: object
       properties:
@@ -127,6 +110,10 @@ components:
               type: object
         pricing:
           type: object
+    HostnodeMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/Hostnode'
   securitySchemes:
     ApiKeyPair:
       type: apiKey

@@ -14,9 +14,7 @@ info:
 
     `data.id`, and `data.attributes` fields. Rate limited at 100 requests per
 
-    minute per organization.
-
-    '
+    minute per organization.'
   version: '2.0'
   contact:
     name: TensorDock Support
@@ -59,9 +57,7 @@ paths:
 
         Requires a minimum storage of 100 GB, an account balance of at least
 
-        $1, and at least one GPU for location-based deployment.
-
-        '
+        $1, and at least one GPU for location-based deployment.'
       operationId: createInstance
       tags:
       - Instances
@@ -175,54 +171,6 @@ paths:
                 $ref: '#/components/schemas/SuccessEnvelope'
 components:
   schemas:
-    InstanceResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/InstanceEnvelope'
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              status:
-                type: string
-              title:
-                type: string
-              detail:
-                type: string
-    InstanceStatusEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            type:
-              type: string
-              const: virtualmachine
-            id:
-              type: string
-            attributes:
-              type: object
-              properties:
-                status:
-                  type: string
-                  enum:
-                  - starting
-                  - stopping
-    InstanceListResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            instances:
-              type: array
-              items:
-                $ref: '#/components/schemas/InstanceEnvelope'
     InstanceAttributes:
       type: object
       properties:
@@ -250,6 +198,16 @@ components:
           type: string
         image:
           type: string
+    InstanceListResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            instances:
+              type: array
+              items:
+                $ref: '#/components/schemas/InstanceEnvelope'
     SuccessEnvelope:
       type: object
       properties:
@@ -261,6 +219,59 @@ components:
               const: success
             message:
               type: string
+    GpuAllocation:
+      type: object
+      properties:
+        gpuV0Name:
+          type: string
+          description: TensorDock canonical GPU model identifier (e.g., `h100-sxm5-80gb`, `rtx4090-24gb`).
+        count:
+          type: integer
+    ModifyInstanceRequest:
+      type: object
+      properties:
+        cpuCores:
+          type: integer
+        ramGb:
+          type: number
+        diskGb:
+          type: number
+        gpus:
+          type: object
+          properties:
+            gpuV0Name:
+              type: string
+            count:
+              type: integer
+    InstanceResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/InstanceEnvelope'
+    InstanceEnvelope:
+      type: object
+      properties:
+        type:
+          type: string
+          const: virtualmachine
+        id:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/InstanceAttributes'
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              status:
+                type: string
+              title:
+                type: string
+              detail:
+                type: string
     CreateInstanceRequest:
       type: object
       required:
@@ -302,40 +313,6 @@ components:
                   type: string
                 cloud_init:
                   type: string
-    GpuAllocation:
-      type: object
-      properties:
-        gpuV0Name:
-          type: string
-          description: TensorDock canonical GPU model identifier (e.g., `h100-sxm5-80gb`, `rtx4090-24gb`).
-        count:
-          type: integer
-    ModifyInstanceRequest:
-      type: object
-      properties:
-        cpuCores:
-          type: integer
-        ramGb:
-          type: number
-        diskGb:
-          type: number
-        gpus:
-          type: object
-          properties:
-            gpuV0Name:
-              type: string
-            count:
-              type: integer
-    InstanceEnvelope:
-      type: object
-      properties:
-        type:
-          type: string
-          const: virtualmachine
-        id:
-          type: string
-        attributes:
-          $ref: '#/components/schemas/InstanceAttributes'
     Resources:
       type: object
       properties:
@@ -349,15 +326,34 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GpuAllocation'
+    InstanceStatusEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              const: virtualmachine
+            id:
+              type: string
+            attributes:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                  - starting
+                  - stopping
   responses:
-    BadRequest:
-      description: Invalid request body.
+    RateLimited:
+      description: Too many requests; rate limited at 100 requests per minute per organization.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication failed or missing.
+    BadRequest:
+      description: Invalid request body.
       content:
         application/json:
           schema:
@@ -368,8 +364,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    RateLimited:
-      description: Too many requests; rate limited at 100 requests per minute per organization.
+    Unauthorized:
+      description: Authentication failed or missing.
       content:
         application/json:
           schema:

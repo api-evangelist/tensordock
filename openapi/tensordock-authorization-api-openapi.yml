@@ -3,20 +3,7 @@ info:
   title: TensorDock Marketplace Authorization API
   description: 'The original TensorDock Marketplace API for deploying and managing GPU virtual
 
-    machines across a global network of independent hardware hosts. Endpoints are
-
-    authenticated via `api_key` + `api_token` form parameters that are tied to an
-
-    organization and can be generated at https://dashboard.tensordock.com/api.
-
-
-    The API covers authorization checks, hostnode discovery, on-demand and spot
-
-    virtual machine deployment, instance lifecycle (start, stop, modify, delete),
-
-    instant VM deployment, container scaling, and billing balance/revenue lookups.
-
-    '
+    machines across a global network of independent hardware hosts.'
   version: '0'
   contact:
     name: TensorDock Support

@@ -3,20 +3,7 @@ info:
   title: TensorDock Marketplace Virtual Machines API
   description: 'The original TensorDock Marketplace API for deploying and managing GPU virtual
 
-    machines across a global network of independent hardware hosts. Endpoints are
-
-    authenticated via `api_key` + `api_token` form parameters that are tied to an
-
-    organization and can be generated at https://dashboard.tensordock.com/api.
-
-
-    The API covers authorization checks, hostnode discovery, on-demand and spot
-
-    virtual machine deployment, instance lifecycle (start, stop, modify, delete),
-
-    instant VM deployment, container scaling, and billing balance/revenue lookups.
-
-    '
+    machines across a global network of independent hardware hosts.'
   version: '0'
   contact:
     name: TensorDock Support
@@ -143,9 +130,7 @@ paths:
       summary: Stop Virtual Machine
       description: 'Stop a running virtual machine. The optional `disassociate_resources` parameter
 
-        controls whether the GPU is released back to the marketplace.
-
-        '
+        controls whether the GPU is released back to the marketplace.'
       operationId: stopVirtualMachine
       tags:
       - Virtual Machines
@@ -223,6 +208,66 @@ paths:
                 $ref: '#/components/schemas/SuccessResponse'
 components:
   schemas:
+    AuthCredentials:
+      type: object
+      required:
+      - api_key
+      - api_token
+      properties:
+        api_key:
+          type: string
+          description: TensorDock authorization key UUID.
+        api_token:
+          type: string
+          description: TensorDock authorization token UUID.
+    ModifyRequest:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/AuthCredentials'
+      - type: object
+        required:
+        - server
+        properties:
+          server:
+            type: string
+          vcpus:
+            type: integer
+          ram:
+            type: integer
+          storage:
+            type: integer
+          gpu_count:
+            type: integer
+    VirtualMachine:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        hostnode:
+          type: string
+        ip:
+          type: string
+        port_forwards:
+          type: object
+        resources:
+          type: object
+          properties:
+            vcpu_count:
+              type: integer
+            ram_gb:
+              type: number
+            storage_gb:
+              type: number
+            gpus:
+              type: array
+              items:
+                type: object
+        rate_hourly:
+          type: number
     SuccessResponse:
       type: object
       properties:
@@ -289,66 +334,6 @@ components:
           type: string
         cost:
           type: object
-    ModifyRequest:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/AuthCredentials'
-      - type: object
-        required:
-        - server
-        properties:
-          server:
-            type: string
-          vcpus:
-            type: integer
-          ram:
-            type: integer
-          storage:
-            type: integer
-          gpu_count:
-            type: integer
-    AuthCredentials:
-      type: object
-      required:
-      - api_key
-      - api_token
-      properties:
-        api_key:
-          type: string
-          description: TensorDock authorization key UUID.
-        api_token:
-          type: string
-          description: TensorDock authorization token UUID.
-    VirtualMachine:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        status:
-          type: string
-        hostnode:
-          type: string
-        ip:
-          type: string
-        port_forwards:
-          type: object
-        resources:
-          type: object
-          properties:
-            vcpu_count:
-              type: integer
-            ram_gb:
-              type: number
-            storage_gb:
-              type: number
-            gpus:
-              type: array
-              items:
-                type: object
-        rate_hourly:
-          type: number
   securitySchemes:
     ApiKeyPair:
       type: apiKey

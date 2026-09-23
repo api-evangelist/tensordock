@@ -1,41 +1,39 @@
 {
   "provider": "tensordock",
   "sources": [
-    "tensordock-authorization-api-openapi.yml",
-    "tensordock-billing-api-openapi.yml",
-    "tensordock-containers-api-openapi.yml",
-    "tensordock-hostnodes-api-openapi.yml",
+    "_original/tensordock-marketplace-api-openapi.yml",
     "tensordock-instances-api-openapi.yml",
-    "tensordock-instant-vms-api-openapi.yml",
-    "tensordock-secrets-api-openapi.yml",
-    "tensordock-spot-api-openapi.yml",
-    "tensordock-virtual-machines-api-openapi.yml"
+    "tensordock-secrets-api-openapi.yml"
   ],
   "outputs": [
     "tensordock-authorization-api-openapi.yml",
     "tensordock-billing-api-openapi.yml",
     "tensordock-containers-api-openapi.yml",
     "tensordock-hostnodes-api-openapi.yml",
-    "tensordock-instances-api-openapi.yml",
     "tensordock-instant-vms-api-openapi.yml",
-    "tensordock-secrets-api-openapi.yml",
     "tensordock-spot-api-openapi.yml",
-    "tensordock-virtual-machines-api-openapi.yml"
+    "tensordock-virtual-machines-api-openapi.yml",
+    "tensordock-instances-api-openapi.yml",
+    "tensordock-secrets-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
-  "warnings": [],
+  "warnings": [
+    "tensordock-instances-api-openapi.yml: previously refined output kept for 7 operation(s) no archived document covers (e.g. /api/v2/instances get, /api/v2/instances post, /api/v2/instances/{id} delete); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "tensordock-secrets-api-openapi.yml: previously refined output kept for 4 operation(s) no archived document covers (e.g. /api/v2/secrets get, /api/v2/secrets post, /api/v2/secrets/{id} delete); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
+  ],
   "notes": [
-    "tensordock-authorization-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "tensordock-billing-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "tensordock-containers-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "tensordock-hostnodes-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "tensordock-instances-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "tensordock-instant-vms-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "tensordock-secrets-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "tensordock-spot-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "tensordock-virtual-machines-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "tensordock-marketplace-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "tensordock-authorization-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tensordock-billing-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tensordock-containers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tensordock-hostnodes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tensordock-instant-vms-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tensordock-spot-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tensordock-virtual-machines-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

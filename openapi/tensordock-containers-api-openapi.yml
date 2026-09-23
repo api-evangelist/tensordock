@@ -3,20 +3,7 @@ info:
   title: TensorDock Marketplace Containers API
   description: 'The original TensorDock Marketplace API for deploying and managing GPU virtual
 
-    machines across a global network of independent hardware hosts. Endpoints are
-
-    authenticated via `api_key` + `api_token` form parameters that are tied to an
-
-    organization and can be generated at https://dashboard.tensordock.com/api.
-
-
-    The API covers authorization checks, hostnode discovery, on-demand and spot
-
-    virtual machine deployment, instance lifecycle (start, stop, modify, delete),
-
-    instant VM deployment, container scaling, and billing balance/revenue lookups.
-
-    '
+    machines across a global network of independent hardware hosts.'
   version: '0'
   contact:
     name: TensorDock Support
@@ -148,13 +135,6 @@ components:
         api_token:
           type: string
           description: TensorDock authorization token UUID.
-    SuccessResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        message:
-          type: string
     ContainerDeployRequest:
       type: object
       allOf:
@@ -180,6 +160,13 @@ components:
               type: integer
           env:
             type: object
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
   securitySchemes:
     ApiKeyPair:
       type: apiKey
