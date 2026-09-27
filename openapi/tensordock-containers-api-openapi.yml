@@ -123,18 +123,6 @@ paths:
                 type: object
 components:
   schemas:
-    AuthCredentials:
-      type: object
-      required:
-      - api_key
-      - api_token
-      properties:
-        api_key:
-          type: string
-          description: TensorDock authorization key UUID.
-        api_token:
-          type: string
-          description: TensorDock authorization token UUID.
     ContainerDeployRequest:
       type: object
       allOf:
@@ -160,6 +148,18 @@ components:
               type: integer
           env:
             type: object
+    AuthCredentials:
+      type: object
+      required:
+      - api_key
+      - api_token
+      properties:
+        api_key:
+          type: string
+          description: TensorDock authorization key UUID.
+        api_token:
+          type: string
+          description: TensorDock authorization token UUID.
     SuccessResponse:
       type: object
       properties:

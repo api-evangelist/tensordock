@@ -238,36 +238,6 @@ components:
             type: integer
           gpu_count:
             type: integer
-    VirtualMachine:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        status:
-          type: string
-        hostnode:
-          type: string
-        ip:
-          type: string
-        port_forwards:
-          type: object
-        resources:
-          type: object
-          properties:
-            vcpu_count:
-              type: integer
-            ram_gb:
-              type: number
-            storage_gb:
-              type: number
-            gpus:
-              type: array
-              items:
-                type: object
-        rate_hourly:
-          type: number
     SuccessResponse:
       type: object
       properties:
@@ -334,6 +304,36 @@ components:
           type: string
         cost:
           type: object
+    VirtualMachine:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        hostnode:
+          type: string
+        ip:
+          type: string
+        port_forwards:
+          type: object
+        resources:
+          type: object
+          properties:
+            vcpu_count:
+              type: integer
+            ram_gb:
+              type: number
+            storage_gb:
+              type: number
+            gpus:
+              type: array
+              items:
+                type: object
+        rate_hourly:
+          type: number
   securitySchemes:
     ApiKeyPair:
       type: apiKey

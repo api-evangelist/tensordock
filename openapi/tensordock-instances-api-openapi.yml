@@ -171,6 +171,102 @@ paths:
                 $ref: '#/components/schemas/SuccessEnvelope'
 components:
   schemas:
+    GpuAllocation:
+      type: object
+      properties:
+        gpuV0Name:
+          type: string
+          description: TensorDock canonical GPU model identifier (e.g., `h100-sxm5-80gb`, `rtx4090-24gb`).
+        count:
+          type: integer
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              status:
+                type: string
+              title:
+                type: string
+              detail:
+                type: string
+    InstanceEnvelope:
+      type: object
+      properties:
+        type:
+          type: string
+          const: virtualmachine
+        id:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/InstanceAttributes'
+    ModifyInstanceRequest:
+      type: object
+      properties:
+        cpuCores:
+          type: integer
+        ramGb:
+          type: number
+        diskGb:
+          type: number
+        gpus:
+          type: object
+          properties:
+            gpuV0Name:
+              type: string
+            count:
+              type: integer
+    InstanceStatusEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              const: virtualmachine
+            id:
+              type: string
+            attributes:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                  - starting
+                  - stopping
+    Resources:
+      type: object
+      properties:
+        vcpu_count:
+          type: integer
+        ram_gb:
+          type: number
+        storage_gb:
+          type: number
+        gpus:
+          type: array
+          items:
+            $ref: '#/components/schemas/GpuAllocation'
+    SuccessEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              const: success
+            message:
+              type: string
+    InstanceResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/InstanceEnvelope'
     InstanceAttributes:
       type: object
       properties:
@@ -198,80 +294,6 @@ components:
           type: string
         image:
           type: string
-    InstanceListResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            instances:
-              type: array
-              items:
-                $ref: '#/components/schemas/InstanceEnvelope'
-    SuccessEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            type:
-              type: string
-              const: success
-            message:
-              type: string
-    GpuAllocation:
-      type: object
-      properties:
-        gpuV0Name:
-          type: string
-          description: TensorDock canonical GPU model identifier (e.g., `h100-sxm5-80gb`, `rtx4090-24gb`).
-        count:
-          type: integer
-    ModifyInstanceRequest:
-      type: object
-      properties:
-        cpuCores:
-          type: integer
-        ramGb:
-          type: number
-        diskGb:
-          type: number
-        gpus:
-          type: object
-          properties:
-            gpuV0Name:
-              type: string
-            count:
-              type: integer
-    InstanceResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/InstanceEnvelope'
-    InstanceEnvelope:
-      type: object
-      properties:
-        type:
-          type: string
-          const: virtualmachine
-        id:
-          type: string
-        attributes:
-          $ref: '#/components/schemas/InstanceAttributes'
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              status:
-                type: string
-              title:
-                type: string
-              detail:
-                type: string
     CreateInstanceRequest:
       type: object
       required:
@@ -313,47 +335,25 @@ components:
                   type: string
                 cloud_init:
                   type: string
-    Resources:
-      type: object
-      properties:
-        vcpu_count:
-          type: integer
-        ram_gb:
-          type: number
-        storage_gb:
-          type: number
-        gpus:
-          type: array
-          items:
-            $ref: '#/components/schemas/GpuAllocation'
-    InstanceStatusEnvelope:
+    InstanceListResponse:
       type: object
       properties:
         data:
           type: object
           properties:
-            type:
-              type: string
-              const: virtualmachine
-            id:
-              type: string
-            attributes:
-              type: object
-              properties:
-                status:
-                  type: string
-                  enum:
-                  - starting
-                  - stopping
+            instances:
+              type: array
+              items:
+                $ref: '#/components/schemas/InstanceEnvelope'
   responses:
-    RateLimited:
-      description: Too many requests; rate limited at 100 requests per minute per organization.
+    BadRequest:
+      description: Invalid request body.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request body.
+    RateLimited:
+      description: Too many requests; rate limited at 100 requests per minute per organization.
       content:
         application/json:
           schema:
