@@ -79,6 +79,10 @@ paths:
                 $ref: '#/components/schemas/Hostnode'
 components:
   schemas:
+    HostnodeMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/Hostnode'
     Hostnode:
       type: object
       properties:
@@ -110,10 +114,6 @@ components:
               type: object
         pricing:
           type: object
-    HostnodeMap:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/Hostnode'
   securitySchemes:
     ApiKeyPair:
       type: apiKey

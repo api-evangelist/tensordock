@@ -84,6 +84,17 @@ paths:
                 $ref: '#/components/schemas/SpotValidationResponse'
 components:
   schemas:
+    SpotValidationResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        will_succeed:
+          type: boolean
+        message:
+          type: string
+        suggested_price:
+          type: number
     AuthCredentials:
       type: object
       required:
@@ -96,17 +107,6 @@ components:
         api_token:
           type: string
           description: TensorDock authorization token UUID.
-    SpotValidationResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        will_succeed:
-          type: boolean
-        message:
-          type: string
-        suggested_price:
-          type: number
   securitySchemes:
     ApiKeyPair:
       type: apiKey

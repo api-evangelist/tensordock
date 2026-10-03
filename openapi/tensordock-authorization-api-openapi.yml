@@ -71,6 +71,13 @@ paths:
                       type: object
 components:
   schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
     AuthCredentials:
       type: object
       required:
@@ -83,13 +90,6 @@ components:
         api_token:
           type: string
           description: TensorDock authorization token UUID.
-    SuccessResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        message:
-          type: string
   securitySchemes:
     ApiKeyPair:
       type: apiKey

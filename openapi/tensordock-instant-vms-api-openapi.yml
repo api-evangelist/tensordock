@@ -58,6 +58,15 @@ paths:
                 type: object
 components:
   schemas:
+    DeployResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        server:
+          type: string
+        cost:
+          type: object
     InstantDeployRequest:
       type: object
       allOf:
@@ -85,15 +94,6 @@ components:
         api_token:
           type: string
           description: TensorDock authorization token UUID.
-    DeployResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        server:
-          type: string
-        cost:
-          type: object
   securitySchemes:
     ApiKeyPair:
       type: apiKey

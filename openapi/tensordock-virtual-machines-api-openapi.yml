@@ -208,18 +208,22 @@ paths:
                 $ref: '#/components/schemas/SuccessResponse'
 components:
   schemas:
-    AuthCredentials:
+    SuccessResponse:
       type: object
-      required:
-      - api_key
-      - api_token
       properties:
-        api_key:
+        success:
+          type: boolean
+        message:
           type: string
-          description: TensorDock authorization key UUID.
-        api_token:
+    DeployResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        server:
           type: string
-          description: TensorDock authorization token UUID.
+        cost:
+          type: object
     ModifyRequest:
       type: object
       allOf:
@@ -238,13 +242,48 @@ components:
             type: integer
           gpu_count:
             type: integer
-    SuccessResponse:
+    VirtualMachine:
       type: object
       properties:
-        success:
-          type: boolean
-        message:
+        id:
           type: string
+        name:
+          type: string
+        status:
+          type: string
+        hostnode:
+          type: string
+        ip:
+          type: string
+        port_forwards:
+          type: object
+        resources:
+          type: object
+          properties:
+            vcpu_count:
+              type: integer
+            ram_gb:
+              type: number
+            storage_gb:
+              type: number
+            gpus:
+              type: array
+              items:
+                type: object
+        rate_hourly:
+          type: number
+    AuthCredentials:
+      type: object
+      required:
+      - api_key
+      - api_token
+      properties:
+        api_key:
+          type: string
+          description: TensorDock authorization key UUID.
+        api_token:
+          type: string
+          description: TensorDock authorization token UUID.
     DeployRequest:
       type: object
       allOf:
@@ -295,45 +334,6 @@ components:
             type: integer
           ipv4:
             type: boolean
-    DeployResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        server:
-          type: string
-        cost:
-          type: object
-    VirtualMachine:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        status:
-          type: string
-        hostnode:
-          type: string
-        ip:
-          type: string
-        port_forwards:
-          type: object
-        resources:
-          type: object
-          properties:
-            vcpu_count:
-              type: integer
-            ram_gb:
-              type: number
-            storage_gb:
-              type: number
-            gpus:
-              type: array
-              items:
-                type: object
-        rate_hourly:
-          type: number
   securitySchemes:
     ApiKeyPair:
       type: apiKey
