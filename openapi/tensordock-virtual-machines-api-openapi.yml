@@ -208,40 +208,6 @@ paths:
                 $ref: '#/components/schemas/SuccessResponse'
 components:
   schemas:
-    SuccessResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        message:
-          type: string
-    DeployResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        server:
-          type: string
-        cost:
-          type: object
-    ModifyRequest:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/AuthCredentials'
-      - type: object
-        required:
-        - server
-        properties:
-          server:
-            type: string
-          vcpus:
-            type: integer
-          ram:
-            type: integer
-          storage:
-            type: integer
-          gpu_count:
-            type: integer
     VirtualMachine:
       type: object
       properties:
@@ -272,18 +238,6 @@ components:
                 type: object
         rate_hourly:
           type: number
-    AuthCredentials:
-      type: object
-      required:
-      - api_key
-      - api_token
-      properties:
-        api_key:
-          type: string
-          description: TensorDock authorization key UUID.
-        api_token:
-          type: string
-          description: TensorDock authorization token UUID.
     DeployRequest:
       type: object
       allOf:
@@ -334,6 +288,52 @@ components:
             type: integer
           ipv4:
             type: boolean
+    AuthCredentials:
+      type: object
+      required:
+      - api_key
+      - api_token
+      properties:
+        api_key:
+          type: string
+          description: TensorDock authorization key UUID.
+        api_token:
+          type: string
+          description: TensorDock authorization token UUID.
+    DeployResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        server:
+          type: string
+        cost:
+          type: object
+    ModifyRequest:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/AuthCredentials'
+      - type: object
+        required:
+        - server
+        properties:
+          server:
+            type: string
+          vcpus:
+            type: integer
+          ram:
+            type: integer
+          storage:
+            type: integer
+          gpu_count:
+            type: integer
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
   securitySchemes:
     ApiKeyPair:
       type: apiKey

@@ -170,61 +170,28 @@ paths:
               schema:
                 $ref: '#/components/schemas/SuccessEnvelope'
 components:
-  responses:
-    RateLimited:
-      description: Too many requests; rate limited at 100 requests per minute per organization.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request body.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Instance not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication failed or missing.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    InstanceStatusEnvelope:
+    Resources:
       type: object
       properties:
-        data:
-          type: object
-          properties:
-            type:
-              type: string
-              const: virtualmachine
-            id:
-              type: string
-            attributes:
-              type: object
-              properties:
-                status:
-                  type: string
-                  enum:
-                  - starting
-                  - stopping
-    InstanceEnvelope:
+        vcpu_count:
+          type: integer
+        ram_gb:
+          type: number
+        storage_gb:
+          type: number
+        gpus:
+          type: array
+          items:
+            $ref: '#/components/schemas/GpuAllocation'
+    GpuAllocation:
       type: object
       properties:
-        type:
+        gpuV0Name:
           type: string
-          const: virtualmachine
-        id:
-          type: string
-        attributes:
-          $ref: '#/components/schemas/InstanceAttributes'
+          description: TensorDock canonical GPU model identifier (e.g., `h100-sxm5-80gb`, `rtx4090-24gb`).
+        count:
+          type: integer
     CreateInstanceRequest:
       type: object
       required:
@@ -266,17 +233,32 @@ components:
                   type: string
                 cloud_init:
                   type: string
-    SuccessEnvelope:
+    InstanceEnvelope:
       type: object
       properties:
-        data:
+        type:
+          type: string
+          const: virtualmachine
+        id:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/InstanceAttributes'
+    ModifyInstanceRequest:
+      type: object
+      properties:
+        cpuCores:
+          type: integer
+        ramGb:
+          type: number
+        diskGb:
+          type: number
+        gpus:
           type: object
           properties:
-            type:
+            gpuV0Name:
               type: string
-              const: success
-            message:
-              type: string
+            count:
+              type: integer
     ErrorResponse:
       type: object
       properties:
@@ -291,32 +273,21 @@ components:
                 type: string
               detail:
                 type: string
-    GpuAllocation:
+    InstanceListResponse:
       type: object
       properties:
-        gpuV0Name:
-          type: string
-          description: TensorDock canonical GPU model identifier (e.g., `h100-sxm5-80gb`, `rtx4090-24gb`).
-        count:
-          type: integer
+        data:
+          type: object
+          properties:
+            instances:
+              type: array
+              items:
+                $ref: '#/components/schemas/InstanceEnvelope'
     InstanceResponse:
       type: object
       properties:
         data:
           $ref: '#/components/schemas/InstanceEnvelope'
-    Resources:
-      type: object
-      properties:
-        vcpu_count:
-          type: integer
-        ram_gb:
-          type: number
-        storage_gb:
-          type: number
-        gpus:
-          type: array
-          items:
-            $ref: '#/components/schemas/GpuAllocation'
     InstanceAttributes:
       type: object
       properties:
@@ -344,32 +315,36 @@ components:
           type: string
         image:
           type: string
-    ModifyInstanceRequest:
-      type: object
-      properties:
-        cpuCores:
-          type: integer
-        ramGb:
-          type: number
-        diskGb:
-          type: number
-        gpus:
-          type: object
-          properties:
-            gpuV0Name:
-              type: string
-            count:
-              type: integer
-    InstanceListResponse:
+    InstanceStatusEnvelope:
       type: object
       properties:
         data:
           type: object
           properties:
-            instances:
-              type: array
-              items:
-                $ref: '#/components/schemas/InstanceEnvelope'
+            type:
+              type: string
+              const: virtualmachine
+            id:
+              type: string
+            attributes:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                  - starting
+                  - stopping
+    SuccessEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              const: success
+            message:
+              type: string
   parameters:
     InstanceId:
       in: path
@@ -378,6 +353,31 @@ components:
       schema:
         type: string
       description: Instance UUID.
+  responses:
+    Unauthorized:
+      description: Authentication failed or missing.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Instance not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request body.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    RateLimited:
+      description: Too many requests; rate limited at 100 requests per minute per organization.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     BearerAuth:
       type: http
