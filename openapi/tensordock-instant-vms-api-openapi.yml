@@ -58,18 +58,6 @@ paths:
                 type: object
 components:
   schemas:
-    AuthCredentials:
-      type: object
-      required:
-      - api_key
-      - api_token
-      properties:
-        api_key:
-          type: string
-          description: TensorDock authorization key UUID.
-        api_token:
-          type: string
-          description: TensorDock authorization token UUID.
     DeployResponse:
       type: object
       properties:
@@ -94,6 +82,18 @@ components:
             type: string
           password:
             type: string
+    AuthCredentials:
+      type: object
+      required:
+      - api_key
+      - api_token
+      properties:
+        api_key:
+          type: string
+          description: TensorDock authorization key UUID.
+        api_token:
+          type: string
+          description: TensorDock authorization token UUID.
   securitySchemes:
     ApiKeyPair:
       type: apiKey

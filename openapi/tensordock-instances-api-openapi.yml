@@ -171,6 +171,126 @@ paths:
                 $ref: '#/components/schemas/SuccessEnvelope'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              status:
+                type: string
+              title:
+                type: string
+              detail:
+                type: string
+    InstanceEnvelope:
+      type: object
+      properties:
+        type:
+          type: string
+          const: virtualmachine
+        id:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/InstanceAttributes'
+    InstanceAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+        status:
+          type: string
+          enum:
+          - starting
+          - running
+          - stopping
+          - stopped
+          - deleting
+          - deleted
+          - error
+        ipAddress:
+          type: string
+        portForwards:
+          type: object
+        resources:
+          $ref: '#/components/schemas/Resources'
+        rateHourly:
+          type: number
+        location_id:
+          type: string
+        image:
+          type: string
+    InstanceListResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            instances:
+              type: array
+              items:
+                $ref: '#/components/schemas/InstanceEnvelope'
+    InstanceResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/InstanceEnvelope'
+    ModifyInstanceRequest:
+      type: object
+      properties:
+        cpuCores:
+          type: integer
+        ramGb:
+          type: number
+        diskGb:
+          type: number
+        gpus:
+          type: object
+          properties:
+            gpuV0Name:
+              type: string
+            count:
+              type: integer
+    SuccessEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              const: success
+            message:
+              type: string
+    InstanceStatusEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              const: virtualmachine
+            id:
+              type: string
+            attributes:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                  - starting
+                  - stopping
+    GpuAllocation:
+      type: object
+      properties:
+        gpuV0Name:
+          type: string
+          description: TensorDock canonical GPU model identifier (e.g., `h100-sxm5-80gb`, `rtx4090-24gb`).
+        count:
+          type: integer
     Resources:
       type: object
       properties:
@@ -184,14 +304,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GpuAllocation'
-    GpuAllocation:
-      type: object
-      properties:
-        gpuV0Name:
-          type: string
-          description: TensorDock canonical GPU model identifier (e.g., `h100-sxm5-80gb`, `rtx4090-24gb`).
-        count:
-          type: integer
     CreateInstanceRequest:
       type: object
       required:
@@ -233,139 +345,7 @@ components:
                   type: string
                 cloud_init:
                   type: string
-    InstanceEnvelope:
-      type: object
-      properties:
-        type:
-          type: string
-          const: virtualmachine
-        id:
-          type: string
-        attributes:
-          $ref: '#/components/schemas/InstanceAttributes'
-    ModifyInstanceRequest:
-      type: object
-      properties:
-        cpuCores:
-          type: integer
-        ramGb:
-          type: number
-        diskGb:
-          type: number
-        gpus:
-          type: object
-          properties:
-            gpuV0Name:
-              type: string
-            count:
-              type: integer
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              status:
-                type: string
-              title:
-                type: string
-              detail:
-                type: string
-    InstanceListResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            instances:
-              type: array
-              items:
-                $ref: '#/components/schemas/InstanceEnvelope'
-    InstanceResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/InstanceEnvelope'
-    InstanceAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-        status:
-          type: string
-          enum:
-          - starting
-          - running
-          - stopping
-          - stopped
-          - deleting
-          - deleted
-          - error
-        ipAddress:
-          type: string
-        portForwards:
-          type: object
-        resources:
-          $ref: '#/components/schemas/Resources'
-        rateHourly:
-          type: number
-        location_id:
-          type: string
-        image:
-          type: string
-    InstanceStatusEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            type:
-              type: string
-              const: virtualmachine
-            id:
-              type: string
-            attributes:
-              type: object
-              properties:
-                status:
-                  type: string
-                  enum:
-                  - starting
-                  - stopping
-    SuccessEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            type:
-              type: string
-              const: success
-            message:
-              type: string
-  parameters:
-    InstanceId:
-      in: path
-      name: id
-      required: true
-      schema:
-        type: string
-      description: Instance UUID.
   responses:
-    Unauthorized:
-      description: Authentication failed or missing.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Instance not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     BadRequest:
       description: Invalid request body.
       content:
@@ -378,6 +358,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Instance not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed or missing.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    InstanceId:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+      description: Instance UUID.
   securitySchemes:
     BearerAuth:
       type: http

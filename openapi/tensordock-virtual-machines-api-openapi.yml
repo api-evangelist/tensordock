@@ -208,36 +208,43 @@ paths:
                 $ref: '#/components/schemas/SuccessResponse'
 components:
   schemas:
-    VirtualMachine:
+    SuccessResponse:
       type: object
       properties:
-        id:
+        success:
+          type: boolean
+        message:
           type: string
-        name:
+    AuthCredentials:
+      type: object
+      required:
+      - api_key
+      - api_token
+      properties:
+        api_key:
           type: string
-        status:
+          description: TensorDock authorization key UUID.
+        api_token:
           type: string
-        hostnode:
-          type: string
-        ip:
-          type: string
-        port_forwards:
-          type: object
-        resources:
-          type: object
-          properties:
-            vcpu_count:
-              type: integer
-            ram_gb:
-              type: number
-            storage_gb:
-              type: number
-            gpus:
-              type: array
-              items:
-                type: object
-        rate_hourly:
-          type: number
+          description: TensorDock authorization token UUID.
+    ModifyRequest:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/AuthCredentials'
+      - type: object
+        required:
+        - server
+        properties:
+          server:
+            type: string
+          vcpus:
+            type: integer
+          ram:
+            type: integer
+          storage:
+            type: integer
+          gpu_count:
+            type: integer
     DeployRequest:
       type: object
       allOf:
@@ -288,18 +295,6 @@ components:
             type: integer
           ipv4:
             type: boolean
-    AuthCredentials:
-      type: object
-      required:
-      - api_key
-      - api_token
-      properties:
-        api_key:
-          type: string
-          description: TensorDock authorization key UUID.
-        api_token:
-          type: string
-          description: TensorDock authorization token UUID.
     DeployResponse:
       type: object
       properties:
@@ -309,31 +304,36 @@ components:
           type: string
         cost:
           type: object
-    ModifyRequest:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/AuthCredentials'
-      - type: object
-        required:
-        - server
-        properties:
-          server:
-            type: string
-          vcpus:
-            type: integer
-          ram:
-            type: integer
-          storage:
-            type: integer
-          gpu_count:
-            type: integer
-    SuccessResponse:
+    VirtualMachine:
       type: object
       properties:
-        success:
-          type: boolean
-        message:
+        id:
           type: string
+        name:
+          type: string
+        status:
+          type: string
+        hostnode:
+          type: string
+        ip:
+          type: string
+        port_forwards:
+          type: object
+        resources:
+          type: object
+          properties:
+            vcpu_count:
+              type: integer
+            ram_gb:
+              type: number
+            storage_gb:
+              type: number
+            gpus:
+              type: array
+              items:
+                type: object
+        rate_hourly:
+          type: number
   securitySchemes:
     ApiKeyPair:
       type: apiKey
