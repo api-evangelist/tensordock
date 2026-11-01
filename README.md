@@ -1,4 +1,4 @@
-# TensorDock (tensordock)
+# TensorDock
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,147 +66,177 @@
 
 TensorDock operates a global GPU cloud marketplace that connects independent hardware hosts with customers needing affordable on-demand and spot GPU compute. The platform exposes two REST APIs — the original Marketplace API (v0) at marketplace.tensordock.com and the newer Instances API (v2) at dashboard.tensordock.com — to deploy, manage, and scale virtual machines across 100+ locations in 20+ countries with 42+ GPU models ranging from consumer RTX cards to H100 SXM5. TensorDock targets AI startups, researchers, rendering shops, and gaming services that need cost-effective compute (advertised at up to 80% less than hyperscalers) without quotas or long-term commitments.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/tensordock/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/tensordock/refs/heads/main/apis.yml)
+**Areas:** GPU · Cloud · Marketplace · Compute · Virtual Machines · Artificial Intelligence · Machine Learning · Bare Metal · Spot Instances · Containers
 
-## Scope
+## TensorDock on APIs.io
 
-- **Position:** Consuming
-- **Access:** 3rd-Party
+Everything profiled for TensorDock is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/tensordock/](https://apis.io/providers/tensordock/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (9)
 
-- GPU
-- Cloud
-- Marketplace
-- Compute
-- Virtual Machines
-- AI
-- Machine Learning
-- Bare Metal
-- Spot Instances
-- Containers
+- [TensorDock Instances API](https://apis.io/apis/tensordock/tensordock-instances-api/) — The current TensorDock Instances API (v2) at https://dashboard.tensordock.com/api/v2/instances for creating, listing, inspecting, starting, stopping,…
+- [TensorDock Secrets API](https://apis.io/apis/tensordock/tensordock-secrets-api/) — The TensorDock Secrets API (v2) for managing SSH keys and generic secrets that are encrypted at rest and in transit and can be attached to instances at…
+- [TensorDock Authorization API](https://apis.io/apis/tensordock/tensordock-authorization-api/) — Verify and list API authorization pairs
+- [TensorDock Billing API](https://apis.io/apis/tensordock/tensordock-billing-api/) — Retrieve balance, revenue, and monthly summaries
+- [TensorDock Containers API](https://apis.io/apis/tensordock/tensordock-containers-api/) — Deploy, scale, terminate, and inspect containers
+- [TensorDock Hostnodes API](https://apis.io/apis/tensordock/tensordock-hostnodes-api/) — Discover available hostnodes and GPU/CPU configurations
+- [TensorDock Instant VMs API](https://apis.io/apis/tensordock/tensordock-instant-vms-api/) — Deploy and inspect pre-configured Instant VMs
+- [TensorDock Spot API](https://apis.io/apis/tensordock/tensordock-spot-api/) — Validate spot instance pricing for new and existing instances
+- [TensorDock Virtual Machines API](https://apis.io/apis/tensordock/tensordock-virtual-machines-api/) — Deploy, list, start, stop, modify, and delete virtual machines
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-25
-- **Modified:** 2026-05-25
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### TensorDock Marketplace API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The original TensorDock Marketplace REST API (v0) for deploying, managing, starting, stopping, and deleting GPU virtual machines across the global marketplace of independent hardware hosts. Endpoints accept api_key + api_token authorization pairs as form parameters and cover hostnode discovery, on-demand and spot instance deployment, instance lifecycle, container scaling, and billing balance lookups.
+- [Tensordock Agentic Access](https://apis.io/agentic-access/tensordock/tensordock-agentic-access/)
 
-- **Human URL:** [https://documenter.getpostman.com/view/20973002/2s8YzMYRDc](https://documenter.getpostman.com/view/20973002/2s8YzMYRDc)
+#### JSON Schema (2)
 
-#### Tags
+The data models the API reads and writes.
 
-- GPU
-- Cloud
-- Compute
-- Marketplace
-- Virtual Machines
+- [TensorDock Hostnode](https://apis.io/schemas/tensordock/tensordock-hostnode/)
+- [TensorDock Instance](https://apis.io/schemas/tensordock/tensordock-instance/)
 
-#### Properties
+#### JSON-LD (1)
 
-- [Documentation](https://documenter.getpostman.com/view/20973002/2s8YzMYRDc)
-- [OpenAPI](openapi/tensordock-marketplace-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+Linked-data contexts for the provider's vocabulary.
 
-### TensorDock Instances API
+- [Tensordock Context](https://apis.io/jsonld/tensordock/tensordock-context/)
 
-The current TensorDock Instances API (v2) at https://dashboard.tensordock.com/api/v2/instances for creating, listing, inspecting, starting, stopping, modifying, and deleting GPU and CPU virtual machines. Uses Bearer token authentication and a JSON:API-style envelope of `data.type`, `data.id`, and `data.attributes`. Supports both location-based and hostnode-based deployment patterns.
+#### Vocabulary (1)
 
-- **Human URL:** [https://dashboard.tensordock.com/api/docs/instance-management](https://dashboard.tensordock.com/api/docs/instance-management)
+The provider's domain terms, defined.
 
-#### Tags
+- [Tensordock Vocabulary](https://apis.io/vocabularies/tensordock/tensordock-vocabulary/)
 
-- GPU
-- Cloud
-- Compute
-- Instances
-- Virtual Machines
+#### Examples (5)
 
-#### Properties
+Example requests and responses.
 
-- [Documentation](https://dashboard.tensordock.com/api/docs/instance-management)
-- [Documentation](https://dashboard.tensordock.com/api/docs/instance-creation)
-- [OpenAPI](openapi/tensordock-instances-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/tensordock-instances-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/tensordock-instances-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/tensordock-instance-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/tensordock-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+- [Tensordock Create Instance Example](https://apis.io/examples/tensordock/tensordock-create-instance-example/)
+- [Tensordock Create Secret Example](https://apis.io/examples/tensordock/tensordock-create-secret-example/)
+- [Tensordock List Hostnodes Example](https://apis.io/examples/tensordock/tensordock-list-hostnodes-example/)
+- [Tensordock List Instances Example](https://apis.io/examples/tensordock/tensordock-list-instances-example/)
+- [Tensordock Spot Validate New Example](https://apis.io/examples/tensordock/tensordock-spot-validate-new-example/)
 
-### TensorDock Secrets API
+#### Collections (11)
 
-The TensorDock Secrets API (v2) for managing SSH keys and generic secrets that are encrypted at rest and in transit and can be attached to instances at deploy time. Two secret types are supported — `SSHKEY` for SSH authentication and `SECRET`/`GENERIC` for application credentials whose values are not returned after creation.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://dashboard.tensordock.com/api/docs/secrets](https://dashboard.tensordock.com/api/docs/secrets)
+- [TensorDock Marketplace Authorization API](https://apis.io/collections/tensordock/open-tensordock-authorization-api/)
+- [TensorDock Marketplace Billing API](https://apis.io/collections/tensordock/open-tensordock-billing-api/)
+- [TensorDock Marketplace Containers API](https://apis.io/collections/tensordock/open-tensordock-containers-api/)
+- [TensorDock Marketplace Hostnodes API](https://apis.io/collections/tensordock/open-tensordock-hostnodes-api/)
+- [TensorDock Instances API](https://apis.io/collections/tensordock/open-tensordock-instances-api/)
+- [TensorDock Marketplace Instant VMs API](https://apis.io/collections/tensordock/open-tensordock-instant-vms-api/)
+- [TensorDock Instances Secrets API](https://apis.io/collections/tensordock/open-tensordock-secrets-api/)
+- [TensorDock Marketplace Spot API](https://apis.io/collections/tensordock/open-tensordock-spot-api/)
+- [TensorDock Marketplace Virtual Machines API](https://apis.io/collections/tensordock/open-tensordock-virtual-machines-api/)
+- [TensorDock Instances API](https://apis.io/collections/tensordock/postman-tensordock-instances-api/)
+- [TensorDock Instances Secrets API](https://apis.io/collections/tensordock/postman-tensordock-secrets-api/)
 
-#### Tags
+#### Governance rules (2)
 
-- GPU
-- Cloud
-- Secrets
-- SSH Keys
-- Credentials
+Spectral rulesets for the provider's contracts.
 
-#### Properties
+- [TensorDock — jsonschema rules](https://apis.io/rules/tensordock/tensordock-jsonschema-spectral-rules/)
+- [TensorDock API Rules](https://apis.io/rules/tensordock/tensordock-rules/)
 
-- [Documentation](https://dashboard.tensordock.com/api/docs/secrets)
-- [OpenAPI](openapi/tensordock-secrets-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/tensordock-secrets-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/tensordock-secrets-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Security (2)
 
-## Common Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- [Portal](https://www.tensordock.com)
+- [Tensordock Authentication](https://apis.io/security/tensordock/tensordock-authentication/)
+- [Tensordock Domain Security](https://apis.io/security/tensordock/tensordock-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Tensordock Plans Pricing](https://apis.io/plans/tensordock/tensordock-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Tensordock Rate Limits](https://apis.io/rate-limits/tensordock/tensordock-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Tensordock Finops](https://apis.io/finops/tensordock/tensordock-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.tensordock.com/)
 - [Documentation](https://docs.tensordock.com)
-- [Documentation](https://dashboard.tensordock.com/api/docs)
-- [Documentation](https://documenter.getpostman.com/view/20973002/2s8YzMYRDc)
-- [Getting Started](https://dashboard.tensordock.com/api/docs/getting-started)
-- [Console](https://dashboard.tensordock.com)
-- [Sandbox](https://dashboard.tensordock.com/deploy)
-- [Sandbox](https://dashboard.tensordock.com/deploy_cpu)
-- [Sign Up](https://dashboard.tensordock.com/api)
-- [Blog](https://blog.tensordock.com)
-- [Trust Center](https://tensordock.com/security)
-- [Documentation](https://docs.tensordock.com/legal-information/legal-information)
-- [Terms of Service](https://docs.tensordock.com/legal-information/terms-of-service-tos)
-- [Privacy Policy](https://docs.tensordock.com/legal-information/tensordock-privacy-policy)
-- [Terms of Service](https://docs.tensordock.com/legal-information/acceptable-use-policy-aup)
-- [Documentation](https://docs.tensordock.com/legal-information/downtime-compensation)
-- [Documentation](https://docs.tensordock.com/legal-information/taxes-vat-gst)
-- [Support](https://marketplace.tensordock.com/support)
-- [Support](https://marketplace.tensordock.com/faq)
-- [Forum](https://tensordock.userjot.com/)
-- [Twitter](https://twitter.com/TensorDock)
-- [LinkedIn](https://www.linkedin.com/company/tensordock)
-- [Instagram](https://instagram.com/tensordock)
-- [YouTube](https://www.youtube.com/channel/UCsCAK6krPmRe3Y7Hp5QHXQg)
-- [Forum](https://discord.gg/Xyzjjuj6zf)
-- [GitHub Organization](https://github.com/tensordock)
-- [SDK](https://github.com/tensordock/tensordock-rs)
-- [SDK](https://pypi.org/project/tensordock/)
-- [Tool](https://github.com/tensordock/dashboard-frontend-template)
-- [Tool](https://github.com/tensordock/wireguard-manager)
-- [Tool](https://github.com/tensordock/tensorblog)
-- [Tool](https://github.com/tensordock/hosting-install)
-- [Documentation](https://docs.tensordock.com/virtual-machines/introduction-to-core-compute-vms)
-- [Documentation](https://docs.tensordock.com/virtual-machines/spot-instances)
-- [Documentation](https://docs.tensordock.com/virtual-machines/cloud-init)
-- [Documentation](https://docs.tensordock.com/virtual-machines/how-to-ssh-into-your-instance)
-- [Documentation](https://docs.tensordock.com/virtual-machines/how-to-rdp-into-your-instance)
-- [Documentation](https://docs.tensordock.com/whitelabel/overview)
-- [Documentation](https://docs.tensordock.com/whitelabel/setting-up-a-storefront)
-- [Sign Up](https://www.tensordock.com/host.html)
-- [Plans](plans/tensordock-plans-pricing.yml)
-- [Rate Limits](rate-limits/tensordock-rate-limits.yml)
-- [Fin Ops](finops/tensordock-finops.yml)
+- [Getting started](https://dashboard.tensordock.com/api/docs/getting-started)
 - [Pricing](https://marketplace.tensordock.com)
-- [Features](undefined)
+- [Support](https://marketplace.tensordock.com/support)
+- [Blog](https://blog.tensordock.com)
+- [Trust centre](https://tensordock.com/security)
+- [Terms of service](https://docs.tensordock.com/legal-information/terms-of-service-tos)
+- [Privacy policy](https://docs.tensordock.com/legal-information/tensordock-privacy-policy)
+- [GitHub](https://github.com/tensordock)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** info@apievangelist.com
-**URL:** https://apievangelist.com
+**Kin Score 54.8** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 55.0 |
+| Contract governance | 13.6 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 65.5 |
+| Access clarity | 92.1 |
+
+**Agent readiness 19.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 27.3** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/tensordock/](https://apis.io/providers/tensordock/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for TensorDock: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/tensordock/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
